@@ -1,0 +1,95 @@
+name: Publicar site por FTPS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "ftp-static/**"
+      - ".github/workflows/deploy-ftp.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: barroco-producao
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    name: Validar e publicar
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      FTP_PORT: ${{ secrets.FTP_PORT }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+
+    steps:
+      - name: Baixar o site
+        uses: actions/checkout@v4
+
+      - name: Validar pacote de produção
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f ftp-static/index.html
+          test -f ftp-static/.htaccess
+          test -f ftp-static/robots.txt
+          test -f ftp-static/sitemap.xml
+          test -f ftp-static/sitemap-images.xml
+          test -f ftp-static/projetos-page.html
+          test -d ftp-static/assets
+
+      - name: Validar configuração segura
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$FTP_SERVER"
+          test -n "$FTP_PORT"
+          test -n "$FTP_USERNAME"
+          test -n "$FTP_PASSWORD"
+          test -n "$FTP_SERVER_DIR"
+          echo "::add-mask::$FTP_PASSWORD"
+
+      - name: Instalar cliente FTPS
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+
+      - name: Publicar sem excluir arquivos remotos
+        shell: bash
+        run: |
+          set -euo pipefail
+          lftp <<LFTP
+          set cmd:fail-exit yes
+          set net:max-retries 2
+          set net:timeout 25
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          open -p "$FTP_PORT" -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER"
+          cd "$FTP_SERVER_DIR"
+          mirror --reverse --verbose --parallel=4 --no-perms --exclude-glob "LEIA-ME-INSTALACAO.txt" "ftp-static" "."
+          put -O "." "ftp-static/.htaccess"
+          bye
+          LFTP
+
+      - name: Verificar o site publicado
+        shell: bash
+        run: |
+          set -euo pipefail
+          for tentativa in 1 2 3 4 5; do
+            if curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/" >/dev/null \
+              && curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/sitemap.xml" >/dev/null \
+              && curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/robots.txt" >/dev/null; then
+              exit 0
+            fi
+            sleep 12
+          done
+          echo "A publicação terminou, mas a verificação pública ainda falhou."
+          exit 1
