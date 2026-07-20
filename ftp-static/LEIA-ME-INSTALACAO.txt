@@ -1,0 +1,37 @@
+BARROCO ARQUITETURA — PACOTE PARA HOSPEDAGEM FTP
+====================================================
+
+Este pacote contém a versão estática otimizada e independente do site aprovado.
+O site público atual não precisa ser desligado durante a preparação.
+
+PUBLICAÇÃO
+1. Faça um backup da pasta pública atual da hospedagem.
+2. Envie todo o conteúdo deste pacote para a raiz pública do domínio (normalmente public_html, www ou htdocs).
+3. Confirme que o arquivo oculto .htaccess também foi enviado.
+4. Mantenha o domínio apontado para a hospedagem atual até concluir os testes no endereço temporário fornecido pelo provedor.
+5. Depois dos testes, altere o DNS conforme as instruções da hospedagem.
+
+VALIDAÇÃO APÓS O UPLOAD
+- Página inicial: /
+- Projetos: /projetos
+- Apartamentos: /projetos-de-apartamentos
+- Casas: /projetos-de-casas
+- Reformas: /reformas-residenciais
+- Comercial: /projetos-e-obras-comerciais
+- Sitemap: /sitemap.xml
+- Sitemap de imagens: /sitemap-images.xml
+- Robots: /robots.txt
+- Redirecionamento antigo: /portfolio deve ir para /projetos
+- URL removida: /archived-2 deve responder HTTP 410
+
+DESEMPENHO
+As imagens estão em WebP, os arquivos visuais têm cache prolongado e CSS/JavaScript usam cache imutável.
+O HTML permanece revalidável para que futuras atualizações apareçam imediatamente.
+
+REQUISITOS DA HOSPEDAGEM
+- Servidor Apache ou LiteSpeed com suporte a .htaccess e mod_rewrite.
+- HTTPS ativo para www.barrocoarquitetura.com.br.
+- PHP e banco de dados não são necessários.
+
+ATUALIZAÇÕES FUTURAS
+O projeto-fonte permanece separado deste pacote. Após cada edição, uma nova exportação substitui os arquivos publicados.

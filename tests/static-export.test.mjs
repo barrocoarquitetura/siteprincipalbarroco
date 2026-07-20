@@ -1,0 +1,49 @@
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import path from "node:path";
+import test from "node:test";
+
+const root = path.resolve("ftp-static");
+const pages = [
+  "index.html",
+  "projetos-page.html",
+  "projetos-de-apartamentos.html",
+  "projetos-de-casas.html",
+  "reformas-residenciais.html",
+  "projetos-e-obras-comerciais.html",
+  "projetos/apartamento-com-ambientes-integrados.html",
+  "projetos/casa-contemporanea-com-piscina.html",
+  "projetos/escritorio-com-recepcao-e-jardim-vertical.html",
+  "projetos/reforma-de-apartamento-com-cozinha-e-varanda.html",
+];
+
+test("exports all indexable pages without the Vinext runtime", async () => {
+  for (const page of pages) {
+    const html = await readFile(path.join(root, page), "utf8");
+    assert.doesNotMatch(html, /__VINEXT|modulepreload|data-rsc-/i, page);
+    assert.match(html, /<script defer src="\/assets\/site-static\.js"><\/script>/i, page);
+    assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br/i, page);
+    assert.equal((html.match(/<h1\b/gi) || []).length, 1, page);
+  }
+});
+
+test("keeps every referenced local asset in the package", async () => {
+  for (const page of pages) {
+    const html = await readFile(path.join(root, page), "utf8");
+    const references = [...html.matchAll(/(?:src|href)="(\/(?:assets|images)\/[^"?#]+|\/favicon\.svg)"/gi)].map((match) => match[1]);
+    for (const reference of references) await access(path.join(root, reference.slice(1)));
+  }
+});
+
+test("ships discovery, routing, caching and removal rules", async () => {
+  const robots = await readFile(path.join(root, "robots.txt"), "utf8");
+  const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
+  const imageSitemap = await readFile(path.join(root, "sitemap-images.xml"), "utf8");
+  const htaccess = await readFile(path.join(root, ".htaccess"), "utf8");
+  assert.match(robots, /sitemap\.xml/i);
+  assert.match(sitemap, /<urlset/i);
+  assert.match(imageSitemap, /<image:image>/i);
+  assert.match(htaccess, /archived-2\/\?\$ - \[R=410,L\]/i);
+  assert.match(htaccess, /max-age=31536000, immutable/i);
+  assert.match(htaccess, /AddType image\/webp \.webp/i);
+});
