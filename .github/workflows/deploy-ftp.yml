@@ -1,4 +1,4 @@
-# Publicação FTPS com origem fixa e validação criptográfica
+# Publicação FTPS com identificação segura da raiz pública
 name: Publicar site por FTPS
 
 on:
@@ -63,6 +63,27 @@ jobs:
           sudo apt-get install -y -qq lftp
           echo "$FTP_ORIGIN_IP $FTP_SERVER" | sudo tee -a /etc/hosts >/dev/null
           getent hosts "$FTP_SERVER"
+
+      - name: Identificar a raiz pública da hospedagem
+        shell: bash
+        run: |
+          set -euo pipefail
+          lftp <<LFTP
+          set cmd:fail-exit no
+          set net:max-retries 2
+          set net:timeout 25
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          set ssl:check-hostname no
+          open -p "$FTP_PORT" -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER"
+          pwd
+          cls -la
+          cls -la public_html
+          cls -la www
+          cls -la htdocs
+          bye
+          LFTP
 
       - name: Publicar sem excluir arquivos remotos
         shell: bash
