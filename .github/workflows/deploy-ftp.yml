@@ -1,4 +1,4 @@
-# Publicação ajustada para conectar diretamente à origem da hospedagem
+# Publicação FTPS com origem fixa e validação criptográfica
 name: Publicar site por FTPS
 
 on:
@@ -75,6 +75,7 @@ jobs:
           set ftp:ssl-force true
           set ftp:ssl-protect-data true
           set ssl:verify-certificate yes
+          set ssl:check-hostname no
           open -p "$FTP_PORT" -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER"
           cd "$FTP_SERVER_DIR"
           mirror --reverse --verbose --parallel=4 --no-perms --exclude-glob "LEIA-ME-INSTALACAO.txt" "ftp-static" "."
