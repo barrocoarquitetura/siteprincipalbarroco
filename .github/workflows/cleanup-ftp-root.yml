@@ -1,0 +1,78 @@
+name: Limpar publicação duplicada da pasta inicial
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/cleanup-ftp-root.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  limpar:
+    name: Remover somente os arquivos enviados por engano
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FTP_SERVER: ftp.barrocoarquitetura.com.br
+      FTP_ORIGIN_IP: "85.155.127.7"
+      FTP_PORT: "2121"
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+
+    steps:
+      - name: Preparar conexão FTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$FTP_USERNAME"
+          test -n "$FTP_PASSWORD"
+          echo "::add-mask::$FTP_USERNAME"
+          echo "::add-mask::$FTP_PASSWORD"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          echo "$FTP_ORIGIN_IP $FTP_SERVER" | sudo tee -a /etc/hosts >/dev/null
+
+      - name: Remover duplicatas da pasta inicial
+        shell: bash
+        run: |
+          lftp <<LFTP
+          set cmd:fail-exit no
+          set net:max-retries 2
+          set net:timeout 25
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          set ssl:check-hostname no
+          open -p "$FTP_PORT" -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER"
+          cd /
+          rm .htaccess
+          rm 404.html
+          rm 410.html
+          rm index.html
+          rm projetos-de-apartamentos.html
+          rm projetos-de-casas.html
+          rm projetos-e-obras-comerciais.html
+          rm projetos-page.html
+          rm reformas-residenciais.html
+          rm robots.txt
+          rm sitemap-images.xml
+          rm sitemap.xml
+          rm favicon.svg
+          rm file.svg
+          rm globe.svg
+          rm window.svg
+          rm -r assets
+          rm -r images
+          rm -r projetos
+          bye
+          LFTP
+
+      - name: Confirmar que o site público permanece íntegro
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/" >/dev/null
+          curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/sitemap.xml" >/dev/null
