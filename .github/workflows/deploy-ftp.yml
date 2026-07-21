@@ -1,4 +1,4 @@
-# Publicação disparada em 20/07/2026 após configuração dos segredos
+# Publicação ajustada para conectar diretamente à origem da hospedagem
 name: Publicar site por FTPS
 
 on:
@@ -24,6 +24,7 @@ jobs:
     timeout-minutes: 20
     env:
       FTP_SERVER: ftp.barrocoarquitetura.com.br
+      FTP_ORIGIN_IP: "85.155.127.7"
       FTP_PORT: "2121"
       FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
       FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
@@ -54,11 +55,14 @@ jobs:
           echo "::add-mask::$FTP_USERNAME"
           echo "::add-mask::$FTP_PASSWORD"
 
-      - name: Instalar cliente FTPS
+      - name: Preparar conexão FTPS com a origem
         shell: bash
         run: |
+          set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y -qq lftp
+          echo "$FTP_ORIGIN_IP $FTP_SERVER" | sudo tee -a /etc/hosts >/dev/null
+          getent hosts "$FTP_SERVER"
 
       - name: Publicar sem excluir arquivos remotos
         shell: bash
