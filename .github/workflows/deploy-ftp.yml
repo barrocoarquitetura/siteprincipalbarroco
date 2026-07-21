@@ -1,3 +1,4 @@
+# Publicação disparada em 20/07/2026 após configuração dos segredos
 name: Publicar site por FTPS
 
 on:
