@@ -1,4 +1,4 @@
-# Publicação FTPS na raiz pública validada
+# Compila e publica automaticamente o site estático no cPanel por FTPS
 name: Publicar site por FTPS
 
 on:
@@ -6,9 +6,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "ftp-static/**"
-      - ".github/workflows/deploy-ftp.yml"
 
 permissions:
   contents: read
@@ -19,7 +16,7 @@ concurrency:
 
 jobs:
   publicar:
-    name: Validar e publicar
+    name: Compilar, validar e publicar
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -31,8 +28,20 @@ jobs:
       FTP_SERVER_DIR: "/public_html"
 
     steps:
-      - name: Baixar o site
+      - name: Baixar o código
         uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm run install:ci
+
+      - name: Gerar pacote estático
+        run: npm run export:ftp
 
       - name: Validar pacote de produção
         shell: bash
