@@ -5,6 +5,7 @@ const navigation = [
   ["Sobre", "/#sobre"],
   ["Serviços", "/#servicos"],
   ["Projetos", "/projetos"],
+  ["Conteúdo", "/blog"],
 ];
 
 export function SiteHeader() {

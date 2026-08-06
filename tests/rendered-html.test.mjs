@@ -12,8 +12,8 @@ const env = {
 };
 const ctx = { waitUntil() {}, passThroughOnException() {} };
 
-function request(path, host = "www.barrocoarquitetura.com.br") {
-  return worker.fetch(new Request(`https://${host}${path}`, { headers: { accept: "text/html" } }), env, ctx);
+function request(path, host = "www.barrocoarquitetura.com.br", protocol = "https") {
+  return worker.fetch(new Request(`${protocol}://${host}${path}`, { headers: { accept: "text/html" } }), env, ctx);
 }
 
 const canonicalPaths = [
@@ -27,6 +27,13 @@ const canonicalPaths = [
   "/projetos/casa-contemporanea-com-piscina",
   "/projetos/escritorio-com-recepcao-e-jardim-vertical",
   "/projetos/reforma-de-apartamento-com-cozinha-e-varanda",
+  "/blog",
+  "/blog/projeto-de-interiores-para-apartamento-o-que-inclui",
+  "/blog/reforma-de-apartamento-por-onde-comecar",
+  "/blog/projeto-executivo-de-interiores-o-que-e",
+  "/blog/quanto-tempo-dura-reforma-de-apartamento",
+  "/blog/projeto-de-interiores-antes-das-chaves",
+  "/blog/como-escolher-escritorio-de-arquitetura",
 ];
 
 test("renders production SEO metadata on the home page", async () => {
@@ -49,6 +56,17 @@ test("renders indexable project case studies", async () => {
   assert.match(html, /CreativeWork/);
   assert.match(html, /BreadcrumbList/);
   assert.match(html, /<meta name="robots" content="index, follow/i);
+});
+
+test("renders first-hand technical articles with article schema", async () => {
+  const response = await request("/blog/reforma-de-apartamento-por-onde-comecar");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Reforma de apartamento: por onde começar/i);
+  assert.match(html, /BlogPosting/);
+  assert.match(html, /BreadcrumbList/);
+  assert.match(html, /Barroco Arquitetura/);
+  assert.match(html, /Resposta direta/i);
 });
 
 test("keeps every canonical page indexable and uniquely described", async () => {
@@ -85,6 +103,16 @@ test("redirects relevant legacy pages permanently", async () => {
   assert.match(budget.headers.get("location") ?? "", /\/#contato$/);
 });
 
+test("consolidates protocol and hostname on the canonical www domain", async () => {
+  const apex = await request("/blog", "barrocoarquitetura.com.br");
+  assert.ok([301, 308].includes(apex.status));
+  assert.equal(apex.headers.get("location"), "https://www.barrocoarquitetura.com.br/blog");
+
+  const insecure = await request("/projetos?origem=teste", "www.barrocoarquitetura.com.br", "http");
+  assert.ok([301, 308].includes(insecure.status));
+  assert.equal(insecure.headers.get("location"), "https://www.barrocoarquitetura.com.br/projetos?origem=teste");
+});
+
 test("returns 410 for the removed spam URL", async () => {
   const response = await request("/archived-2");
   assert.equal(response.status, 410);
@@ -97,11 +125,15 @@ test("publishes clean discovery files for Google", async () => {
   const robotsText = await robots.text();
   assert.match(robotsText, /Sitemap: https:\/\/www\.barrocoarquitetura\.com\.br\/sitemap\.xml/i);
   assert.match(robotsText, /Sitemap: https:\/\/www\.barrocoarquitetura\.com\.br\/sitemap-images\.xml/i);
+  assert.match(robotsText, /OAI-SearchBot/i);
+  assert.match(robotsText, /PerplexityBot/i);
+  assert.doesNotMatch(robotsText, /^Host:/im);
 
   const sitemap = await request("/sitemap.xml");
   assert.equal(sitemap.status, 200);
   const sitemapText = await sitemap.text();
   assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/projetos\/apartamento-com-ambientes-integrados/i);
+  assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/projeto-de-interiores-antes-das-chaves/i);
   assert.doesNotMatch(sitemapText, /\/portfolio|\/orcamento|\/archived-2/i);
 
   const imageSitemap = await request("/sitemap-images.xml");
@@ -115,5 +147,13 @@ test("publishes clean discovery files for Google", async () => {
   ]) {
     assert.match(imageSitemapText, new RegExp(`https:\\/\\/www\\.barrocoarquitetura\\.com\\.br${path}`));
   }
+  assert.match(imageSitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/reforma-de-apartamento-por-onde-comecar/i);
   assert.doesNotMatch(imageSitemapText, /<image:(caption|title|geo_location|license)>/i);
+
+  const rss = await request("/rss.xml");
+  assert.equal(rss.status, 200);
+  assert.match(rss.headers.get("content-type") ?? "", /^application\/rss\+xml\b/i);
+  const rssText = await rss.text();
+  assert.match(rssText, /<rss version="2\.0">/i);
+  assert.match(rssText, /projeto-de-interiores-para-apartamento-o-que-inclui/i);
 });

@@ -1,5 +1,6 @@
 import { apartmentImages, commercialImages, houseImages } from "../projetos/projectData";
 import { caseStudies } from "../projetos/caseStudies";
+import { blogPosts } from "../blog/posts";
 
 const baseUrl = "https://www.barrocoarquitetura.com.br";
 
@@ -70,6 +71,10 @@ const imageGroups: Array<{ page: string; images: string[] }> = [
   ...caseStudies.map((caseStudy) => ({
     page: `/projetos/${caseStudy.slug}`,
     images: caseStudy.gallery.map(([src]) => src),
+  })),
+  ...blogPosts.map((post) => ({
+    page: `/blog/${post.slug}`,
+    images: [post.image],
   })),
 ];
 

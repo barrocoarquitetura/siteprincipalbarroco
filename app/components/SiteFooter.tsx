@@ -19,6 +19,7 @@ export function SiteFooter() {
           <Link href="/projetos-de-casas">Casas</Link>
           <Link href="/reformas-residenciais">Reformas</Link>
           <Link href="/projetos-e-obras-comerciais">Comercial e escritórios</Link>
+          <Link href="/blog">Conteúdo técnico</Link>
         </div>
         <div>
           <strong>Contato</strong>

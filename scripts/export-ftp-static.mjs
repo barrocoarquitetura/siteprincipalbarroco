@@ -19,6 +19,13 @@ const routes = [
   "/projetos/casa-contemporanea-com-piscina",
   "/projetos/escritorio-com-recepcao-e-jardim-vertical",
   "/projetos/reforma-de-apartamento-com-cozinha-e-varanda",
+  "/blog",
+  "/blog/projeto-de-interiores-para-apartamento-o-que-inclui",
+  "/blog/reforma-de-apartamento-por-onde-comecar",
+  "/blog/projeto-executivo-de-interiores-o-que-e",
+  "/blog/quanto-tempo-dura-reforma-de-apartamento",
+  "/blog/projeto-de-interiores-antes-das-chaves",
+  "/blog/como-escolher-escritorio-de-arquitetura",
 ];
 
 const mimeTypes = {
@@ -159,8 +166,10 @@ VALIDAÇÃO APÓS O UPLOAD
 - Casas: /projetos-de-casas
 - Reformas: /reformas-residenciais
 - Comercial: /projetos-e-obras-comerciais
+- Conteúdo técnico: /blog
 - Sitemap: /sitemap.xml
 - Sitemap de imagens: /sitemap-images.xml
+- RSS: /rss.xml
 - Robots: /robots.txt
 - Redirecionamento antigo: /portfolio deve ir para /projetos
 - URL removida: /archived-2 deve responder HTTP 410
@@ -209,7 +218,7 @@ const missingResponse = await worker.fetch(
 await writeFile(path.join(outputRoot, "404.html"), toStaticHtml(await missingResponse.text()));
 await writeFile(path.join(outputRoot, "410.html"), "<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow,noarchive\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Conteúdo removido</title></head><body><h1>Conteúdo removido</h1><p>Esta página não está mais disponível.</p></body></html>");
 
-for (const discoveryPath of ["/robots.txt", "/sitemap.xml", "/sitemap-images.xml"]) {
+for (const discoveryPath of ["/robots.txt", "/sitemap.xml", "/sitemap-images.xml", "/rss.xml"]) {
   const accept = discoveryPath.endsWith(".xml") ? "application/xml" : "text/plain";
   await writeFile(path.join(outputRoot, discoveryPath.slice(1)), await render(worker, discoveryPath, accept));
 }

@@ -104,6 +104,7 @@ export const metadata: Metadata = {
     template: "%s | Barroco Arquitetura",
   },
   description: "Escritório de arquitetura em Santo André para projetos de casas, apartamentos, interiores, reformas e obras comerciais no estado de São Paulo.",
+  alternates: { types: { "application/rss+xml": "/rss.xml" } },
   robots: {
     index: true,
     follow: true,

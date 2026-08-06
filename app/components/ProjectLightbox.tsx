@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 type LightboxItem = {
   src: string;
@@ -103,7 +104,7 @@ export function ProjectLightbox() {
           <button ref={closeButtonRef} type="button" onClick={close} aria-label="Fechar imagem ampliada">Fechar <span aria-hidden="true">×</span></button>
         </div>
         <div className="project-lightbox__image">
-          <img src={item.src} alt={item.alt} />
+          <Image src={item.src} alt={item.alt} fill sizes="100vw" />
         </div>
         <div className="project-lightbox__footer">
           <div><strong>{item.title}</strong><span>{item.description}</span></div>

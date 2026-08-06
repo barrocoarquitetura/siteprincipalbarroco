@@ -28,6 +28,13 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    const isPublicDomain = url.hostname === "barrocoarquitetura.com.br" || url.hostname === "www.barrocoarquitetura.com.br";
+
+    if (isPublicDomain && (url.protocol !== "https:" || url.hostname !== "www.barrocoarquitetura.com.br")) {
+      url.protocol = "https:";
+      url.hostname = "www.barrocoarquitetura.com.br";
+      return Response.redirect(url, 308);
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];

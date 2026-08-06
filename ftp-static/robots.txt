@@ -1,6 +1,11 @@
 User-Agent: *
 Allow: /
 
+User-Agent: OAI-SearchBot
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
 Sitemap: https://www.barrocoarquitetura.com.br/sitemap.xml
 Sitemap: https://www.barrocoarquitetura.com.br/sitemap-images.xml
-Host: https://www.barrocoarquitetura.com.br

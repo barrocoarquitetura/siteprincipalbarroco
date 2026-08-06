@@ -5,6 +5,7 @@ import { HeroCarousel, PortfolioCarousel, TestimonialCarousel } from "./componen
 import { LeadForm } from "./components/LeadForm";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
+import { blogPosts } from "./blog/posts";
 import { testimonials } from "./content/testimonials";
 
 export const metadata: Metadata = {
@@ -315,6 +316,30 @@ export default function Home() {
             </div>
           </div>
           <PortfolioCarousel projects={projects.map(([image, title, text]) => ({ image, title, text }))} />
+        </section>
+
+        <section className="section section--sand home-insights">
+          <div className="page-shell">
+            <div className="section-heading section-heading--split" data-reveal>
+              <div><p className="eyebrow">Conteúdo técnico</p><h2>Dúvidas importantes antes do projeto e da obra.</h2></div>
+              <div><p>Orientações baseadas na prática do escritório para comparar escopos, antecipar decisões e planejar com mais clareza.</p><Link className="text-link" href="/blog">Ver todos os guias <span aria-hidden="true">→</span></Link></div>
+            </div>
+            <div className="blog-grid blog-grid--home">
+              {blogPosts.slice(0, 3).map((post) => (
+                <article className="blog-card" key={post.slug}>
+                  <Link className="blog-card__image" href={`/blog/${post.slug}`} aria-label={`Ler: ${post.title}`}>
+                    <img src={post.image} alt={post.imageAlt} loading="lazy" decoding="async" />
+                  </Link>
+                  <div className="blog-card__body">
+                    <div className="blog-card__meta"><span>{post.category}</span><span>{post.readingTime}</span></div>
+                    <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+                    <p>{post.excerpt}</p>
+                    <Link className="text-link" href={`/blog/${post.slug}`}>Ler guia <span aria-hidden="true">→</span></Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="section section--sand">

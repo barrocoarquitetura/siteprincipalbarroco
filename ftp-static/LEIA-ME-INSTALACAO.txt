@@ -18,8 +18,10 @@ VALIDAÇÃO APÓS O UPLOAD
 - Casas: /projetos-de-casas
 - Reformas: /reformas-residenciais
 - Comercial: /projetos-e-obras-comerciais
+- Conteúdo técnico: /blog
 - Sitemap: /sitemap.xml
 - Sitemap de imagens: /sitemap-images.xml
+- RSS: /rss.xml
 - Robots: /robots.txt
 - Redirecionamento antigo: /portfolio deve ir para /projetos
 - URL removida: /archived-2 deve responder HTTP 410
