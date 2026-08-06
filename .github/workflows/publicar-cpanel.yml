@@ -1,0 +1,58 @@
+name: Publicar pacote para o cPanel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-cpanel
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci --no-audit --no-fund
+
+      - name: Gerar pacote estático
+        run: npm run export:ftp
+
+      - name: Validar pacote
+        run: |
+          test -f ftp-static/index.html
+          test -f ftp-static/.htaccess
+          test -f ftp-static/robots.txt
+
+      - name: Publicar branch deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p "$RUNNER_TEMP/cpanel-deploy"
+          cp -a ftp-static/. "$RUNNER_TEMP/cpanel-deploy/"
+          cd "$RUNNER_TEMP/cpanel-deploy"
+          git init
+          git checkout -b deploy
+          git add -A
+          git commit -m "Publicação automática de ${SOURCE_SHA}"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}.git" deploy
