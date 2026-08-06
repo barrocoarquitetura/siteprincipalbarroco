@@ -37,3 +37,6 @@ REQUISITOS DA HOSPEDAGEM
 
 ATUALIZAÇÕES FUTURAS
 O projeto-fonte permanece separado deste pacote. Após cada edição, uma nova exportação substitui os arquivos publicados.
+
+SINCRONIZAÇÃO
+Publicação automática solicitada em 06/08/2026.
