@@ -1,4 +1,5 @@
 import { copyFile, cp, mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,6 +7,7 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 const outputRoot = path.join(projectRoot, "ftp-static");
 const clientRoot = path.join(projectRoot, "dist", "client");
 const runtimeSource = path.join(projectRoot, "scripts", "static-site-runtime.js");
+const runtimeVersion = createHash("sha256").update(await readFile(runtimeSource)).digest("hex").slice(0, 12);
 const productionOrigin = "https://www.barrocoarquitetura.com.br";
 const googleAdsId = "AW-614157022";
 const googleTagHead = `<script async src="https://www.googletagmanager.com/gtag/js?id=${googleAdsId}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${googleAdsId}');</script>`;
@@ -66,7 +68,7 @@ function toStaticHtml(source) {
   html = addHeroAltText(html);
   return html
     .replace("</head>", `${googleTagHead}</head>`)
-    .replace("</body>", "<script defer src=\"/assets/site-static.js\"></script></body>");
+    .replace("</body>", `<script defer src="/assets/site-static.js?v=${runtimeVersion}"></script></body>`);
 }
 
 async function assetsFetch(request) {

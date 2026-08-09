@@ -28,7 +28,7 @@ test("exports all indexable pages without the Vinext runtime", async () => {
   for (const page of pages) {
     const html = await readFile(path.join(root, page), "utf8");
     assert.doesNotMatch(html, /__VINEXT|modulepreload|data-rsc-/i, page);
-    assert.match(html, /<script defer src="\/assets\/site-static\.js"><\/script>/i, page);
+    assert.match(html, /<script defer src="\/assets\/site-static\.js\?v=[0-9a-f]{12}"><\/script>/i, page);
     assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i, page);
     assert.match(html, /gtag\('config','AW-614157022'\)/i, page);
     assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br/i, page);
