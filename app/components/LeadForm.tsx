@@ -6,6 +6,13 @@ type LeadFormProps = {
   defaultService?: string;
 };
 
+const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
+
+type AnalyticsWindow = Window & {
+  dataLayer?: Array<Record<string, unknown>>;
+  gtag?: (command: "event", eventName: string, parameters: Record<string, unknown>) => void;
+};
+
 export function LeadForm({ defaultService = "" }: LeadFormProps) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,13 +32,30 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
       fields.message ? `Observações: ${fields.message}` : "",
     ].filter(Boolean).join("\n");
 
-    const analyticsWindow = window as Window & { dataLayer?: Array<Record<string, unknown>> };
+    const destination = `https://api.whatsapp.com/send?phone=551127630517&text=${encodeURIComponent(message)}`;
+    const analyticsWindow = window as AnalyticsWindow;
     analyticsWindow.dataLayer?.push({
       event: "lead_form_whatsapp",
       service: fields.service,
       property_type: fields.property,
     });
-    window.location.href = `https://api.whatsapp.com/send?phone=551127630517&text=${encodeURIComponent(message)}`;
+
+    let redirected = false;
+    const redirectToWhatsApp = () => {
+      if (redirected) return;
+      redirected = true;
+      window.location.assign(destination);
+    };
+
+    if (typeof analyticsWindow.gtag === "function") {
+      analyticsWindow.gtag("event", "conversion", {
+        send_to: formConversionId,
+        event_callback: redirectToWhatsApp,
+      });
+      window.setTimeout(redirectToWhatsApp, 1200);
+    } else {
+      redirectToWhatsApp();
+    }
   }
 
   return (

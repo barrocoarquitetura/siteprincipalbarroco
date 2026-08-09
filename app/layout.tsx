@@ -5,6 +5,8 @@ import { WhatsAppButton } from "./components/WhatsAppButton";
 import { AnalyticsEvents } from "./components/AnalyticsEvents";
 import "./globals.css";
 
+const googleAdsId = "AW-614157022";
+
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -142,6 +144,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${googleAdsId}');`,
+          }}
+        />
         <script dangerouslySetInnerHTML={{ __html: "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('reveal-enabled')}catch(e){}" }} />
       </head>
       <body>

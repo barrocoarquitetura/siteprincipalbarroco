@@ -46,6 +46,8 @@ test("renders production SEO metadata on the home page", async () => {
   assert.match(html, /ProfessionalService/);
   assert.match(html, /FAQPage/);
   assert.match(html, /data-reveal/);
+  assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i);
+  assert.match(html, /gtag\('config','AW-614157022'\)/i);
 });
 
 test("renders indexable project case studies", async () => {

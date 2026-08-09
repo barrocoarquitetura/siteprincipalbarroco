@@ -3,6 +3,8 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const pad = (number) => String(number).padStart(2, "0");
+  const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
+  const whatsappConversionId = "AW-614157022/bWIoCP-morQDEN6V7aQC";
 
   function pushAnalytics(event, details = {}) {
     window.dataLayer?.push({ event, page_path: window.location.pathname, ...details });
@@ -216,8 +218,25 @@
           `Prazo: ${fields.timeline}`,
           fields.message ? `Observações: ${fields.message}` : "",
         ].filter(Boolean).join("\n");
+        const destination = `https://api.whatsapp.com/send?phone=551127630517&text=${encodeURIComponent(message)}`;
         pushAnalytics("lead_form_whatsapp", { service: fields.service, property_type: fields.property });
-        window.location.href = `https://api.whatsapp.com/send?phone=551127630517&text=${encodeURIComponent(message)}`;
+
+        let redirected = false;
+        const redirectToWhatsApp = () => {
+          if (redirected) return;
+          redirected = true;
+          window.location.assign(destination);
+        };
+
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "conversion", {
+            send_to: formConversionId,
+            event_callback: redirectToWhatsApp,
+          });
+          window.setTimeout(redirectToWhatsApp, 1200);
+        } else {
+          redirectToWhatsApp();
+        }
       });
     });
   }
@@ -227,7 +246,12 @@
       const link = event.target.closest?.("a[href]");
       if (!link) return;
       const href = link.href;
-      if (/wa\.me|api\.whatsapp\.com/.test(href)) pushAnalytics("whatsapp_click", { link_url: href });
+      if (/wa\.me|api\.whatsapp\.com/.test(href)) {
+        pushAnalytics("whatsapp_click", { link_url: href });
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "conversion", { send_to: whatsappConversionId });
+        }
+      }
       else if (href.startsWith("tel:")) pushAnalytics("phone_click", { link_url: href });
       else if (href.startsWith("mailto:")) pushAnalytics("email_click", { link_url: href });
     });

@@ -29,9 +29,18 @@ test("exports all indexable pages without the Vinext runtime", async () => {
     const html = await readFile(path.join(root, page), "utf8");
     assert.doesNotMatch(html, /__VINEXT|modulepreload|data-rsc-/i, page);
     assert.match(html, /<script defer src="\/assets\/site-static\.js"><\/script>/i, page);
+    assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i, page);
+    assert.match(html, /gtag\('config','AW-614157022'\)/i, page);
     assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br/i, page);
     assert.equal((html.match(/<h1\b/gi) || []).length, 1, page);
   }
+});
+
+test("ships the qualified lead and WhatsApp conversion events", async () => {
+  const runtime = await readFile(path.join(root, "assets", "site-static.js"), "utf8");
+  assert.match(runtime, /AW-614157022\/KLJACJyUorQDEN6V7aQC/);
+  assert.match(runtime, /AW-614157022\/bWIoCP-morQDEN6V7aQC/);
+  assert.match(runtime, /event_callback:\s*redirectToWhatsApp/);
 });
 
 test("keeps every referenced local asset in the package", async () => {

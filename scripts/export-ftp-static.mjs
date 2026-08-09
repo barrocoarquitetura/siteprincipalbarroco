@@ -7,6 +7,8 @@ const outputRoot = path.join(projectRoot, "ftp-static");
 const clientRoot = path.join(projectRoot, "dist", "client");
 const runtimeSource = path.join(projectRoot, "scripts", "static-site-runtime.js");
 const productionOrigin = "https://www.barrocoarquitetura.com.br";
+const googleAdsId = "AW-614157022";
+const googleTagHead = `<script async src="https://www.googletagmanager.com/gtag/js?id=${googleAdsId}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${googleAdsId}');</script>`;
 
 const routes = [
   "/",
@@ -62,7 +64,9 @@ function toStaticHtml(source) {
     .replace(/\sdata-precedence="[^"]*"/gi, "")
     .replace("<html ", "<html data-static-export=\"true\" ");
   html = addHeroAltText(html);
-  return html.replace("</body>", "<script defer src=\"/assets/site-static.js\"></script></body>");
+  return html
+    .replace("</head>", `${googleTagHead}</head>`)
+    .replace("</body>", "<script defer src=\"/assets/site-static.js\"></script></body>");
 }
 
 async function assetsFetch(request) {
@@ -108,8 +112,6 @@ AddType application/xml .xml
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} !^www\\.barrocoarquitetura\\.com\\.br$ [NC]
   RewriteRule ^ https://www.barrocoarquitetura.com.br%{REQUEST_URI} [R=301,L,NE]
-
-  RewriteRule ^blog/?$ blog.html [L]
 
   RewriteCond %{REQUEST_URI} ^(.+)/+$
   RewriteRule ^(.+)/$ /$1 [R=301,L,NE]

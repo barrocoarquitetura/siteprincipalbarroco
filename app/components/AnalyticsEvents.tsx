@@ -2,7 +2,12 @@
 
 import { useEffect } from "react";
 
-type AnalyticsWindow = Window & { dataLayer?: Array<Record<string, unknown>> };
+const whatsappConversionId = "AW-614157022/bWIoCP-morQDEN6V7aQC";
+
+type AnalyticsWindow = Window & {
+  dataLayer?: Array<Record<string, unknown>>;
+  gtag?: (command: "event", eventName: string, parameters: Record<string, unknown>) => void;
+};
 
 export function AnalyticsEvents() {
   useEffect(() => {
@@ -18,11 +23,15 @@ export function AnalyticsEvents() {
       else if (href.startsWith("mailto:")) eventName = "email_click";
       if (!eventName) return;
 
-      (window as AnalyticsWindow).dataLayer?.push({
+      const analyticsWindow = window as AnalyticsWindow;
+      analyticsWindow.dataLayer?.push({
         event: eventName,
         page_path: window.location.pathname,
         link_url: href,
       });
+      if (eventName === "whatsapp_click" && typeof analyticsWindow.gtag === "function") {
+        analyticsWindow.gtag("event", "conversion", { send_to: whatsappConversionId });
+      }
     };
 
     document.addEventListener("click", handleClick);
