@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 const whatsappConversionId = "AW-614157022/bWIoCP-morQDEN6V7aQC";
+const analyticsMeasurementId = "G-YED0X4J78V";
 
 type AnalyticsWindow = Window & {
   dataLayer?: Array<Record<string, unknown>>;
@@ -26,6 +27,11 @@ export function AnalyticsEvents() {
       const analyticsWindow = window as AnalyticsWindow;
       analyticsWindow.dataLayer?.push({
         event: eventName,
+        page_path: window.location.pathname,
+        link_url: href,
+      });
+      analyticsWindow.gtag?.("event", eventName, {
+        send_to: analyticsMeasurementId,
         page_path: window.location.pathname,
         link_url: href,
       });

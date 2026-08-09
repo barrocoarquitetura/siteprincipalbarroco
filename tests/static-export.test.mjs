@@ -40,6 +40,10 @@ test("ships the qualified lead and WhatsApp conversion events", async () => {
   const runtime = await readFile(path.join(root, "assets", "site-static.js"), "utf8");
   assert.match(runtime, /AW-614157022\/KLJACJyUorQDEN6V7aQC/);
   assert.match(runtime, /AW-614157022\/bWIoCP-morQDEN6V7aQC/);
+  assert.match(runtime, /G-YED0X4J78V/);
+  assert.match(runtime, /"lead_form_whatsapp"/);
+  assert.match(runtime, /"phone_click"/);
+  assert.match(runtime, /"email_click"/);
   assert.match(runtime, /event_callback:\s*redirectToWhatsApp/);
 });
 

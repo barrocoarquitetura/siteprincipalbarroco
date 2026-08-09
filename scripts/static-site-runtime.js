@@ -5,6 +5,7 @@
   const pad = (number) => String(number).padStart(2, "0");
   const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
   const whatsappConversionId = "AW-614157022/bWIoCP-morQDEN6V7aQC";
+  const analyticsMeasurementId = "G-YED0X4J78V";
 
   function pushAnalytics(event, details = {}) {
     window.dataLayer?.push({ event, page_path: window.location.pathname, ...details });
@@ -220,6 +221,11 @@
         ].filter(Boolean).join("\n");
         const destination = `https://api.whatsapp.com/send?phone=551127630517&text=${encodeURIComponent(message)}`;
         pushAnalytics("lead_form_whatsapp", { service: fields.service, property_type: fields.property });
+        window.gtag?.("event", "lead_form_whatsapp", {
+          send_to: analyticsMeasurementId,
+          service: fields.service,
+          property_type: fields.property,
+        });
 
         let redirected = false;
         const redirectToWhatsApp = () => {
@@ -246,14 +252,23 @@
       const link = event.target.closest?.("a[href]");
       if (!link) return;
       const href = link.href;
+      let eventName = "";
       if (/wa\.me|api\.whatsapp\.com/.test(href)) {
-        pushAnalytics("whatsapp_click", { link_url: href });
+        eventName = "whatsapp_click";
         if (typeof window.gtag === "function") {
           window.gtag("event", "conversion", { send_to: whatsappConversionId });
         }
       }
-      else if (href.startsWith("tel:")) pushAnalytics("phone_click", { link_url: href });
-      else if (href.startsWith("mailto:")) pushAnalytics("email_click", { link_url: href });
+      else if (href.startsWith("tel:")) eventName = "phone_click";
+      else if (href.startsWith("mailto:")) eventName = "email_click";
+      if (!eventName) return;
+
+      pushAnalytics(eventName, { link_url: href });
+      window.gtag?.("event", eventName, {
+        send_to: analyticsMeasurementId,
+        page_path: window.location.pathname,
+        link_url: href,
+      });
     });
   }
 

@@ -7,6 +7,7 @@ type LeadFormProps = {
 };
 
 const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
+const analyticsMeasurementId = "G-YED0X4J78V";
 
 type AnalyticsWindow = Window & {
   dataLayer?: Array<Record<string, unknown>>;
@@ -36,6 +37,12 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
     const analyticsWindow = window as AnalyticsWindow;
     analyticsWindow.dataLayer?.push({
       event: "lead_form_whatsapp",
+      service: fields.service,
+      property_type: fields.property,
+    });
+
+    analyticsWindow.gtag?.("event", "lead_form_whatsapp", {
+      send_to: analyticsMeasurementId,
       service: fields.service,
       property_type: fields.property,
     });
