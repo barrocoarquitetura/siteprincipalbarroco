@@ -29,8 +29,8 @@ export default function ComercialPage() {
   return <ServicePage
     canonicalPath="/projetos-e-obras-comerciais"
     eyebrow="Projetos e obras comerciais"
-    title="Arquitetura comercial em Santo André para espaços que trabalham a favor do negócio."
-    intro="Projeto de interiores, executivo e obra para lojas, espaços de atendimento e escritórios em Santo André e São Paulo, conectando operação, experiência e identidade."
+    title="Arquitetura comercial para espaços que trabalham a favor do negócio."
+    intro="Projeto de interiores, executivo e obra para lojas, espaços de atendimento e escritórios, conectando operação, experiência e identidade."
     image="/images/comercial-recepcao-jardim-vertical.webp"
     imageAlt="Ambiente de trabalho com marcenaria planejada, iluminação técnica e divisórias de vidro"
     highlights={[

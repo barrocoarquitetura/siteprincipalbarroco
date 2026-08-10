@@ -48,7 +48,7 @@ test("renders production SEO metadata on the home page", async () => {
   assert.match(html, /ProfessionalService/);
   assert.match(html, /Mayara Cimino/);
   assert.match(html, /Luiz Faria/);
-  assert.match(html, /Escritório de arquitetura em Santo André, do projeto à obra/i);
+  assert.match(html, /Arquitetura e interiores com identidade, do projeto à obra/i);
   assert.match(html, /FAQPage/);
   assert.match(html, /data-reveal/);
   assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i);

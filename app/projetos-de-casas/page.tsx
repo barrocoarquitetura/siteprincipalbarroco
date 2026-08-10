@@ -28,7 +28,7 @@ export default function CasasPage() {
   return <ServicePage
     canonicalPath="/projetos-de-casas"
     eyebrow="Projetos de casas"
-    title="Projeto arquitetônico para casas em Santo André e São Paulo."
+    title="Casas pensadas para o terreno, a rotina e a forma de viver."
     intro="Arquitetura e interiores para casas novas ou existentes, conectando espaços, rotina, conforto e identidade em uma solução coerente."
     image="/images/casa-patio-piscina.webp"
     imageAlt="Casa térrea contemporânea com piscina e área de lazer"

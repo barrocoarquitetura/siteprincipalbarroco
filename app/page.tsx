@@ -194,10 +194,10 @@ export default function Home() {
           <div className="page-shell home-hero__grid">
             <div className="home-hero__copy" data-reveal>
               <p className="eyebrow">Arquitetura, interiores e execução</p>
-              <h1>Escritório de arquitetura em Santo André, do projeto à obra.</h1>
+              <h1>Arquitetura e interiores com identidade, do projeto à obra.</h1>
               <p className="hero-lead">
                 Projetos residenciais e comerciais com identidade, clareza técnica e acompanhamento direto —
-                do conceito e detalhamento à execução e marcenaria, em Santo André e São Paulo.
+                do conceito e detalhamento à execução e marcenaria, com atenção a cada etapa.
               </p>
               <div className="button-row">
                 <a className="button button--primary" href="#contato">

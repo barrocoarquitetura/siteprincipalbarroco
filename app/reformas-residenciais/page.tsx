@@ -28,8 +28,8 @@ export default function ReformasPage() {
   return <ServicePage
     canonicalPath="/reformas-residenciais"
     eyebrow="Reformas residenciais"
-    title="Reforma de apartamentos em Santo André, do projeto à execução."
-    intro="Reformas de apartamentos e casas em Santo André e São Paulo, com planejamento, orçamento, gerenciamento e execução conectados em cada etapa."
+    title="Reforma de apartamentos e casas, do projeto à execução."
+    intro="Reformas de apartamentos e casas com planejamento, orçamento, gerenciamento e execução conectados em cada etapa."
     image="/images/portfolio-cozinha-verde.webp"
     imageAlt="Cozinha reformada com marcenaria verde e estrutura metálica"
     gallery={[

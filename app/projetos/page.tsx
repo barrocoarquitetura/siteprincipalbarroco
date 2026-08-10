@@ -98,7 +98,7 @@ export default function ProjetosPage() {
       <main>
         <section className="projects-hero page-shell">
           <p className="eyebrow">Portfólio selecionado</p>
-          <h1>Projetos de arquitetura e interiores em Santo André e São Paulo.</h1>
+          <h1>Projetos de arquitetura e interiores com identidade, técnica e intenção.</h1>
           <p className="projects-hero__lead">Residências, interiores e ambientes comerciais concebidos com identidade, precisão técnica e atenção à experiência de quem ocupa cada espaço.</p>
           <nav className="projects-jump" aria-label="Categorias de projetos">
             {categories.map((category) => <a href={`#${category.id}`} key={category.id}>{category.eyebrow}</a>)}

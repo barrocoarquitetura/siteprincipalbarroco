@@ -28,7 +28,7 @@ export default function ApartamentosPage() {
   return <ServicePage
     canonicalPath="/projetos-de-apartamentos"
     eyebrow="Projeto de interiores para apartamentos"
-    title="Projeto de interiores para apartamentos em Santo André e São Paulo."
+    title="Projeto de interiores para aproveitar cada metro do apartamento."
     intro="Layout, imagens 3D, projeto executivo, especificações e orçamentos para transformar apartamentos com clareza, funcionalidade e identidade."
     image="/images/apartamento-estar-jantar-integrados.webp"
     imageAlt="Apartamento com sala de estar, jantar e varanda integradas"
