@@ -63,7 +63,12 @@ export function ServicePage(props: ServicePageProps) {
       inLanguage: "pt-BR",
       mainEntityOfPage: pageUrl,
       provider: { "@id": "https://www.barrocoarquitetura.com.br/#empresa" },
-      areaServed: { "@type": "AdministrativeArea", name: "Estado de São Paulo" },
+      areaServed: [
+        { "@type": "City", name: "Santo André" },
+        { "@type": "City", name: "São Bernardo do Campo" },
+        { "@type": "City", name: "São Caetano do Sul" },
+        { "@type": "AdministrativeArea", name: "Estado de São Paulo" },
+      ],
     },
     {
       "@context": "https://schema.org",

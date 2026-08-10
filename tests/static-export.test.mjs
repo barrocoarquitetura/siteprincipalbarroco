@@ -22,6 +22,8 @@ const pages = [
   "blog/quanto-tempo-dura-reforma-de-apartamento.html",
   "blog/projeto-de-interiores-antes-das-chaves.html",
   "blog/como-escolher-escritorio-de-arquitetura.html",
+  "blog/quanto-custa-projeto-de-interiores.html",
+  "blog/reforma-de-apartamento-nbr-16280.html",
 ];
 
 test("exports all indexable pages without the Vinext runtime", async () => {

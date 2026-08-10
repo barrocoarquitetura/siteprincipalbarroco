@@ -4,7 +4,7 @@ import { caseStudies } from "./projetos/caseStudies";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.barrocoarquitetura.com.br";
-  const lastModified = new Date("2026-08-06");
+  const lastModified = new Date("2026-08-10");
   const primaryPages: MetadataRoute.Sitemap = [
     { url: base, lastModified, changeFrequency: "monthly", priority: 1 },
     { url: `${base}/projetos`, lastModified, changeFrequency: "monthly", priority: 0.9 },

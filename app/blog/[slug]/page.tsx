@@ -69,6 +69,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         image: { "@type": "ImageObject", url: `${baseUrl}${post.image}`, contentUrl: `${baseUrl}${post.image}`, caption: post.imageAlt },
         keywords: post.keywords.join(", "),
         about: post.keywords.map((name) => ({ "@type": "Thing", name })),
+        citation: post.sources?.map((source) => ({ "@type": "CreativeWork", name: source.title, url: source.url })),
         isPartOf: { "@id": `${baseUrl}/blog#blog` },
       },
       {
@@ -144,6 +145,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {section.highlight && <aside className="article-highlight">{section.highlight}</aside>}
                 </section>
               ))}
+
+              {post.sources && post.sources.length > 0 && (
+                <section className="article-section article-sources">
+                  <h2>Fontes técnicas consultadas</h2>
+                  <p>Referências institucionais utilizadas para conferir as informações técnicas deste guia.</p>
+                  <ul>
+                    {post.sources.map((source) => (
+                      <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a></li>
+                    ))}
+                  </ul>
+                </section>
+              )}
 
               <section className="article-author">
                 <div><span>Conteúdo técnico</span><h2>Barroco Arquitetura</h2></div>

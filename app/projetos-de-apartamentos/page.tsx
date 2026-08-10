@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { ServicePage } from "../components/ServicePage";
 
 export const metadata: Metadata = {
-  title: { absolute: "Projeto de Interiores para Apartamentos em SP | Barroco" },
-  description: "Projeto de interiores para apartamentos em São Paulo, com layout, imagens 3D, executivo, iluminação, marcenaria, especificações e orçamentos.",
+  title: { absolute: "Projeto de Interiores em Santo André e SP | Barroco" },
+  description: "Projeto de interiores para apartamentos em Santo André e São Paulo, com layout, imagens 3D, executivo, iluminação, marcenaria e especificações.",
   alternates: { canonical: "/projetos-de-apartamentos" },
   openGraph: {
-    title: "Projeto de Interiores para Apartamentos | Barroco Arquitetura",
-    description: "Layout, imagens 3D, executivo, iluminação, marcenaria e especificações para apartamentos em São Paulo.",
+    title: "Projeto de Interiores em Santo André e SP | Barroco Arquitetura",
+    description: "Projeto de interiores para apartamentos com layout, executivo, iluminação, marcenaria e especificações em Santo André e São Paulo.",
     url: "/projetos-de-apartamentos",
     images: [{
       url: "/images/apartamento-estar-jantar-integrados.webp",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projeto de Interiores para Apartamentos | Barroco Arquitetura",
-    description: "Layout, imagens 3D, executivo, iluminação, marcenaria e especificações para apartamentos em São Paulo.",
+    title: "Projeto de Interiores em Santo André e SP | Barroco Arquitetura",
+    description: "Projeto de interiores para apartamentos com layout, executivo, iluminação, marcenaria e especificações em Santo André e São Paulo.",
     images: ["/images/apartamento-estar-jantar-integrados.webp"],
   },
 };
@@ -28,8 +28,8 @@ export default function ApartamentosPage() {
   return <ServicePage
     canonicalPath="/projetos-de-apartamentos"
     eyebrow="Projeto de interiores para apartamentos"
-    title="Projeto de interiores para aproveitar cada metro do apartamento."
-    intro="Layout, imagens 3D, projeto executivo, especificações e orçamentos para transformar o imóvel com clareza, funcionalidade e identidade."
+    title="Projeto de interiores para apartamentos em Santo André e São Paulo."
+    intro="Layout, imagens 3D, projeto executivo, especificações e orçamentos para transformar apartamentos com clareza, funcionalidade e identidade."
     image="/images/apartamento-estar-jantar-integrados.webp"
     imageAlt="Apartamento com sala de estar, jantar e varanda integradas"
     gallery={[

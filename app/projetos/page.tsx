@@ -8,11 +8,11 @@ import { apartmentImages, commercialImages, houseImages } from "./projectData";
 import { caseStudies } from "./caseStudies";
 
 export const metadata: Metadata = {
-  title: { absolute: "Projetos de Arquitetura e Interiores em SP | Barroco" },
-  description: "Conheça projetos de apartamentos, casas, reformas, espaços comerciais e escritórios desenvolvidos pela Barroco Arquitetura em São Paulo.",
+  title: { absolute: "Projetos de Arquitetura em Santo André e SP | Barroco" },
+  description: "Conheça projetos de apartamentos, casas, reformas e espaços comerciais desenvolvidos pela Barroco Arquitetura em Santo André e São Paulo.",
   alternates: { canonical: "/projetos" },
   openGraph: {
-    title: "Projetos de Arquitetura e Interiores em SP | Barroco Arquitetura",
+    title: "Projetos de Arquitetura em Santo André e SP | Barroco Arquitetura",
     description: "Portfólio de projetos residenciais e comerciais, interiores, reformas e obras.",
     url: "/projetos",
     images: [{
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projetos de Arquitetura e Interiores em SP | Barroco Arquitetura",
+    title: "Projetos de Arquitetura em Santo André e SP | Barroco Arquitetura",
     description: "Portfólio de projetos residenciais e comerciais, interiores, reformas e obras.",
     images: ["/images/portfolio-integracao-varanda.webp"],
   },
@@ -98,7 +98,7 @@ export default function ProjetosPage() {
       <main>
         <section className="projects-hero page-shell">
           <p className="eyebrow">Portfólio selecionado</p>
-          <h1>Arquitetura revelada nos espaços, materiais e detalhes.</h1>
+          <h1>Projetos de arquitetura e interiores em Santo André e São Paulo.</h1>
           <p className="projects-hero__lead">Residências, interiores e ambientes comerciais concebidos com identidade, precisão técnica e atenção à experiência de quem ocupa cada espaço.</p>
           <nav className="projects-jump" aria-label="Categorias de projetos">
             {categories.map((category) => <a href={`#${category.id}`} key={category.id}>{category.eyebrow}</a>)}

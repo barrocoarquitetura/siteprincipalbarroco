@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { ServicePage } from "../components/ServicePage";
 
 export const metadata: Metadata = {
-  title: { absolute: "Reforma de Apartamentos e Casas em SP | Barroco" },
-  description: "Reforma de apartamentos e casas em São Paulo, com projeto, orçamento, gerenciamento de obra, execução e marcenaria coordenados pela Barroco.",
+  title: { absolute: "Reforma de Apartamento em Santo André e SP | Barroco" },
+  description: "Reforma de apartamentos em Santo André e São Paulo, com projeto, orçamento, gerenciamento de obra, execução e marcenaria coordenados pela Barroco.",
   alternates: { canonical: "/reformas-residenciais" },
   openGraph: {
-    title: "Reformas Residenciais com Projeto e Obra | Barroco",
-    description: "Projeto, gerenciamento, execução e marcenaria para reformas de apartamentos e casas.",
+    title: "Reforma de Apartamento em Santo André e SP | Barroco",
+    description: "Projeto, gerenciamento, execução e marcenaria para reformas de apartamentos e casas em Santo André e São Paulo.",
     url: "/reformas-residenciais",
     images: [{
       url: "/images/portfolio-cozinha-verde.webp",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reformas Residenciais com Projeto e Obra | Barroco Arquitetura",
-    description: "Projeto, gerenciamento, execução e marcenaria para reformas de apartamentos e casas.",
+    title: "Reforma de Apartamento em Santo André e SP | Barroco Arquitetura",
+    description: "Projeto, gerenciamento, execução e marcenaria para reformas de apartamentos e casas em Santo André e São Paulo.",
     images: ["/images/portfolio-cozinha-verde.webp"],
   },
 };
@@ -28,8 +28,8 @@ export default function ReformasPage() {
   return <ServicePage
     canonicalPath="/reformas-residenciais"
     eyebrow="Reformas residenciais"
-    title="Reforma de apartamentos e casas, do projeto à execução."
-    intro="Reformas de casas e apartamentos com planejamento, orçamento, gerenciamento e execução, mantendo decisões, fornecedores e etapas conectados."
+    title="Reforma de apartamentos em Santo André, do projeto à execução."
+    intro="Reformas de apartamentos e casas em Santo André e São Paulo, com planejamento, orçamento, gerenciamento e execução conectados em cada etapa."
     image="/images/portfolio-cozinha-verde.webp"
     imageAlt="Cozinha reformada com marcenaria verde e estrutura metálica"
     gallery={[

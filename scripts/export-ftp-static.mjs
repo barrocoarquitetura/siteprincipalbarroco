@@ -30,6 +30,8 @@ const routes = [
   "/blog/quanto-tempo-dura-reforma-de-apartamento",
   "/blog/projeto-de-interiores-antes-das-chaves",
   "/blog/como-escolher-escritorio-de-arquitetura",
+  "/blog/quanto-custa-projeto-de-interiores",
+  "/blog/reforma-de-apartamento-nbr-16280",
 ];
 
 const mimeTypes = {

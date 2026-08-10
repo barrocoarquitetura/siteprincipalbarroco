@@ -34,6 +34,8 @@ const canonicalPaths = [
   "/blog/quanto-tempo-dura-reforma-de-apartamento",
   "/blog/projeto-de-interiores-antes-das-chaves",
   "/blog/como-escolher-escritorio-de-arquitetura",
+  "/blog/quanto-custa-projeto-de-interiores",
+  "/blog/reforma-de-apartamento-nbr-16280",
 ];
 
 test("renders production SEO metadata on the home page", async () => {
@@ -44,6 +46,9 @@ test("renders production SEO metadata on the home page", async () => {
   assert.doesNotMatch(html, /codex-preview/i);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br\/?"/i);
   assert.match(html, /ProfessionalService/);
+  assert.match(html, /Mayara Cimino/);
+  assert.match(html, /Luiz Faria/);
+  assert.match(html, /Escritório de arquitetura em Santo André, do projeto à obra/i);
   assert.match(html, /FAQPage/);
   assert.match(html, /data-reveal/);
   assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i);
@@ -136,6 +141,8 @@ test("publishes clean discovery files for Google", async () => {
   const sitemapText = await sitemap.text();
   assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/projetos\/apartamento-com-ambientes-integrados/i);
   assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/projeto-de-interiores-antes-das-chaves/i);
+  assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/quanto-custa-projeto-de-interiores/i);
+  assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/reforma-de-apartamento-nbr-16280/i);
   assert.doesNotMatch(sitemapText, /\/portfolio|\/orcamento|\/archived-2/i);
 
   const imageSitemap = await request("/sitemap-images.xml");
