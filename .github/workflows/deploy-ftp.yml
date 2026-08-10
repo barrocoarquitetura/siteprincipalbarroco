@@ -53,6 +53,7 @@ jobs:
           test -f ftp-static/sitemap.xml
           test -f ftp-static/sitemap-images.xml
           test -f ftp-static/projetos-page.html
+          test -f ftp-static/blog.html
           test -d ftp-static/assets
 
       - name: Validar credenciais protegidas
@@ -97,8 +98,9 @@ jobs:
         run: |
           set -euo pipefail
           for tentativa in 1 2 3 4 5; do
-            if curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/" >/dev/null \
-              && curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/sitemap.xml" >/dev/null \
+            if curl --fail --silent --show-error --location --max-redirs 10 --max-time 25 "https://www.barrocoarquitetura.com.br/" >/dev/null \
+              && curl --fail --silent --show-error --location --max-redirs 10 --max-time 25 "https://www.barrocoarquitetura.com.br/blog" >/dev/null \
+              && curl --fail --silent --show-error --location --max-redirs 10 --max-time 25 "https://www.barrocoarquitetura.com.br/sitemap.xml" >/dev/null \
               && curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/robots.txt" >/dev/null; then
               exit 0
             fi
