@@ -97,14 +97,31 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          navegador="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/151 Safari/537.36"
+          urls=(
+            "https://www.barrocoarquitetura.com.br/"
+            "https://www.barrocoarquitetura.com.br/blog"
+            "https://www.barrocoarquitetura.com.br/sitemap.xml"
+            "https://www.barrocoarquitetura.com.br/robots.txt"
+          )
+
           for tentativa in 1 2 3 4 5; do
-            if curl --fail --silent --show-error --location --max-redirs 10 --max-time 25 "https://www.barrocoarquitetura.com.br/" >/dev/null \
-              && curl --fail --silent --show-error --location --max-redirs 10 --max-time 25 "https://www.barrocoarquitetura.com.br/blog" >/dev/null \
-              && curl --fail --silent --show-error --location --max-redirs 10 --max-time 25 "https://www.barrocoarquitetura.com.br/sitemap.xml" >/dev/null \
-              && curl --fail --silent --show-error --location --max-time 25 "https://www.barrocoarquitetura.com.br/robots.txt" >/dev/null; then
+            falhou=0
+            for url in "${urls[@]}"; do
+              if ! curl --ipv4 --fail --silent --show-error --location --max-redirs 10 --max-time 25 \
+                --user-agent "$navegador" "$url" >/dev/null; then
+                echo "Falha na verificação: $url (tentativa $tentativa)"
+                falhou=1
+                break
+              fi
+            done
+            if [ "$falhou" -eq 0 ]; then
               exit 0
             fi
             sleep 12
           done
+
           echo "A publicação terminou, mas a verificação pública ainda falhou."
+          curl --ipv4 --silent --show-error --head --location --max-redirs 3 --max-time 25 \
+            --user-agent "$navegador" "https://www.barrocoarquitetura.com.br/" || true
           exit 1
