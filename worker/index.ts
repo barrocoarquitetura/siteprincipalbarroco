@@ -1,6 +1,7 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+import { handleLeadOptions, handleLeadPost } from "./leads";
 
 interface Env {
   ASSETS: Fetcher;
@@ -34,6 +35,15 @@ const worker = {
       url.protocol = "https:";
       url.hostname = "www.barrocoarquitetura.com.br";
       return Response.redirect(url, 308);
+    }
+
+    if (url.pathname === "/api/leads") {
+      if (request.method === "OPTIONS") return handleLeadOptions(request);
+      if (request.method === "POST") return handleLeadPost(request, env.DB);
+      return Response.json({ error: "Método não permitido." }, {
+        status: 405,
+        headers: { allow: "POST, OPTIONS", "cache-control": "no-store" },
+      });
     }
 
     if (url.pathname === "/_vinext/image") {

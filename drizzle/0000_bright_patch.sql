@@ -1,0 +1,32 @@
+CREATE TABLE `leads` (
+	`id` text PRIMARY KEY NOT NULL,
+	`reference` text NOT NULL,
+	`name` text NOT NULL,
+	`email` text NOT NULL,
+	`phone` text NOT NULL,
+	`location` text NOT NULL,
+	`property_type` text NOT NULL,
+	`area_square_meters` integer NOT NULL,
+	`service` text NOT NULL,
+	`timeline` text NOT NULL,
+	`message` text DEFAULT '' NOT NULL,
+	`status` text DEFAULT 'new' NOT NULL,
+	`consent_at` text NOT NULL,
+	`consent_version` text NOT NULL,
+	`gclid` text,
+	`gbraid` text,
+	`wbraid` text,
+	`ga_client_id` text,
+	`utm_source` text,
+	`utm_medium` text,
+	`utm_campaign` text,
+	`utm_term` text,
+	`utm_content` text,
+	`landing_page` text NOT NULL,
+	`page_url` text NOT NULL,
+	`referrer` text,
+	`qualified_at` text,
+	`created_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+--> statement-breakpoint
+CREATE UNIQUE INDEX `leads_reference_unique` ON `leads` (`reference`);

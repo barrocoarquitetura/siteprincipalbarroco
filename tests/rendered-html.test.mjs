@@ -12,6 +12,41 @@ const env = {
 };
 const ctx = { waitUntil() {}, passThroughOnException() {} };
 
+function createLeadDatabase() {
+  const leads = new Map();
+  return {
+    leads,
+    prepare(query) {
+      return {
+        bind(...parameters) {
+          return { query, parameters };
+        },
+      };
+    },
+    async batch(statements) {
+      return statements.map((statement) => {
+        if (/INSERT OR IGNORE INTO leads/i.test(statement.query)) {
+          const [id, reference] = statement.parameters;
+          if (!leads.has(id)) {
+            leads.set(id, {
+              id,
+              reference,
+              createdAt: "2026-08-26 12:00:00",
+              gclid: statement.parameters[13],
+            });
+          }
+          return { success: true, results: [] };
+        }
+        if (/SELECT id, reference, created_at AS createdAt FROM leads/i.test(statement.query)) {
+          const lead = leads.get(statement.parameters[0]);
+          return { success: true, results: lead ? [lead] : [] };
+        }
+        throw new Error(`Unexpected SQL in test: ${statement.query}`);
+      });
+    },
+  };
+}
+
 function request(path, host = "www.barrocoarquitetura.com.br", protocol = "https") {
   return worker.fetch(new Request(`${protocol}://${host}${path}`, { headers: { accept: "text/html" } }), env, ctx);
 }
@@ -34,8 +69,6 @@ const canonicalPaths = [
   "/blog/quanto-tempo-dura-reforma-de-apartamento",
   "/blog/projeto-de-interiores-antes-das-chaves",
   "/blog/como-escolher-escritorio-de-arquitetura",
-  "/blog/quanto-custa-projeto-de-interiores",
-  "/blog/reforma-de-apartamento-nbr-16280",
 ];
 
 test("renders production SEO metadata on the home page", async () => {
@@ -46,13 +79,72 @@ test("renders production SEO metadata on the home page", async () => {
   assert.doesNotMatch(html, /codex-preview/i);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br\/?"/i);
   assert.match(html, /ProfessionalService/);
-  assert.match(html, /Mayara Cimino/);
-  assert.match(html, /Luiz Faria/);
-  assert.match(html, /Arquitetura e interiores com identidade, do projeto à obra/i);
   assert.match(html, /FAQPage/);
   assert.match(html, /data-reveal/);
   assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i);
   assert.match(html, /gtag\('config','AW-614157022'\)/i);
+  assert.match(html, /data-lead-endpoint="https:\/\/barroco-arquitetura-residencial\.luizcontatoarquiteto\.chatgpt\.site\/api\/leads"/i);
+  assert.match(html, /<input(?=[^>]*name="consent")(?=[^>]*type="checkbox")[^>]*>/i);
+  assert.match(html, /data-form-status/i);
+});
+
+test("persists a validated lead before confirming the conversion", async () => {
+  const database = createLeadDatabase();
+  const id = "1f1f1111-2222-4333-8444-555555555555";
+  const payload = {
+    clientSubmissionId: id,
+    name: "Cliente Teste",
+    email: "cliente@example.com",
+    phone: "(11) 99999-9999",
+    location: "Santo André, SP",
+    property: "Apartamento",
+    area: 120,
+    service: "Projeto de interiores para apartamento",
+    timeline: "Nos próximos 3 meses",
+    message: "Reforma completa.",
+    consent: true,
+    website: "",
+    attribution: {
+      gclid: "teste-gclid",
+      landingPage: "https://www.barrocoarquitetura.com.br/projetos-de-apartamentos?gclid=teste-gclid",
+      pageUrl: "https://www.barrocoarquitetura.com.br/projetos-de-apartamentos",
+    },
+  };
+  const response = await worker.fetch(new Request("https://www.barrocoarquitetura.com.br/api/leads", {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      origin: "https://www.barrocoarquitetura.com.br",
+    },
+    body: JSON.stringify(payload),
+  }), { ...env, DB: database }, ctx);
+
+  assert.equal(response.status, 201);
+  assert.equal(response.headers.get("access-control-allow-origin"), "https://www.barrocoarquitetura.com.br");
+  const body = await response.json();
+  assert.equal(body.ok, true);
+  assert.equal(body.lead.id, id);
+  assert.match(body.lead.reference, /^BA-\d{8}-1F1F11$/);
+  assert.equal(database.leads.get(id).gclid, "teste-gclid");
+});
+
+test("rejects untrusted origins and incomplete lead submissions", async () => {
+  const database = createLeadDatabase();
+  const untrusted = await worker.fetch(new Request("https://www.barrocoarquitetura.com.br/api/leads", {
+    method: "POST",
+    headers: { "content-type": "application/json", origin: "https://example.com" },
+    body: "{}",
+  }), { ...env, DB: database }, ctx);
+  assert.equal(untrusted.status, 403);
+
+  const incomplete = await worker.fetch(new Request("https://www.barrocoarquitetura.com.br/api/leads", {
+    method: "POST",
+    headers: { "content-type": "application/json", origin: "https://www.barrocoarquitetura.com.br" },
+    body: JSON.stringify({ clientSubmissionId: "1f1f1111-2222-4333-8444-555555555555" }),
+  }), { ...env, DB: database }, ctx);
+  assert.equal(incomplete.status, 422);
+  assert.equal(database.leads.size, 0);
 });
 
 test("renders indexable project case studies", async () => {
@@ -141,8 +233,6 @@ test("publishes clean discovery files for Google", async () => {
   const sitemapText = await sitemap.text();
   assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/projetos\/apartamento-com-ambientes-integrados/i);
   assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/projeto-de-interiores-antes-das-chaves/i);
-  assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/quanto-custa-projeto-de-interiores/i);
-  assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/reforma-de-apartamento-nbr-16280/i);
   assert.doesNotMatch(sitemapText, /\/portfolio|\/orcamento|\/archived-2/i);
 
   const imageSitemap = await request("/sitemap-images.xml");

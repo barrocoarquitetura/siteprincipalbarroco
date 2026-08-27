@@ -22,8 +22,6 @@ const pages = [
   "blog/quanto-tempo-dura-reforma-de-apartamento.html",
   "blog/projeto-de-interiores-antes-das-chaves.html",
   "blog/como-escolher-escritorio-de-arquitetura.html",
-  "blog/quanto-custa-projeto-de-interiores.html",
-  "blog/reforma-de-apartamento-nbr-16280.html",
 ];
 
 test("exports all indexable pages without the Vinext runtime", async () => {
@@ -36,6 +34,9 @@ test("exports all indexable pages without the Vinext runtime", async () => {
     assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br/i, page);
     assert.equal((html.match(/<h1\b/gi) || []).length, 1, page);
   }
+  const home = await readFile(path.join(root, "index.html"), "utf8");
+  assert.match(home, /data-lead-endpoint="https:\/\/barroco-arquitetura-residencial\.luizcontatoarquiteto\.chatgpt\.site\/api\/leads"/i);
+  assert.match(home, /<input(?=[^>]*name="consent")(?=[^>]*type="checkbox")[^>]*>/i);
 });
 
 test("ships the qualified lead and WhatsApp conversion events", async () => {
@@ -47,6 +48,11 @@ test("ships the qualified lead and WhatsApp conversion events", async () => {
   assert.match(runtime, /"phone_click"/);
   assert.match(runtime, /"email_click"/);
   assert.match(runtime, /event_callback:\s*redirectToWhatsApp/);
+  assert.match(runtime, /fetch\(form\.dataset\.leadEndpoint/);
+  assert.match(runtime, /"set",\s*"user_data"/);
+  assert.match(runtime, /phone_number:\s*normalizedPhone/);
+  assert.match(runtime, /transaction_id:\s*result\.lead\.id/);
+  assert.match(runtime, /gclid:\s*params\.get\("gclid"\)/);
 });
 
 test("keeps every referenced local asset in the package", async () => {

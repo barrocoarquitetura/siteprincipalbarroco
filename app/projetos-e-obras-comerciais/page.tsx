@@ -3,12 +3,12 @@ import { ServicePage } from "../components/ServicePage";
 import { commercialImages } from "../projetos/projectData";
 
 export const metadata: Metadata = {
-  title: { absolute: "Arquitetura Comercial em Santo André e SP | Barroco" },
-  description: "Arquitetura comercial e reforma de escritórios em Santo André e São Paulo, do layout e projeto executivo ao gerenciamento e à obra.",
+  title: { absolute: "Projeto de Escritório e Arquitetura Comercial | Barroco" },
+  description: "Arquitetura comercial, interiores e reforma de escritórios, lojas e espaços de atendimento em São Paulo, do layout ao executivo e à obra.",
   alternates: { canonical: "/projetos-e-obras-comerciais" },
   openGraph: {
-    title: "Arquitetura Comercial em Santo André e SP | Barroco",
-    description: "Projeto de interiores, executivo e obra para escritórios, lojas e espaços comerciais em Santo André e São Paulo.",
+    title: "Arquitetura Comercial e Reforma de Escritórios | Barroco",
+    description: "Projeto de interiores, executivo e obra para escritórios, lojas e espaços comerciais.",
     url: "/projetos-e-obras-comerciais",
     images: [{
       url: "/images/comercial-recepcao-jardim-vertical.webp",
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arquitetura Comercial em Santo André e SP | Barroco Arquitetura",
-    description: "Projeto de interiores, executivo e obra para escritórios, lojas e espaços comerciais em Santo André e São Paulo.",
+    title: "Arquitetura Comercial e Reforma de Escritórios | Barroco Arquitetura",
+    description: "Projeto de interiores, executivo e obra para escritórios, lojas e espaços comerciais.",
     images: ["/images/comercial-recepcao-jardim-vertical.webp"],
   },
 };
@@ -30,7 +30,7 @@ export default function ComercialPage() {
     canonicalPath="/projetos-e-obras-comerciais"
     eyebrow="Projetos e obras comerciais"
     title="Arquitetura comercial para espaços que trabalham a favor do negócio."
-    intro="Projeto de interiores, executivo e obra para lojas, espaços de atendimento e escritórios, conectando operação, experiência e identidade."
+    intro="Projeto de interiores, executivo e obra para lojas, espaços de atendimento e escritórios, conectando operação, experiência, identidade e investimento."
     image="/images/comercial-recepcao-jardim-vertical.webp"
     imageAlt="Ambiente de trabalho com marcenaria planejada, iluminação técnica e divisórias de vidro"
     highlights={[
