@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { ServicePage } from "../components/ServicePage";
 
 export const metadata: Metadata = {
-  title: { absolute: "Projeto de Casas em Santo André e SP | Barroco" },
-  description: "Projeto arquitetônico e de interiores para casas em Santo André e São Paulo, com implantação, layout, imagens 3D, executivo e especificações.",
+  title: { absolute: "Projeto Arquitetônico para Casas em SP | Barroco" },
+  description: "Projeto arquitetônico e de interiores para casas em São Paulo, com implantação, layout, imagens 3D, projeto executivo e especificações.",
   alternates: { canonical: "/projetos-de-casas" },
   openGraph: {
-    title: "Projeto de Casas em Santo André e SP | Barroco Arquitetura",
-    description: "Arquitetura e interiores para casas novas ou existentes em Santo André e diferentes regiões de São Paulo.",
+    title: "Projeto Arquitetônico para Casas | Barroco Arquitetura",
+    description: "Arquitetura e interiores para casas novas ou existentes em diferentes regiões do estado de São Paulo.",
     url: "/projetos-de-casas",
     images: [{
       url: "/images/casa-patio-piscina.webp",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projeto de Casas em Santo André e SP | Barroco Arquitetura",
-    description: "Arquitetura e interiores para casas novas ou existentes em Santo André e diferentes regiões de São Paulo.",
+    title: "Projeto Arquitetônico para Casas | Barroco Arquitetura",
+    description: "Arquitetura e interiores para casas novas ou existentes em diferentes regiões do estado de São Paulo.",
     images: ["/images/casa-patio-piscina.webp"],
   },
 };
@@ -28,8 +28,8 @@ export default function CasasPage() {
   return <ServicePage
     canonicalPath="/projetos-de-casas"
     eyebrow="Projetos de casas"
-    title="Casas pensadas para o terreno, a rotina e a forma de viver."
-    intro="Arquitetura e interiores para casas novas ou existentes, conectando espaços, rotina, conforto e identidade em uma solução coerente."
+    title="Projeto arquitetônico para uma casa alinhada ao seu jeito de viver."
+    intro="Projeto arquitetônico e de interiores para casas novas ou existentes, conectando espaços, rotina, conforto e identidade em uma solução coerente."
     image="/images/casa-patio-piscina.webp"
     imageAlt="Casa térrea contemporânea com piscina e área de lazer"
     gallery={[

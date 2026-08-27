@@ -120,6 +120,7 @@ p { line-height: 1.65; }
 .button--ghost-dark:hover { background: var(--ink); color: white; }
 .button--light { background: white; color: var(--ink); }
 .button--form { width: 100%; margin-top: 22px; border: 0; background: var(--terracotta); color: white; cursor: pointer; }
+.button--form:disabled { opacity: .68; cursor: wait; }
 
 .trust-strip { border-block: 1px solid var(--line); background: rgba(178,75,40,.025); }
 .trust-strip__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
@@ -222,6 +223,15 @@ p { line-height: 1.65; }
 .lead-form textarea { resize: vertical; }
 .lead-form input:focus, .lead-form select:focus, .lead-form textarea:focus { border-color: #f0b9a4; box-shadow: 0 0 0 1px #f0b9a4; }
 .form-note { margin: 14px 0 0; color: #8f8b85; font-size: 11px; }
+.form-consent { flex-direction: row !important; align-items: flex-start; gap: 11px !important; color: #c8c3bb; line-height: 1.5; cursor: pointer; }
+.lead-form .form-consent input { width: 18px; min-width: 18px; height: 18px; min-height: 18px; margin: 2px 0 0; padding: 0; accent-color: var(--terracotta); }
+.form-consent span { font-size: 11px !important; font-weight: 500 !important; }
+.form-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+.form-status { margin: 13px 0 0; padding: 11px 12px; border: 1px solid transparent; font-size: 12px; line-height: 1.5; }
+.form-status[hidden], .form-fallback[hidden] { display: none; }
+.form-status--success { border-color: rgba(132,189,139,.42); background: rgba(62,111,68,.2); color: #d7efd9; }
+.form-status--error { border-color: rgba(240,185,164,.46); background: rgba(178,75,40,.15); color: #ffd8c9; }
+.form-fallback { display: inline-block; margin-top: 12px; border-bottom: 1px solid #f0b9a4; padding-bottom: 4px; color: #f0b9a4; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 
 .site-footer { padding-top: 76px; background: var(--terracotta); color: white; }
 .site-footer__grid { display: grid; grid-template-columns: 1.55fr 1fr .7fr 1.05fr; gap: clamp(38px, 6vw, 78px); padding-bottom: 64px; }

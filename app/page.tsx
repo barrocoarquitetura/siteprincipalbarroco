@@ -158,7 +158,7 @@ const homeStructuredData = [
     "@id": "https://www.barrocoarquitetura.com.br/#pagina",
     url: "https://www.barrocoarquitetura.com.br",
     name: "Escritório de Arquitetura em Santo André e SP | Barroco",
-    description: "Escritório de arquitetura em Santo André para projetos residenciais e comerciais, interiores, reformas, obras e marcenaria em São Paulo.",
+    description: "Projetos de arquitetura e interiores, reformas, obras e marcenaria para casas, apartamentos, comércios e escritórios.",
     inLanguage: "pt-BR",
     isPartOf: { "@id": "https://www.barrocoarquitetura.com.br/#website" },
     about: { "@id": "https://www.barrocoarquitetura.com.br/#empresa" },
@@ -196,8 +196,8 @@ export default function Home() {
               <p className="eyebrow">Arquitetura, interiores e execução</p>
               <h1>Arquitetura e interiores com identidade, do projeto à obra.</h1>
               <p className="hero-lead">
-                Projetos residenciais e comerciais com identidade, clareza técnica e acompanhamento direto —
-                do conceito e detalhamento à execução e marcenaria, com atenção a cada etapa.
+                Arquitetura residencial e comercial conduzida com método, clareza técnica e atenção a cada
+                escolha — do conceito ao detalhamento, à obra e à marcenaria.
               </p>
               <div className="button-row">
                 <a className="button button--primary" href="#contato">

@@ -94,30 +94,6 @@ const websiteJsonLd = {
   publisher: { "@id": "https://www.barrocoarquitetura.com.br/#empresa" },
 };
 
-const peopleJsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://www.barrocoarquitetura.com.br/#mayara-cimino",
-      name: "Mayara Cimino",
-      jobTitle: "Arquiteta",
-      image: "https://www.barrocoarquitetura.com.br/images/mayara-cimino-luiz-faria.webp",
-      worksFor: { "@id": "https://www.barrocoarquitetura.com.br/#empresa" },
-      knowsAbout: ["Arquitetura", "Arquitetura de interiores", "Projetos residenciais", "Detalhamento executivo"],
-    },
-    {
-      "@type": "Person",
-      "@id": "https://www.barrocoarquitetura.com.br/#luiz-faria",
-      name: "Luiz Faria",
-      jobTitle: "Arquiteto",
-      image: "https://www.barrocoarquitetura.com.br/images/mayara-cimino-luiz-faria.webp",
-      worksFor: { "@id": "https://www.barrocoarquitetura.com.br/#empresa" },
-      knowsAbout: ["Arquitetura", "Projeto executivo", "Reformas residenciais", "Gerenciamento de obras"],
-    },
-  ],
-};
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.barrocoarquitetura.com.br"),
   applicationName: "Barroco Arquitetura",
@@ -179,7 +155,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(peopleJsonLd) }} />
         {children}
         <AnalyticsEvents />
         <ProjectLightbox />

@@ -6,9 +6,78 @@
   const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
   const whatsappConversionId = "AW-614157022/bWIoCP-morQDEN6V7aQC";
   const analyticsMeasurementId = "G-YED0X4J78V";
+  const leadApiUrl = "https://barroco-arquitetura-residencial.luizcontatoarquiteto.chatgpt.site/api/leads";
+  const attributionStorageKey = "barroco_attribution_v1";
 
   function pushAnalytics(event, details = {}) {
     window.dataLayer?.push({ event, page_path: window.location.pathname, ...details });
+  }
+
+  function cookieValue(name) {
+    const prefix = `${encodeURIComponent(name)}=`;
+    const cookie = document.cookie.split("; ").find((item) => item.startsWith(prefix));
+    return cookie ? decodeURIComponent(cookie.slice(prefix.length)) : "";
+  }
+
+  function readAttribution() {
+    const params = new URLSearchParams(window.location.search);
+    let stored = {};
+    try {
+      stored = JSON.parse(window.localStorage.getItem(attributionStorageKey) || "{}");
+    } catch {
+      stored = {};
+    }
+
+    const gclCookie = cookieValue("_gcl_aw").split(".").slice(2).join(".");
+    const gaParts = cookieValue("_ga").split(".");
+    const attribution = {
+      gclid: params.get("gclid") || gclCookie || stored.gclid || "",
+      gbraid: params.get("gbraid") || stored.gbraid || "",
+      wbraid: params.get("wbraid") || stored.wbraid || "",
+      gaClientId: gaParts.length >= 4 ? gaParts.slice(-2).join(".") : stored.gaClientId || "",
+      utmSource: params.get("utm_source") || stored.utmSource || "",
+      utmMedium: params.get("utm_medium") || stored.utmMedium || "",
+      utmCampaign: params.get("utm_campaign") || stored.utmCampaign || "",
+      utmTerm: params.get("utm_term") || stored.utmTerm || "",
+      utmContent: params.get("utm_content") || stored.utmContent || "",
+      landingPage: stored.landingPage || window.location.href,
+      pageUrl: window.location.href,
+      referrer: stored.referrer || document.referrer,
+    };
+    try {
+      window.localStorage.setItem(attributionStorageKey, JSON.stringify(attribution));
+    } catch {
+      // The current submission still contains attribution when storage is unavailable.
+    }
+    return attribution;
+  }
+
+  function normalizedPhone(value) {
+    const digits = String(value).replace(/\D/g, "");
+    if (digits.length === 10 || digits.length === 11) return `+55${digits}`;
+    if ((digits.length === 12 || digits.length === 13) && digits.startsWith("55")) return `+${digits}`;
+    return String(value);
+  }
+
+  function whatsappMessage(fields, reference = "") {
+    return [
+      "Olá, Barroco Arquitetura. Gostaria de avaliar meu projeto.",
+      reference ? `Código do contato: ${reference}` : "",
+      "",
+      `Nome: ${fields.name}`,
+      `E-mail: ${fields.email}`,
+      `Telefone: ${fields.phone}`,
+      `Cidade/bairro: ${fields.location}`,
+      `Imóvel: ${fields.property}`,
+      `Área aproximada: ${fields.area} m²`,
+      `Serviço: ${fields.service}`,
+      `Prazo: ${fields.timeline}`,
+      fields.message ? `Observações: ${fields.message}` : "",
+    ].filter(Boolean).join("\n");
+  }
+
+  function whatsappDestination(message) {
+    return `https://api.whatsapp.com/send?phone=551127630517&text=${encodeURIComponent(message)}`;
   }
 
   function enableScrollReveal() {
@@ -203,45 +272,101 @@
 
   function enableLeadForms() {
     document.querySelectorAll("form.lead-form").forEach((form) => {
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const fields = Object.fromEntries(new FormData(form).entries());
-        const message = [
-          "Olá, Barroco Arquitetura. Gostaria de avaliar meu projeto.",
-          "",
-          `Nome: ${fields.name}`,
-          `E-mail: ${fields.email}`,
-          `Telefone: ${fields.phone}`,
-          `Cidade/bairro: ${fields.location}`,
-          `Imóvel: ${fields.property}`,
-          `Área aproximada: ${fields.area} m²`,
-          `Serviço: ${fields.service}`,
-          `Prazo: ${fields.timeline}`,
-          fields.message ? `Observações: ${fields.message}` : "",
-        ].filter(Boolean).join("\n");
-        const destination = `https://api.whatsapp.com/send?phone=551127630517&text=${encodeURIComponent(message)}`;
-        pushAnalytics("lead_form_whatsapp", { service: fields.service, property_type: fields.property });
-        window.gtag?.("event", "lead_form_whatsapp", {
-          send_to: analyticsMeasurementId,
-          service: fields.service,
-          property_type: fields.property,
-        });
+        if (form.dataset.submitting === "true") return;
 
-        let redirected = false;
-        const redirectToWhatsApp = () => {
-          if (redirected) return;
-          redirected = true;
-          window.location.assign(destination);
-        };
+        const formData = new FormData(form);
+        const fields = Object.fromEntries(formData.entries());
+        const button = form.querySelector("button[type='submit']");
+        const status = form.querySelector("[data-form-status]");
+        const fallback = form.querySelector("[data-form-fallback]");
+        const fallbackDestination = whatsappDestination(whatsappMessage(fields));
+        form.dataset.submitting = "true";
+        form.dataset.submissionId ||= crypto.randomUUID();
+        if (button) {
+          button.disabled = true;
+          button.innerHTML = "Registrando contato… <span aria-hidden='true'>→</span>";
+        }
+        if (status) {
+          status.hidden = true;
+          status.className = "form-status";
+          status.textContent = "";
+        }
+        if (fallback) fallback.hidden = true;
 
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "conversion", {
-            send_to: formConversionId,
-            event_callback: redirectToWhatsApp,
+        try {
+          const response = await fetch(form.dataset.leadEndpoint || leadApiUrl, {
+            method: "POST",
+            mode: "cors",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              ...fields,
+              clientSubmissionId: form.dataset.submissionId,
+              consent: formData.get("consent") === "on",
+              attribution: readAttribution(),
+            }),
           });
-          window.setTimeout(redirectToWhatsApp, 1200);
-        } else {
-          redirectToWhatsApp();
+          const result = await response.json();
+          if (!response.ok || !result.ok || !result.lead?.id || !result.lead.reference) {
+            throw new Error(result.error || "Não foi possível registrar o contato.");
+          }
+
+          const destination = whatsappDestination(whatsappMessage(fields, result.lead.reference));
+          pushAnalytics("lead_form_whatsapp", {
+            lead_id: result.lead.id,
+            lead_reference: result.lead.reference,
+            service: fields.service,
+            property_type: fields.property,
+          });
+          window.gtag?.("set", "user_data", {
+            email: String(fields.email).trim().toLowerCase(),
+            phone_number: normalizedPhone(fields.phone),
+          });
+          window.gtag?.("event", "lead_form_whatsapp", {
+            send_to: analyticsMeasurementId,
+            lead_id: result.lead.id,
+            service: fields.service,
+            property_type: fields.property,
+          });
+          if (status) {
+            status.hidden = false;
+            status.className = "form-status form-status--success";
+            status.textContent = `Contato ${result.lead.reference} registrado. Abrindo o WhatsApp…`;
+          }
+
+          let redirected = false;
+          const redirectToWhatsApp = () => {
+            if (redirected) return;
+            redirected = true;
+            window.location.assign(destination);
+          };
+
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "conversion", {
+              send_to: formConversionId,
+              transaction_id: result.lead.id,
+              event_callback: redirectToWhatsApp,
+            });
+            window.setTimeout(redirectToWhatsApp, 1600);
+          } else {
+            redirectToWhatsApp();
+          }
+        } catch (error) {
+          form.dataset.submitting = "false";
+          if (button) {
+            button.disabled = false;
+            button.innerHTML = "Enviar pelo WhatsApp <span aria-hidden='true'>→</span>";
+          }
+          if (status) {
+            status.hidden = false;
+            status.className = "form-status form-status--error";
+            status.textContent = error instanceof Error ? error.message : "Não foi possível registrar o contato. Tente novamente.";
+          }
+          if (fallback) {
+            fallback.href = fallbackDestination;
+            fallback.hidden = false;
+          }
         }
       });
     });
@@ -279,6 +404,7 @@
   }
 
   enableScrollReveal();
+  readAttribution();
   enableHeroCarousels();
   enablePortfolioCarousels();
   enableTestimonialCarousels();

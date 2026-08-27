@@ -1,4 +1,33 @@
-// Intentionally empty by default.
-// Add Drizzle tables here when the site actually needs a database.
-// See examples/d1/db/schema.ts for an opt-in example.
-export {};
+import { sql } from "drizzle-orm";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+export const leads = sqliteTable("leads", {
+  id: text("id").primaryKey(),
+  reference: text("reference").notNull().unique(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  location: text("location").notNull(),
+  propertyType: text("property_type").notNull(),
+  areaSquareMeters: integer("area_square_meters").notNull(),
+  service: text("service").notNull(),
+  timeline: text("timeline").notNull(),
+  message: text("message").notNull().default(""),
+  status: text("status").notNull().default("new"),
+  consentAt: text("consent_at").notNull(),
+  consentVersion: text("consent_version").notNull(),
+  gclid: text("gclid"),
+  gbraid: text("gbraid"),
+  wbraid: text("wbraid"),
+  gaClientId: text("ga_client_id"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  utmTerm: text("utm_term"),
+  utmContent: text("utm_content"),
+  landingPage: text("landing_page").notNull(),
+  pageUrl: text("page_url").notNull(),
+  referrer: text("referrer"),
+  qualifiedAt: text("qualified_at"),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});

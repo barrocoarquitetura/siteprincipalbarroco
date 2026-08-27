@@ -30,8 +30,6 @@ const routes = [
   "/blog/quanto-tempo-dura-reforma-de-apartamento",
   "/blog/projeto-de-interiores-antes-das-chaves",
   "/blog/como-escolher-escritorio-de-arquitetura",
-  "/blog/quanto-custa-projeto-de-interiores",
-  "/blog/reforma-de-apartamento-nbr-16280",
 ];
 
 const mimeTypes = {
@@ -116,8 +114,6 @@ AddType application/xml .xml
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} !^www\\.barrocoarquitetura\\.com\\.br$ [NC]
   RewriteRule ^ https://www.barrocoarquitetura.com.br%{REQUEST_URI} [R=301,L,NE]
-
-  RewriteRule ^blog/?$ blog.html [L]
 
   RewriteCond %{REQUEST_URI} ^(.+)/+$
   RewriteRule ^(.+)/$ /$1 [R=301,L,NE]
