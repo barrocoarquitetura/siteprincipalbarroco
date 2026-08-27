@@ -74,6 +74,11 @@ test("ships discovery, routing, caching and removal rules", async () => {
   assert.match(imageSitemap, /<image:image>/i);
   assert.match(rss, /<rss version="2\.0">/i);
   assert.match(htaccess, /archived-2\/\?\$ - \[R=410,L\]/i);
+  assert.match(htaccess, /RewriteRule \^blog\/\?\$ blog\.html \[L\]/i);
+  assert.ok(
+    htaccess.indexOf("RewriteRule ^blog/?$ blog.html [L]") < htaccess.indexOf("RewriteCond %{REQUEST_URI} ^(.+)/+$"),
+    "the blog rewrite must run before trailing-slash normalization",
+  );
   assert.match(htaccess, /max-age=31536000, immutable/i);
   assert.match(htaccess, /AddType image\/webp \.webp/i);
 });
