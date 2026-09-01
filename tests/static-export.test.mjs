@@ -51,6 +51,8 @@ test("ships the qualified lead and WhatsApp conversion events", async () => {
   assert.match(runtime, /fetch\(form\.dataset\.leadEndpoint/);
   assert.match(runtime, /"set",\s*"user_data"/);
   assert.match(runtime, /phone_number:\s*normalizedPhone/);
+  assert.match(runtime, /"event",\s*"form_submit"/);
+  assert.match(runtime, /send_to:\s*googleAdsId/);
   assert.match(runtime, /transaction_id:\s*result\.lead\.id/);
   assert.match(runtime, /gclid:\s*params\.get\("gclid"\)/);
 });

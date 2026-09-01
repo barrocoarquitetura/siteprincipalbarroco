@@ -7,6 +7,7 @@ type LeadFormProps = {
 };
 
 const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
+const googleAdsId = "AW-614157022";
 const analyticsMeasurementId = "G-YED0X4J78V";
 const leadApiUrl = "https://barroco-arquitetura-residencial.luizcontatoarquiteto.chatgpt.site/api/leads";
 const attributionStorageKey = "barroco_attribution_v1";
@@ -166,6 +167,9 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
       analyticsWindow.gtag?.("set", "user_data", {
         email: String(fields.email).trim().toLowerCase(),
         phone_number: normalizedPhone(String(fields.phone)),
+      });
+      analyticsWindow.gtag?.("event", "form_submit", {
+        send_to: googleAdsId,
       });
       analyticsWindow.gtag?.("event", "lead_form_whatsapp", {
         send_to: analyticsMeasurementId,

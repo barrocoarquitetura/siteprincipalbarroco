@@ -5,6 +5,7 @@
   const pad = (number) => String(number).padStart(2, "0");
   const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
   const whatsappConversionId = "AW-614157022/bWIoCP-morQDEN6V7aQC";
+  const googleAdsId = "AW-614157022";
   const analyticsMeasurementId = "G-YED0X4J78V";
   const leadApiUrl = "https://barroco-arquitetura-residencial.luizcontatoarquiteto.chatgpt.site/api/leads";
   const attributionStorageKey = "barroco_attribution_v1";
@@ -322,6 +323,9 @@
           window.gtag?.("set", "user_data", {
             email: String(fields.email).trim().toLowerCase(),
             phone_number: normalizedPhone(fields.phone),
+          });
+          window.gtag?.("event", "form_submit", {
+            send_to: googleAdsId,
           });
           window.gtag?.("event", "lead_form_whatsapp", {
             send_to: analyticsMeasurementId,
