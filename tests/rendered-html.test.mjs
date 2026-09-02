@@ -82,6 +82,9 @@ test("renders production SEO metadata on the home page", async () => {
   assert.match(html, /FAQPage/);
   assert.match(html, /data-reveal/);
   assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i);
+  assert.match(html, /firstPartyPath='\/metrics\/'/i);
+  assert.match(html, /fetch\(firstPartyPath\+'healthy'/i);
+  assert.match(html, /script\.onerror=function\(\)\{loaded=false;load\(googleScript,false\)\}/i);
   assert.match(html, /gtag\('config','AW-614157022'\)/i);
   assert.match(html, /data-lead-endpoint="https:\/\/barroco-arquitetura-residencial\.luizcontatoarquiteto\.chatgpt\.site\/api\/leads"/i);
   assert.match(html, /<input(?=[^>]*name="consent")(?=[^>]*type="checkbox")[^>]*>/i);

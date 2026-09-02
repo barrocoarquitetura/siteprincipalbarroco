@@ -6,6 +6,8 @@ import { AnalyticsEvents } from "./components/AnalyticsEvents";
 import "./globals.css";
 
 const googleAdsId = "AW-614157022";
+const googleTagGatewayPath = "/metrics/";
+const googleTagLoader = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${googleAdsId}');(function(){var firstPartyPath='${googleTagGatewayPath}';var googleScript='https://www.googletagmanager.com/gtag/js?id=${googleAdsId}';var loaded=false;function load(src,isFirstParty){if(loaded)return;loaded=true;var script=document.createElement('script');script.async=true;script.src=src;if(isFirstParty)script.onerror=function(){loaded=false;load(googleScript,false)};document.head.appendChild(script)}if(!window.fetch){load(googleScript,false);return}Promise.race([fetch(firstPartyPath+'healthy',{cache:'no-store',credentials:'same-origin'}).then(function(response){if(!response.ok)return false;return response.text().then(function(text){return text.trim()==='ok'})}).catch(function(){return false}),new Promise(function(resolve){setTimeout(function(){resolve(false)},1200)})]).then(function(healthy){load(healthy?firstPartyPath:googleScript,healthy)})})();`;
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -144,10 +146,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`} />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${googleAdsId}');`,
+            __html: googleTagLoader,
           }}
         />
         <script dangerouslySetInnerHTML={{ __html: "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('reveal-enabled')}catch(e){}" }} />

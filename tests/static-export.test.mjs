@@ -30,6 +30,9 @@ test("exports all indexable pages without the Vinext runtime", async () => {
     assert.doesNotMatch(html, /__VINEXT|modulepreload|data-rsc-/i, page);
     assert.match(html, /<script defer src="\/assets\/site-static\.js\?v=[0-9a-f]{12}"><\/script>/i, page);
     assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i, page);
+    assert.match(html, /firstPartyPath='\/metrics\/'/i, page);
+    assert.match(html, /fetch\(firstPartyPath\+'healthy'/i, page);
+    assert.match(html, /script\.onerror=function\(\)\{loaded=false;load\(googleScript,false\)\}/i, page);
     assert.match(html, /gtag\('config','AW-614157022'\)/i, page);
     assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br/i, page);
     assert.equal((html.match(/<h1\b/gi) || []).length, 1, page);
