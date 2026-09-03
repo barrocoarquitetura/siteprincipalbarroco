@@ -51,25 +51,20 @@ function request(path, host = "www.barrocoarquitetura.com.br", protocol = "https
   return worker.fetch(new Request(`${protocol}://${host}${path}`, { headers: { accept: "text/html" } }), env, ctx);
 }
 
-const canonicalPaths = [
-  "/",
-  "/projetos",
-  "/projetos-de-apartamentos",
-  "/projetos-de-casas",
-  "/reformas-residenciais",
-  "/projetos-e-obras-comerciais",
-  "/projetos/apartamento-com-ambientes-integrados",
-  "/projetos/casa-contemporanea-com-piscina",
-  "/projetos/escritorio-com-recepcao-e-jardim-vertical",
-  "/projetos/reforma-de-apartamento-com-cozinha-e-varanda",
-  "/blog",
-  "/blog/projeto-de-interiores-para-apartamento-o-que-inclui",
-  "/blog/reforma-de-apartamento-por-onde-comecar",
-  "/blog/projeto-executivo-de-interiores-o-que-e",
-  "/blog/quanto-tempo-dura-reforma-de-apartamento",
-  "/blog/projeto-de-interiores-antes-das-chaves",
-  "/blog/como-escolher-escritorio-de-arquitetura",
+const sitemapResponse = await request("/sitemap.xml");
+if (!sitemapResponse.ok) throw new Error(`Falha ao carregar sitemap para os testes: HTTP ${sitemapResponse.status}`);
+const sitemapText = await sitemapResponse.text();
+const canonicalPaths = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, location]) => new URL(location).pathname);
+const requiredCommercialGuides = [
+  "/blog/quanto-custa-projeto-de-interiores",
+  "/blog/reforma-de-apartamento-nbr-16280",
 ];
+
+test("keeps the complete indexable route inventory", () => {
+  assert.equal(canonicalPaths.length, 19, "o sitemap deve conter as 19 páginas indexáveis aprovadas");
+  assert.equal(new Set(canonicalPaths).size, canonicalPaths.length, "o sitemap não deve conter rotas duplicadas");
+  for (const path of requiredCommercialGuides) assert.ok(canonicalPaths.includes(path), `${path} deve permanecer no sitemap`);
+});
 
 test("renders production SEO metadata on the home page", async () => {
   const response = await request("/");
@@ -80,6 +75,10 @@ test("renders production SEO metadata on the home page", async () => {
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br\/?"/i);
   assert.match(html, /ProfessionalService/);
   assert.match(html, /FAQPage/);
+  assert.match(html, /id="mayara-cimino"/i);
+  assert.match(html, /id="luiz-faria"/i);
+  assert.match(html, /Mauá/);
+  assert.match(html, /São Paulo/);
   assert.match(html, /data-reveal/);
   assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i);
   assert.match(html, /firstPartyPath='\/metrics\/'/i);
@@ -168,7 +167,28 @@ test("renders first-hand technical articles with article schema", async () => {
   assert.match(html, /BlogPosting/);
   assert.match(html, /BreadcrumbList/);
   assert.match(html, /Barroco Arquitetura/);
+  assert.match(html, /Por Mayara Cimino e Luiz Faria/i);
+  assert.match(html, /#mayara-cimino/);
+  assert.match(html, /#luiz-faria/);
   assert.match(html, /Resposta direta/i);
+});
+
+test("renders and links the restored high-intent commercial guides", async () => {
+  const blog = await request("/blog");
+  assert.equal(blog.status, 200);
+  const blogHtml = await blog.text();
+
+  for (const path of requiredCommercialGuides) {
+    assert.match(blogHtml, new RegExp(`href="${path.replaceAll("/", "\\/")}"`, "i"), path);
+    const response = await request(path);
+    assert.equal(response.status, 200, path);
+    const html = await response.text();
+    assert.match(html, /BlogPosting/i, path);
+    assert.match(html, /Resposta direta/i, path);
+  }
+
+  const nbrGuide = await request("/blog/reforma-de-apartamento-nbr-16280");
+  assert.match(await nbrGuide.text(), /Fontes técnicas consultadas/i);
 });
 
 test("keeps every canonical page indexable and uniquely described", async () => {
@@ -231,11 +251,10 @@ test("publishes clean discovery files for Google", async () => {
   assert.match(robotsText, /PerplexityBot/i);
   assert.doesNotMatch(robotsText, /^Host:/im);
 
-  const sitemap = await request("/sitemap.xml");
-  assert.equal(sitemap.status, 200);
-  const sitemapText = await sitemap.text();
   assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/projetos\/apartamento-com-ambientes-integrados/i);
   assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/projeto-de-interiores-antes-das-chaves/i);
+  assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/quanto-custa-projeto-de-interiores/i);
+  assert.match(sitemapText, /https:\/\/www\.barrocoarquitetura\.com\.br\/blog\/reforma-de-apartamento-nbr-16280/i);
   assert.doesNotMatch(sitemapText, /\/portfolio|\/orcamento|\/archived-2/i);
 
   const imageSitemap = await request("/sitemap-images.xml");

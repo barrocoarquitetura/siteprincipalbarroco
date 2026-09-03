@@ -21,7 +21,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: { absolute: post.metaTitle },
     description: post.description,
     alternates: { canonical },
-    authors: [{ name: "Barroco Arquitetura", url: baseUrl }],
+    authors: [
+      { name: "Mayara Cimino", url: `${baseUrl}/#mayara-cimino` },
+      { name: "Luiz Faria", url: `${baseUrl}/#luiz-faria` },
+    ],
     openGraph: {
       title: post.title,
       description: post.description,
@@ -29,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url: canonical,
       publishedTime: post.published,
       modifiedTime: post.modified,
-      authors: [baseUrl],
+      authors: [`${baseUrl}/#mayara-cimino`, `${baseUrl}/#luiz-faria`],
       images: [{ url: post.image, alt: post.imageAlt }],
     },
     twitter: {
@@ -64,11 +67,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         dateModified: post.modified,
         inLanguage: "pt-BR",
         mainEntityOfPage: { "@id": `${pageUrl}#pagina` },
-        author: { "@type": "Organization", "@id": `${baseUrl}/#empresa`, name: "Barroco Arquitetura", url: baseUrl },
+        author: [
+          { "@type": "Person", "@id": `${baseUrl}/#mayara-cimino`, name: "Mayara Cimino", url: `${baseUrl}/#mayara-cimino` },
+          { "@type": "Person", "@id": `${baseUrl}/#luiz-faria`, name: "Luiz Faria", url: `${baseUrl}/#luiz-faria` },
+        ],
         publisher: { "@id": `${baseUrl}/#empresa` },
         image: { "@type": "ImageObject", url: `${baseUrl}${post.image}`, contentUrl: `${baseUrl}${post.image}`, caption: post.imageAlt },
         keywords: post.keywords.join(", "),
         about: post.keywords.map((name) => ({ "@type": "Thing", name })),
+        citation: post.sources?.map((source) => ({ "@type": "CreativeWork", name: source.title, url: source.url })),
         isPartOf: { "@id": `${baseUrl}/blog#blog` },
       },
       {
@@ -109,7 +116,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <h1>{post.title}</h1>
               <p className="hero-lead">{post.excerpt}</p>
               <div className="article-meta">
-                <span>Por Barroco Arquitetura</span>
+                <span>Por Mayara Cimino e Luiz Faria</span>
                 <span>Publicado em {formatDate(post.published)}</span>
                 <span>{post.readingTime}</span>
               </div>
@@ -144,6 +151,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {section.highlight && <aside className="article-highlight">{section.highlight}</aside>}
                 </section>
               ))}
+
+              {post.sources && post.sources.length > 0 && (
+                <section className="article-section article-sources">
+                  <h2>Fontes técnicas consultadas</h2>
+                  <p>Referências institucionais utilizadas para conferir as informações técnicas deste guia.</p>
+                  <ul>
+                    {post.sources.map((source) => (
+                      <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a></li>
+                    ))}
+                  </ul>
+                </section>
+              )}
 
               <section className="article-author">
                 <div><span>Conteúdo técnico</span><h2>Barroco Arquitetura</h2></div>

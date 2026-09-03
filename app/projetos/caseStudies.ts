@@ -1,5 +1,6 @@
 export type CaseStudy = {
   slug: string;
+  modified: string;
   category: string;
   title: string;
   metaTitle: string;
@@ -21,6 +22,7 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "apartamento-com-ambientes-integrados",
+    modified: "2026-07-20",
     category: "Interiores de apartamento",
     title: "Apartamento com estar, jantar e varanda integrados.",
     metaTitle: "Apartamento com Ambientes Integrados | Barroco",
@@ -51,6 +53,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "casa-contemporanea-com-piscina",
+    modified: "2026-07-20",
     category: "Projeto de casa",
     title: "Casa contemporânea organizada ao redor do lazer.",
     metaTitle: "Casa Contemporânea com Piscina | Barroco",
@@ -81,6 +84,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "escritorio-com-recepcao-e-jardim-vertical",
+    modified: "2026-07-20",
     category: "Arquitetura comercial",
     title: "Escritório com recepção, iluminação técnica e jardim vertical.",
     metaTitle: "Projeto de Escritório Corporativo | Barroco",
@@ -111,6 +115,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "reforma-de-apartamento-com-cozinha-e-varanda",
+    modified: "2026-07-20",
     category: "Reforma residencial",
     title: "Reforma de apartamento com cozinha e varanda planejadas.",
     metaTitle: "Reforma de Apartamento Planejada | Barroco",

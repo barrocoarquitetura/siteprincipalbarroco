@@ -4,29 +4,29 @@ import path from "node:path";
 import test from "node:test";
 
 const root = path.resolve("ftp-static");
-const pages = [
-  "index.html",
-  "projetos-page.html",
-  "projetos-de-apartamentos.html",
-  "projetos-de-casas.html",
-  "reformas-residenciais.html",
-  "projetos-e-obras-comerciais.html",
-  "projetos/apartamento-com-ambientes-integrados.html",
-  "projetos/casa-contemporanea-com-piscina.html",
-  "projetos/escritorio-com-recepcao-e-jardim-vertical.html",
-  "projetos/reforma-de-apartamento-com-cozinha-e-varanda.html",
-  "blog.html",
-  "blog/projeto-de-interiores-para-apartamento-o-que-inclui.html",
-  "blog/reforma-de-apartamento-por-onde-comecar.html",
-  "blog/projeto-executivo-de-interiores-o-que-e.html",
-  "blog/quanto-tempo-dura-reforma-de-apartamento.html",
-  "blog/projeto-de-interiores-antes-das-chaves.html",
-  "blog/como-escolher-escritorio-de-arquitetura.html",
+const sitemapXml = await readFile(path.join(root, "sitemap.xml"), "utf8");
+const canonicalUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, location]) => location);
+const pages = canonicalUrls.map((location) => {
+  const pathname = new URL(location).pathname;
+  if (pathname === "/") return "index.html";
+  if (pathname === "/projetos") return "projetos-page.html";
+  return `${pathname.slice(1)}.html`;
+});
+const requiredCommercialGuides = [
+  "blog/quanto-custa-projeto-de-interiores.html",
+  "blog/reforma-de-apartamento-nbr-16280.html",
 ];
 
+test("keeps the complete indexable route inventory", () => {
+  assert.equal(canonicalUrls.length, 19, "o sitemap deve conter as 19 páginas indexáveis aprovadas");
+  assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, "o sitemap não deve conter URLs duplicadas");
+  for (const page of requiredCommercialGuides) assert.ok(pages.includes(page), `${page} deve permanecer no sitemap`);
+});
+
 test("exports all indexable pages without the Vinext runtime", async () => {
-  for (const page of pages) {
+  for (const [index, page] of pages.entries()) {
     const html = await readFile(path.join(root, page), "utf8");
+    const expectedCanonical = new URL(canonicalUrls[index]).href;
     assert.doesNotMatch(html, /__VINEXT|modulepreload|data-rsc-/i, page);
     assert.match(html, /<script defer src="\/assets\/site-static\.js\?v=[0-9a-f]{12}"><\/script>/i, page);
     assert.match(html, /googletagmanager\.com\/gtag\/js\?id=AW-614157022/i, page);
@@ -34,7 +34,7 @@ test("exports all indexable pages without the Vinext runtime", async () => {
     assert.match(html, /fetch\(firstPartyPath\+'healthy'/i, page);
     assert.match(html, /script\.onerror=function\(\)\{loaded=false;load\(googleScript,false\)\}/i, page);
     assert.match(html, /gtag\('config','AW-614157022'\)/i, page);
-    assert.match(html, /<link rel="canonical" href="https:\/\/www\.barrocoarquitetura\.com\.br/i, page);
+    assert.match(html, new RegExp(`<link rel="canonical" href="${expectedCanonical.replaceAll("/", "\\/")}"`, "i"), page);
     assert.equal((html.match(/<h1\b/gi) || []).length, 1, page);
   }
   const home = await readFile(path.join(root, "index.html"), "utf8");
@@ -70,12 +70,13 @@ test("keeps every referenced local asset in the package", async () => {
 
 test("ships discovery, routing, caching and removal rules", async () => {
   const robots = await readFile(path.join(root, "robots.txt"), "utf8");
-  const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
   const imageSitemap = await readFile(path.join(root, "sitemap-images.xml"), "utf8");
   const rss = await readFile(path.join(root, "rss.xml"), "utf8");
   const htaccess = await readFile(path.join(root, ".htaccess"), "utf8");
   assert.match(robots, /sitemap\.xml/i);
-  assert.match(sitemap, /<urlset/i);
+  assert.match(sitemapXml, /<urlset/i);
+  assert.match(sitemapXml, /blog\/quanto-custa-projeto-de-interiores/i);
+  assert.match(sitemapXml, /blog\/reforma-de-apartamento-nbr-16280/i);
   assert.match(imageSitemap, /<image:image>/i);
   assert.match(rss, /<rss version="2\.0">/i);
   assert.match(htaccess, /archived-2\/\?\$ - \[R=410,L\]/i);

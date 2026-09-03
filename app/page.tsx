@@ -252,8 +252,8 @@ export default function Home() {
               conduzem cada projeto com olhar criativo, detalhamento técnico e acompanhamento próximo.
             </p>
             <div className="about-team-names" aria-label="Arquitetos à frente da Barroco Arquitetura">
-                <div><strong>Mayara Cimino</strong><span>Arquiteta</span></div>
-                <div><strong>Luiz Faria</strong><span>Arquiteto</span></div>
+                <div id="mayara-cimino"><strong>Mayara Cimino</strong><span>Arquiteta</span></div>
+                <div id="luiz-faria"><strong>Luiz Faria</strong><span>Arquiteto</span></div>
             </div>
           </div>
         </section>

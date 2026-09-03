@@ -55,8 +55,22 @@ const localBusinessJsonLd = {
   ],
   foundingDate: "2013",
   founder: [
-    { "@type": "Person", "@id": "https://www.barrocoarquitetura.com.br/#mayara-cimino", name: "Mayara Cimino", jobTitle: "Arquiteta" },
-    { "@type": "Person", "@id": "https://www.barrocoarquitetura.com.br/#luiz-faria", name: "Luiz Faria", jobTitle: "Arquiteto" },
+    {
+      "@type": "Person",
+      "@id": "https://www.barrocoarquitetura.com.br/#mayara-cimino",
+      url: "https://www.barrocoarquitetura.com.br/#mayara-cimino",
+      name: "Mayara Cimino",
+      jobTitle: "Arquiteta",
+      worksFor: { "@id": "https://www.barrocoarquitetura.com.br/#empresa" },
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.barrocoarquitetura.com.br/#luiz-faria",
+      url: "https://www.barrocoarquitetura.com.br/#luiz-faria",
+      name: "Luiz Faria",
+      jobTitle: "Arquiteto",
+      worksFor: { "@id": "https://www.barrocoarquitetura.com.br/#empresa" },
+    },
   ],
   address: {
     "@type": "PostalAddress",
@@ -71,6 +85,8 @@ const localBusinessJsonLd = {
     { "@type": "City", name: "Santo André" },
     { "@type": "City", name: "São Bernardo do Campo" },
     { "@type": "City", name: "São Caetano do Sul" },
+    { "@type": "City", name: "Mauá" },
+    { "@type": "City", name: "São Paulo" },
   ],
   sameAs: ["https://www.instagram.com/barrocoarquitetura/"],
   hasOfferCatalog: {

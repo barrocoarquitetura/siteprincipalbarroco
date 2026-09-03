@@ -14,26 +14,6 @@ const googleTagGatewayPath = "/metrics/";
 const googleTagLoader = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${googleAdsId}');(function(){var firstPartyPath='${googleTagGatewayPath}';var googleScript='https://www.googletagmanager.com/gtag/js?id=${googleAdsId}';var loaded=false;function load(src,isFirstParty){if(loaded)return;loaded=true;var script=document.createElement('script');script.async=true;script.src=src;if(isFirstParty)script.onerror=function(){loaded=false;load(googleScript,false)};document.head.appendChild(script)}if(!window.fetch){load(googleScript,false);return}Promise.race([fetch(firstPartyPath+'healthy',{cache:'no-store',credentials:'same-origin'}).then(function(response){if(!response.ok)return false;return response.text().then(function(text){return text.trim()==='ok'})}).catch(function(){return false}),new Promise(function(resolve){setTimeout(function(){resolve(false)},1200)})]).then(function(healthy){load(healthy?firstPartyPath:googleScript,healthy)})})();`;
 const googleTagHead = `<script>${googleTagLoader}</script>`;
 
-const routes = [
-  "/",
-  "/projetos",
-  "/projetos-de-apartamentos",
-  "/projetos-de-casas",
-  "/reformas-residenciais",
-  "/projetos-e-obras-comerciais",
-  "/projetos/apartamento-com-ambientes-integrados",
-  "/projetos/casa-contemporanea-com-piscina",
-  "/projetos/escritorio-com-recepcao-e-jardim-vertical",
-  "/projetos/reforma-de-apartamento-com-cozinha-e-varanda",
-  "/blog",
-  "/blog/projeto-de-interiores-para-apartamento-o-que-inclui",
-  "/blog/reforma-de-apartamento-por-onde-comecar",
-  "/blog/projeto-executivo-de-interiores-o-que-e",
-  "/blog/quanto-tempo-dura-reforma-de-apartamento",
-  "/blog/projeto-de-interiores-antes-das-chaves",
-  "/blog/como-escolher-escritorio-de-arquitetura",
-];
-
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
@@ -95,6 +75,17 @@ async function render(worker, pathname, accept) {
   );
   if (!response.ok) throw new Error(`Falha ao renderizar ${pathname}: HTTP ${response.status}`);
   return response.text();
+}
+
+function indexableRoutesFromSitemap(sitemapXml) {
+  const routes = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, location]) => {
+    const url = new URL(location.replaceAll("&amp;", "&"));
+    if (url.origin !== productionOrigin) throw new Error(`URL externa inesperada no sitemap: ${url.href}`);
+    return url.pathname || "/";
+  });
+  if (routes.length === 0) throw new Error("O sitemap não contém URLs indexáveis");
+  if (new Set(routes).size !== routes.length) throw new Error("O sitemap contém URLs duplicadas");
+  return routes;
 }
 
 const htaccess = `Options -Indexes
@@ -212,6 +203,8 @@ await copyFile(runtimeSource, path.join(outputRoot, "assets", "site-static.js"))
 const workerUrl = new URL("../dist/server/index.js", import.meta.url);
 workerUrl.searchParams.set("static-export", `${process.pid}-${Date.now()}`);
 const { default: worker } = await import(workerUrl.href);
+const sitemapXml = await render(worker, "/sitemap.xml", "application/xml");
+const routes = indexableRoutesFromSitemap(sitemapXml);
 
 for (const route of routes) {
   const html = toStaticHtml(await render(worker, route, "text/html"));
@@ -230,9 +223,10 @@ await writeFile(path.join(outputRoot, "410.html"), "<!doctype html><html lang=\"
 
 for (const discoveryPath of ["/robots.txt", "/sitemap.xml", "/sitemap-images.xml", "/rss.xml"]) {
   const accept = discoveryPath.endsWith(".xml") ? "application/xml" : "text/plain";
-  await writeFile(path.join(outputRoot, discoveryPath.slice(1)), await render(worker, discoveryPath, accept));
+  const content = discoveryPath === "/sitemap.xml" ? sitemapXml : await render(worker, discoveryPath, accept);
+  await writeFile(path.join(outputRoot, discoveryPath.slice(1)), content);
 }
 
 await writeFile(path.join(outputRoot, ".htaccess"), htaccess);
 await writeFile(path.join(outputRoot, "LEIA-ME-INSTALACAO.txt"), readme);
-console.log(`Exportação FTP criada em ${outputRoot}`);
+console.log(`Exportação FTP criada em ${outputRoot} com ${routes.length} páginas indexáveis`);

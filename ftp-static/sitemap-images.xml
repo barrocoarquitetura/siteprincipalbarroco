@@ -636,4 +636,16 @@
       <image:loc>https://www.barrocoarquitetura.com.br/images/mayara-cimino-luiz-faria.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.barrocoarquitetura.com.br/blog/quanto-custa-projeto-de-interiores</loc>
+    <image:image>
+      <image:loc>https://www.barrocoarquitetura.com.br/images/apartamento-jantar-cristaleira.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.barrocoarquitetura.com.br/blog/reforma-de-apartamento-nbr-16280</loc>
+    <image:image>
+      <image:loc>https://www.barrocoarquitetura.com.br/images/reformas-hero.webp</image:loc>
+    </image:image>
+  </url>
 </urlset>

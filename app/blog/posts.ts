@@ -22,6 +22,7 @@ export type BlogPost = {
   imageAlt: string;
   keywords: string[];
   sections: BlogSection[];
+  sources?: Array<{ title: string; url: string }>;
   relatedService: { href: string; label: string; title: string };
 };
 
@@ -412,6 +413,139 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     relatedService: { href: "/#contato", label: "Contar sobre meu projeto", title: "Quer comparar um escopo para o seu imóvel?" },
+  },
+  {
+    slug: "quanto-custa-projeto-de-interiores",
+    category: "Honorários e contratação",
+    intent: "Comercial",
+    title: "Quanto custa um projeto de interiores? O que define os honorários e como comparar propostas",
+    metaTitle: "Quanto Custa um Projeto de Interiores? | Barroco",
+    description: "Entenda o que define o valor de um projeto de interiores, quais entregas comparar e por que área, complexidade, prazo e escopo alteram os honorários.",
+    excerpt: "O valor só pode ser comparado corretamente quando etapas, ambientes, entregáveis, revisões e participação durante a obra estão claramente definidos.",
+    answer: "O custo de um projeto de interiores depende da área e do número de ambientes, mas também da complexidade, profundidade do executivo, quantidade de detalhamentos, prazo, revisões, visitas e serviços adicionais. Para comparar propostas, verifique o que será entregue e quais responsabilidades estão incluídas, não apenas o preço total.",
+    published: "2026-08-10",
+    modified: "2026-08-10",
+    readingTime: "8 min de leitura",
+    image: "/images/apartamento-jantar-cristaleira.webp",
+    imageAlt: "Projeto de interiores para apartamento com sala de jantar, cristaleira e marcenaria planejada",
+    keywords: ["quanto custa projeto de interiores", "valor projeto de interiores", "honorários de arquiteto", "orçamento projeto de apartamento"],
+    sections: [
+      {
+        title: "Por que não existe um preço único para todo apartamento",
+        paragraphs: [
+          "A área influencia o trabalho, mas não explica o projeto inteiro. Dois imóveis com tamanho semelhante podem exigir níveis muito diferentes de intervenção. Um pode manter instalações e revestimentos; outro pode integrar ambientes, refazer elétrica e hidráulica e receber marcenaria completa.",
+          "Também muda a quantidade de decisões que precisam ser coordenadas. Cozinha, banheiro e área gourmet concentram equipamentos, pontos, pedras, revestimentos e móveis sob medida. Ambientes tecnicamente densos costumam demandar mais levantamento, compatibilização e detalhamento.",
+        ],
+      },
+      {
+        title: "Os fatores que mais influenciam os honorários",
+        bullets: [
+          "Quantidade de ambientes e área efetivamente incluída no escopo.",
+          "Imóvel novo, ocupado ou em reforma, com diferentes condições de levantamento.",
+          "Mudanças de layout, instalações, estrutura, forro e acabamentos.",
+          "Nível de detalhamento de marcenaria, pedras, iluminação e elementos especiais.",
+          "Número de imagens, reuniões, apresentações e ciclos de revisão.",
+          "Prazo disponível e necessidade de organizar decisões em paralelo.",
+          "Inclusão de orçamento, visitas, gerenciamento, execução ou marcenaria.",
+        ],
+      },
+      {
+        title: "Formas comuns de apresentar o valor do projeto",
+        paragraphs: [
+          "Os honorários podem ser apresentados por escopo fechado, por etapa, por ambiente, por área ou por hora técnica. Nenhum formato é automaticamente melhor. O importante é que a base de cálculo esteja conectada a entregas verificáveis.",
+          "Em um escopo fechado, confirme quais revisões e ambientes estão contemplados. Quando a contratação é dividida por etapas, entenda o que precisa estar aprovado antes de avançar e como serão tratados serviços adicionais.",
+        ],
+        highlight: "Um valor só é comparável quando as propostas incluem o mesmo conjunto de etapas, desenhos, especificações, reuniões e responsabilidades.",
+      },
+      {
+        title: "O que conferir antes de escolher uma proposta",
+        bullets: [
+          "Levantamento, briefing e estudo de layout.",
+          "Conceito, imagens 3D e limites de revisão.",
+          "Plantas e detalhes do projeto executivo.",
+          "Especificações de materiais, iluminação, pedras e marcenaria.",
+          "Apoio aos orçamentos, compras e dúvidas de fornecedores.",
+          "Visitas e participação durante a execução.",
+          "Serviços que não estão incluídos e poderão ser contratados separadamente.",
+        ],
+      },
+      {
+        title: "Como chegar à primeira conversa mais preparado",
+        paragraphs: [
+          "Organize a planta ou medidas disponíveis, localização do imóvel, ambientes envolvidos, prazo desejado e uma lista de prioridades. Informe se pretende contratar apenas o projeto ou também orçamento, obra e marcenaria.",
+          "Essas informações não substituem o diagnóstico, mas permitem que o escritório proponha um escopo coerente. Na Barroco, a proposta é preparada após entender o imóvel, o nível de intervenção e o apoio necessário até a execução.",
+        ],
+      },
+    ],
+    relatedService: { href: "/projetos-de-apartamentos", label: "Conhecer o escopo para apartamentos", title: "Quer receber uma proposta para o seu apartamento?" },
+  },
+  {
+    slug: "reforma-de-apartamento-nbr-16280",
+    category: "Reforma e responsabilidade técnica",
+    intent: "Comercial",
+    title: "Reforma de apartamento e NBR 16280: o que organizar antes de começar a obra",
+    metaTitle: "Reforma de Apartamento e NBR 16280 | Barroco",
+    description: "Entenda como a NBR 16280 orienta reformas em condomínios, quais documentos podem ser solicitados e quando consultar um responsável técnico.",
+    excerpt: "Antes da demolição, é preciso entender o escopo, as regras do condomínio, os sistemas afetados e a documentação técnica aplicável.",
+    answer: "A NBR 16280 estabelece requisitos para a gestão de reformas em edificações. Em apartamentos, o proprietário deve consultar as regras do condomínio e apresentar o plano e os documentos solicitados antes da obra. Quando a intervenção exigir responsabilidade técnica, o documento deve ser emitido por profissional habilitado dentro de suas atribuições. As exigências variam conforme o escopo, o edifício e as regras locais.",
+    published: "2026-08-10",
+    modified: "2026-08-10",
+    readingTime: "8 min de leitura",
+    image: "/images/reformas-hero.webp",
+    imageAlt: "Apartamento em processo de planejamento para reforma residencial com projeto técnico",
+    keywords: ["reforma de apartamento NBR 16280", "RRT reforma apartamento", "plano de reforma condomínio", "responsável técnico reforma"],
+    sections: [
+      {
+        title: "O que a NBR 16280 organiza",
+        paragraphs: [
+          "A norma trata do sistema de gestão de reformas em edificações. Seu objetivo é estruturar planejamento, análise das implicações da intervenção, execução, segurança e registro das informações antes, durante e depois da obra.",
+          "Na prática, isso evita que uma reforma seja tratada apenas como uma sequência de serviços isolados. O condomínio precisa saber o que será alterado, quais sistemas poderão ser afetados, quem executará e quais documentos sustentam a responsabilidade técnica aplicável.",
+        ],
+      },
+      {
+        title: "O que o condomínio pode solicitar antes da obra",
+        bullets: [
+          "Descrição dos serviços e ambientes envolvidos.",
+          "Plantas, memoriais ou detalhes necessários para compreender as alterações.",
+          "Cronograma e horários previstos para os trabalhos.",
+          "Identificação das empresas, equipes e profissionais envolvidos.",
+          "Plano de descarte, transporte e proteção das áreas comuns.",
+          "Documentos de responsabilidade técnica quando aplicáveis ao serviço.",
+        ],
+        highlight: "Cada condomínio pode ter formulários e procedimentos próprios. O regulamento interno deve ser consultado antes de fechar o cronograma e mobilizar as equipes.",
+      },
+      {
+        title: "Quando entram RRT, ART ou outro documento técnico",
+        paragraphs: [
+          "Arquitetos e urbanistas registram suas atividades por meio do RRT; engenheiros utilizam a ART; técnicos habilitados podem utilizar o TRT conforme suas atribuições. O documento adequado depende do profissional, do serviço e das competências regulamentadas.",
+          "Nem toda intervenção possui o mesmo risco ou exige os mesmos documentos. Alterações que envolvem sistemas, desempenho ou segurança da edificação precisam ser analisadas com atenção. O responsável técnico deve definir e registrar apenas as atividades para as quais possui atribuição.",
+        ],
+      },
+      {
+        title: "Decisões que precisam estar no projeto antes da demolição",
+        bullets: [
+          "Paredes, vedações e elementos que serão removidos ou construídos.",
+          "Alterações de elétrica, hidráulica, gás, climatização e exaustão.",
+          "Novas cargas, equipamentos e elementos fixados ou apoiados.",
+          "Mudanças de piso, impermeabilização, áreas molhadas e níveis.",
+          "Interferências em fachada, esquadrias, prumadas ou áreas comuns.",
+          "Sequência de execução, proteção, testes e descarte de resíduos.",
+        ],
+      },
+      {
+        title: "Como reduzir atrasos na aprovação do condomínio",
+        paragraphs: [
+          "Peça o regulamento e os formulários antes de concluir o orçamento da obra. Organize o escopo em linguagem clara e confira se projeto, memorial, cronograma e documentos técnicos descrevem a mesma intervenção.",
+          "Quando o condomínio solicitar ajustes, registre a nova versão e distribua apenas o material aprovado para as equipes. A liberação administrativa não substitui a responsabilidade de quem projetou ou executa, e cada mudança relevante precisa ser analisada antes de entrar no canteiro.",
+        ],
+      },
+    ],
+    sources: [
+      { title: "CAU/PB — fiscalização e responsabilidade técnica em reformas de edificações", url: "https://www.caupb.gov.br/caupb-realiza-fiscalizacao-em-condominios-horizontais-e-edificacoes-verticais-na-regiao-metropolitana-de-jp/" },
+      { title: "CDHU — orientações para reformas em apartamentos", url: "https://cdhu.sp.gov.br/servicos-mutuario/reformas-em-apartamentos" },
+      { title: "CAU/BR — responsabilidade técnica e identificação do RRT", url: "https://caubr.gov.br/nova-ferramenta-permite-emitir-qr-code-para-rrt/" },
+    ],
+    relatedService: { href: "/reformas-residenciais", label: "Conhecer projeto e execução de reformas", title: "Vai reformar um apartamento?" },
   },
 ];
 
