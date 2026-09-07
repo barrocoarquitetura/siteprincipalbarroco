@@ -3,7 +3,11 @@ import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } fr
 import handler from "vinext/server/app-router-entry";
 import { handleLeadOptions, handleLeadPost } from "./leads";
 
+import { handleQualifiedLeads } from "./qualified-leads";
+
 interface Env {
+  LEAD_EXPORT_PASSWORD?: string;
+  LEAD_QUALIFICATION_TOKEN?: string;
   ASSETS: Fetcher;
   DB: D1Database;
   IMAGES: {
@@ -35,6 +39,10 @@ const worker = {
       url.protocol = "https:";
       url.hostname = "www.barrocoarquitetura.com.br";
       return Response.redirect(url, 308);
+    }
+
+    if (url.pathname === "/api/ads/qualified-leads.csv" || url.pathname === "/api/ads/qualify") {
+      return handleQualifiedLeads(request, env);
     }
 
     if (url.pathname === "/api/leads") {

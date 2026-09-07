@@ -320,12 +320,13 @@
             service: fields.service,
             property_type: fields.property,
           });
-          window.gtag?.("set", "user_data", {
+          const userData = {
             email: String(fields.email).trim().toLowerCase(),
             phone_number: normalizedPhone(fields.phone),
-          });
+          };
           window.gtag?.("event", "form_submit", {
             send_to: googleAdsId,
+        user_data: userData,
           });
           window.gtag?.("event", "lead_form_whatsapp", {
             send_to: analyticsMeasurementId,
@@ -347,9 +348,12 @@
           };
 
           if (typeof window.gtag === "function") {
+            window.gtag("set", "user_data", userData);
             window.gtag("event", "conversion", {
               send_to: formConversionId,
               transaction_id: result.lead.id,
+              user_data: userData,
+              event_timeout: 1500,
               event_callback: redirectToWhatsApp,
             });
             window.setTimeout(redirectToWhatsApp, 1600);
@@ -385,7 +389,8 @@
       if (/wa\.me|api\.whatsapp\.com/.test(href)) {
         eventName = "whatsapp_click";
         if (typeof window.gtag === "function") {
-          window.gtag("event", "conversion", { send_to: whatsappConversionId });
+          window.gtag("set", "user_data", userData);
+            window.gtag("event", "conversion", { send_to: whatsappConversionId });
         }
       }
       else if (href.startsWith("tel:")) eventName = "phone_click";

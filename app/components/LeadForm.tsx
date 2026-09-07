@@ -164,12 +164,13 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
         service: fields.service,
         property_type: fields.property,
       });
-      analyticsWindow.gtag?.("set", "user_data", {
+      const userData = {
         email: String(fields.email).trim().toLowerCase(),
         phone_number: normalizedPhone(String(fields.phone)),
-      });
+      };
       analyticsWindow.gtag?.("event", "form_submit", {
         send_to: googleAdsId,
+        user_data: userData,
       });
       analyticsWindow.gtag?.("event", "lead_form_whatsapp", {
         send_to: analyticsMeasurementId,
@@ -187,9 +188,12 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
       };
 
       if (typeof analyticsWindow.gtag === "function") {
+        analyticsWindow.gtag("set", "user_data", userData);
         analyticsWindow.gtag("event", "conversion", {
           send_to: formConversionId,
           transaction_id: result.lead.id,
+          user_data: userData,
+          event_timeout: 1500,
           event_callback: redirectToWhatsApp,
         });
         window.setTimeout(redirectToWhatsApp, 1600);
