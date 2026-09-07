@@ -22,7 +22,8 @@ export function normalizeEmail(value: string) {
 }
 export async function conversionCsv(rows: Row[]) {
   const csv = (value: string) => `"${value.replaceAll('"', '""')}"`;
-  const lines = ['Parameters:TimeZone=+0000', 'Google Click ID,Conversion Name,Conversion Time,Conversion Value,Conversion Currency,Email,Phone Number,Order ID'];
+  // Data Manager reads the first line as column names; each timestamp includes its UTC offset.
+  const lines = ['Google Click ID,Conversion Name,Conversion Time,Conversion Value,Conversion Currency,Email,Phone Number,Order ID'];
   for (const row of rows) {
     const date = new Date(row.qualified_at);
     if (!Number.isFinite(date.getTime()) || date.getTime() > Date.now()) throw new Error('Invalid qualification date');
