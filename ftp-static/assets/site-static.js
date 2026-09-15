@@ -389,8 +389,8 @@
       if (/wa\.me|api\.whatsapp\.com/.test(href)) {
         eventName = "whatsapp_click";
         if (typeof window.gtag === "function") {
-          window.gtag("set", "user_data", userData);
-            window.gtag("event", "conversion", { send_to: whatsappConversionId });
+          // A direct WhatsApp click has no submitted form data.
+          window.gtag("event", "conversion", { send_to: whatsappConversionId });
         }
       }
       else if (href.startsWith("tel:")) eventName = "phone_click";
