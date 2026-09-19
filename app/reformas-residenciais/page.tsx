@@ -27,9 +27,10 @@ export const metadata: Metadata = {
 export default function ReformasPage() {
   return <ServicePage
     canonicalPath="/reformas-residenciais"
+    conversionLanding
     eyebrow="Reformas residenciais"
-    title="Reforma de apartamentos e casas, do projeto à execução."
-    intro="Reformas de casas e apartamentos com planejamento, orçamento, gerenciamento e execução, mantendo decisões, fornecedores e etapas conectados."
+    title="Reforma completa, do projeto à execução."
+    intro="Reformas completas de casas e apartamentos com projeto de arquitetura, orçamento e gerenciamento. Planejamos escopo, cronograma e acabamentos antes de iniciar a execução."
     image="/images/portfolio-cozinha-verde.webp"
     imageAlt="Cozinha reformada com marcenaria verde e estrutura metálica"
     gallery={[

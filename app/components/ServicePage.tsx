@@ -8,6 +8,7 @@ import { SiteHeader } from "./SiteHeader";
 
 type ServicePageProps = {
   canonicalPath: string;
+  conversionLanding?: boolean;
   eyebrow: string;
   title: string;
   intro: string;
@@ -95,10 +96,43 @@ export function ServicePage(props: ServicePageProps) {
     },
   ];
 
+  const scopeSection = (
+        <section className="section page-shell scope-section" id="escopo">
+          <div className="scope-intro" data-reveal>
+            <p className="eyebrow">Escopo completo</p>
+            <h2>{props.sectionTitle}</h2>
+            <p>{props.sectionIntro}</p>
+          </div>
+          <div className="deliverable-grid">
+            {props.deliverables.map(([title, text], index) => (
+              <article key={title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+  );
+
+  const contactSection = (
+        <section className="section contact-section" id="contato">
+          <div className="page-shell contact-grid">
+            <div className="contact-copy" data-reveal>
+              <p className="eyebrow eyebrow--light">Sua proposta</p>
+              <h2>Vamos planejar o seu projeto completo.</h2>
+              <p>Conte sobre o imóvel, o serviço e o prazo desejado. Mayara e Luiz avaliam o escopo para apresentar uma proposta de honorários alinhada ao seu projeto.</p>
+              <p>Projeto, execução e marcenaria têm escopos e investimentos definidos na proposta. Atendimento no ABC e em São Paulo.</p>
+            </div>
+            <LeadForm defaultService={props.defaultService} />
+          </div>
+        </section>
+  );
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <SiteHeader />
+      <SiteHeader contactHref="#contato" />
       <main>
         <section className="service-hero">
           <div className="page-shell service-hero__grid">
@@ -130,6 +164,8 @@ export function ServicePage(props: ServicePageProps) {
             ))}
           </div>
         </section>
+
+        {props.conversionLanding && <>{scopeSection}{contactSection}</>}
 
         {props.gallery && props.gallery.length > 0 && (
           <section className="section page-shell service-gallery" id="portfolio">
@@ -181,22 +217,7 @@ export function ServicePage(props: ServicePageProps) {
           </section>
         )}
 
-        <section className="section page-shell scope-section" id="escopo">
-          <div className="scope-intro" data-reveal>
-            <p className="eyebrow">Escopo completo</p>
-            <h2>{props.sectionTitle}</h2>
-            <p>{props.sectionIntro}</p>
-          </div>
-          <div className="deliverable-grid">
-            {props.deliverables.map(([title, text], index) => (
-              <article key={title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+        {!props.conversionLanding && scopeSection}
 
         <section className="section fit-section">
           <div className="page-shell fit-grid">
@@ -267,17 +288,8 @@ export function ServicePage(props: ServicePageProps) {
           </div>
         </section>
 
-        <section className="section contact-section" id="contato">
-          <div className="page-shell contact-grid">
-            <div className="contact-copy" data-reveal>
-              <p className="eyebrow eyebrow--light">Próximo passo</p>
-              <h2>Conte sobre o seu projeto.</h2>
-              <p>Com algumas informações iniciais conseguimos avaliar o tipo de escopo mais adequado para a sua necessidade.</p>
-              <Link href="/" className="text-link text-link--light">Conhecer toda a Barroco <span aria-hidden="true">↗</span></Link>
-            </div>
-            <LeadForm defaultService={props.defaultService} />
-          </div>
-        </section>
+        {!props.conversionLanding && contactSection}
+
       </main>
       <SiteFooter />
     </>

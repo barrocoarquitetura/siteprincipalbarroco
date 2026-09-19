@@ -279,7 +279,7 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
         </label>
       </div>
       <button className="button button--form" type="submit" disabled={submitting}>
-        {submitting ? "Registrando contato…" : "Enviar pelo WhatsApp"} <span aria-hidden="true">→</span>
+        {submitting ? "Registrando contato…" : "Solicitar proposta"} <span aria-hidden="true">→</span>
       </button>
       <p className="form-note">Seus dados são registrados com segurança antes da abertura do WhatsApp. Revise a mensagem antes de enviá-la.</p>
       <p data-form-status className={`form-status${status ? ` form-status--${status.tone}` : ""}`} aria-live="polite" role="status" hidden={!status}>

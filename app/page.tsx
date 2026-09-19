@@ -188,16 +188,17 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData) }} />
-      <SiteHeader />
+      <SiteHeader contactHref="#contato" />
       <main>
         <section className="home-hero">
           <div className="page-shell home-hero__grid">
             <div className="home-hero__copy" data-reveal>
-              <p className="eyebrow">Arquitetura, interiores e execução</p>
-              <h1>Arquitetura e interiores com identidade, do projeto à obra.</h1>
+              <p className="eyebrow">Projetos completos de médio e alto padrão</p>
+              <h1>Escritório de arquitetura e interiores, do projeto à obra.</h1>
               <p className="hero-lead">
-                Arquitetura residencial e comercial conduzida com método, clareza técnica e atenção a cada
-                escolha — do conceito ao detalhamento, à obra e à marcenaria.
+                Projetos personalizados para casas, apartamentos e espaços comerciais.
+                Atendimento direto com Mayara e Luiz, do conceito e das imagens 3D
+                ao executivo, às especificações e ao planejamento da obra.
               </p>
               <div className="button-row">
                 <a className="button button--primary" href="#contato">
@@ -284,6 +285,28 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="section contact-section" id="contato">
+          <div className="page-shell contact-grid">
+            <div className="contact-copy" data-reveal>
+              <p className="eyebrow eyebrow--light">Conte sobre o seu projeto</p>
+              <h2>Uma proposta para o seu projeto completo.</h2>
+              <p>
+                Conte sobre o imóvel, o escopo e quando pretende começar.
+                Avaliamos suas necessidades para apresentar uma proposta de honorários.
+                Projeto, obra e marcenaria podem ser contratados conforme a sua necessidade.
+              </p>
+              <div className="contact-meta">
+                <a href="mailto:contato@barrocoarquitetura.com.br">contato@barrocoarquitetura.com.br</a>
+                <div className="contact-meta__line">
+                  <a href="tel:+551127630517">(11) 2763-0517</a>
+                  <span>· Santo André · SP</span>
+                </div>
+              </div>
+            </div>
+            <LeadForm />
+          </div>
+        </section>
+
         <section className="section process-section">
           <div className="page-shell process-grid">
             <div className="process-intro" data-reveal>
@@ -367,26 +390,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section contact-section" id="contato">
-          <div className="page-shell contact-grid">
-            <div className="contact-copy" data-reveal>
-              <p className="eyebrow eyebrow--light">Conte sobre o seu projeto</p>
-              <h2>Conte-nos o que você deseja transformar.</h2>
-              <p>
-                Responda algumas perguntas. Ao finalizar, você será direcionado
-                ao WhatsApp da Barroco com as informações organizadas.
-              </p>
-              <div className="contact-meta">
-                <a href="mailto:contato@barrocoarquitetura.com.br">contato@barrocoarquitetura.com.br</a>
-                <div className="contact-meta__line">
-                  <a href="tel:+551127630517">(11) 2763-0517</a>
-                  <span>· Santo André · SP</span>
-                </div>
-              </div>
-            </div>
-            <LeadForm />
-          </div>
-        </section>
+
       </main>
       <SiteFooter />
     </>

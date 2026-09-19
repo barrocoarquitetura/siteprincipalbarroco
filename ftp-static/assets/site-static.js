@@ -364,7 +364,7 @@
           form.dataset.submitting = "false";
           if (button) {
             button.disabled = false;
-            button.innerHTML = "Enviar pelo WhatsApp <span aria-hidden='true'>→</span>";
+            button.innerHTML = "Solicitar proposta <span aria-hidden='true'>→</span>";
           }
           if (status) {
             status.hidden = false;

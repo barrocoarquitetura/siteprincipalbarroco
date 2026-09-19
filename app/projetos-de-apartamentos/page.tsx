@@ -27,9 +27,10 @@ export const metadata: Metadata = {
 export default function ApartamentosPage() {
   return <ServicePage
     canonicalPath="/projetos-de-apartamentos"
+    conversionLanding
     eyebrow="Projeto de interiores para apartamentos"
-    title="Projeto de interiores para aproveitar cada metro do apartamento."
-    intro="Layout, imagens 3D, projeto executivo, especificações e orçamentos para transformar o imóvel com clareza, funcionalidade e identidade."
+    title="Interiores de alto padrão para o seu apartamento."
+    intro="Projeto completo de interiores para apartamentos novos ou em reforma. Layout, imagens 3D, executivo e especificações, com atendimento direto dos arquitetos e opção de obra e marcenaria."
     image="/images/apartamento-estar-jantar-integrados.webp"
     imageAlt="Apartamento com sala de estar, jantar e varanda integradas"
     gallery={[
