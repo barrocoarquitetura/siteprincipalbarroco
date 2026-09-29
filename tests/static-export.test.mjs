@@ -51,7 +51,7 @@ test("ships the qualified lead and WhatsApp conversion events", async () => {
   assert.match(runtime, /"phone_click"/);
   assert.match(runtime, /"email_click"/);
   assert.match(runtime, /event_callback:\s*redirectToWhatsApp/);
-  assert.match(runtime, /fetch\(form\.dataset\.leadEndpoint/);
+  assert.match(runtime, /submitLead\(form\.dataset\.leadEndpoint/);
   assert.match(runtime, /"set",\s*"user_data"/);
   assert.match(runtime, /phone_number:\s*normalizedPhone/);
   assert.match(runtime, /"event",\s*"form_submit"/);

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 import test from "node:test";
+import { safeContactUrl } from "../app/lib/lead-tracking.js";
 
 const runtime = await readFile(new URL("../scripts/static-site-runtime.js", import.meta.url), "utf8");
 const handler = runtime.slice(runtime.indexOf("  function enableContactAnalytics()"), runtime.indexOf("  function closeMobileMenus()"));
@@ -12,6 +13,7 @@ test("direct WhatsApp clicks work without form data and send only the contact co
     const calls = [];
     const events = [];
     vm.runInNewContext(`${handler}\nenableContactAnalytics();`, {
+      safeContactUrl,
       document: { addEventListener: (_, listener) => { onClick = listener; } },
       window: { gtag: (...args) => calls.push(args), location: { pathname: "/projetos-de-apartamentos" } },
       whatsappConversionId: "AW-614157022/bWIoCP-morQDEN6V7aQC",

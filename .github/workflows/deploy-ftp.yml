@@ -40,6 +40,9 @@ jobs:
       - name: Instalar dependências
         run: npm run install:ci
 
+      - name: Validar rastreamento e recuperação do formulário
+        run: npm run test:tracking
+
       - name: Gerar pacote estático
         run: npm run export:ftp
 

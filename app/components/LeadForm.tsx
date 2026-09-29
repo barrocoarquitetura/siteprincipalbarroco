@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { readAttribution, submitLead } from "../lib/lead-tracking.js";
 
 type LeadFormProps = {
   defaultService?: string;
@@ -10,81 +11,11 @@ const formConversionId = "AW-614157022/KLJACJyUorQDEN6V7aQC";
 const googleAdsId = "AW-614157022";
 const analyticsMeasurementId = "G-YED0X4J78V";
 const leadApiUrl = "https://barroco-arquitetura-residencial.luizcontatoarquiteto.chatgpt.site/api/leads";
-const attributionStorageKey = "barroco_attribution_v1";
 
 type AnalyticsWindow = Window & {
   dataLayer?: Array<unknown>;
   gtag?: (...parameters: unknown[]) => void;
 };
-
-type Attribution = {
-  gclid: string;
-  gbraid: string;
-  wbraid: string;
-  gaClientId: string;
-  utmSource: string;
-  utmMedium: string;
-  utmCampaign: string;
-  utmTerm: string;
-  utmContent: string;
-  landingPage: string;
-  pageUrl: string;
-  referrer: string;
-};
-
-type LeadResponse = {
-  ok?: boolean;
-  error?: string;
-  lead?: { id?: string; reference?: string };
-};
-
-function cookieValue(name: string) {
-  const prefix = `${encodeURIComponent(name)}=`;
-  const cookie = document.cookie.split("; ").find((item) => item.startsWith(prefix));
-  return cookie ? decodeURIComponent(cookie.slice(prefix.length)) : "";
-}
-
-function googleClickIdFromCookie() {
-  const value = cookieValue("_gcl_aw");
-  return value.split(".").slice(2).join(".");
-}
-
-function googleAnalyticsClientId() {
-  const parts = cookieValue("_ga").split(".");
-  return parts.length >= 4 ? parts.slice(-2).join(".") : "";
-}
-
-function readAttribution(): Attribution {
-  const params = new URLSearchParams(window.location.search);
-  let stored: Partial<Attribution> = {};
-  try {
-    stored = JSON.parse(window.localStorage.getItem(attributionStorageKey) ?? "{}") as Partial<Attribution>;
-  } catch {
-    stored = {};
-  }
-
-  const attribution: Attribution = {
-    gclid: params.get("gclid") || googleClickIdFromCookie() || stored.gclid || "",
-    gbraid: params.get("gbraid") || stored.gbraid || "",
-    wbraid: params.get("wbraid") || stored.wbraid || "",
-    gaClientId: googleAnalyticsClientId() || stored.gaClientId || "",
-    utmSource: params.get("utm_source") || stored.utmSource || "",
-    utmMedium: params.get("utm_medium") || stored.utmMedium || "",
-    utmCampaign: params.get("utm_campaign") || stored.utmCampaign || "",
-    utmTerm: params.get("utm_term") || stored.utmTerm || "",
-    utmContent: params.get("utm_content") || stored.utmContent || "",
-    landingPage: stored.landingPage || window.location.href,
-    pageUrl: window.location.href,
-    referrer: stored.referrer || document.referrer,
-  };
-
-  try {
-    window.localStorage.setItem(attributionStorageKey, JSON.stringify(attribution));
-  } catch {
-    // Attribution still travels with this submission when storage is unavailable.
-  }
-  return attribution;
-}
 
 function normalizedPhone(value: string) {
   const digits = value.replace(/\D/g, "");
@@ -139,21 +70,12 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
     submissionId.current ??= crypto.randomUUID();
 
     try {
-      const response = await fetch(formElement.dataset.leadEndpoint || leadApiUrl, {
-        method: "POST",
-        mode: "cors",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          ...fields,
-          clientSubmissionId: submissionId.current,
-          consent: form.get("consent") === "on",
-          attribution: readAttribution(),
-        }),
+      const result = await submitLead(formElement.dataset.leadEndpoint || leadApiUrl, {
+        ...fields,
+        clientSubmissionId: submissionId.current,
+        consent: form.get("consent") === "on",
+        attribution: readAttribution(),
       });
-      const result = await response.json() as LeadResponse;
-      if (!response.ok || !result.ok || !result.lead?.id || !result.lead.reference) {
-        throw new Error(result.error || "Não foi possível registrar o contato.");
-      }
 
       const destination = whatsappDestination(whatsappMessage(fields, result.lead.reference));
       const analyticsWindow = window as AnalyticsWindow;
@@ -288,7 +210,12 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
       <a
         data-form-fallback
         className="form-fallback"
-        href={fallbackDestination || "#"}
+        href="https://api.whatsapp.com/send?phone=551127630517"
+        onClick={(event) => {
+          if (!fallbackDestination) return;
+          event.preventDefault();
+          window.location.assign(fallbackDestination);
+        }}
         hidden={!fallbackDestination}
       >
         Continuar diretamente pelo WhatsApp

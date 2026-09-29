@@ -1,4 +1,4 @@
-import { copyFile, cp, mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -7,7 +7,10 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 const outputRoot = path.join(projectRoot, "ftp-static");
 const clientRoot = path.join(projectRoot, "dist", "client");
 const runtimeSource = path.join(projectRoot, "scripts", "static-site-runtime.js");
-const runtimeVersion = createHash("sha256").update(await readFile(runtimeSource)).digest("hex").slice(0, 12);
+const trackingSource = await readFile(path.join(projectRoot, "app/lib/lead-tracking.js"), "utf8");
+const runtimeCode = "(() => {\n" + trackingSource.replace(/^export /gm, "") + "\n" +
+  (await readFile(runtimeSource, "utf8")).replace(/^import .*lead-tracking\.js";\n/m, "") + "\n})();";
+const runtimeVersion = createHash("sha256").update(runtimeCode).digest("hex").slice(0, 12);
 const productionOrigin = "https://www.barrocoarquitetura.com.br";
 const googleAdsId = "AW-614157022";
 const googleTagGatewayPath = "/metrics/";
@@ -198,7 +201,7 @@ for (const file of await readdir(path.join(outputRoot, "assets"))) {
 await rm(path.join(outputRoot, ".vite"), { recursive: true, force: true });
 await rm(path.join(outputRoot, ".assetsignore"), { force: true });
 await rm(path.join(outputRoot, "_headers"), { force: true });
-await copyFile(runtimeSource, path.join(outputRoot, "assets", "site-static.js"));
+await writeFile(path.join(outputRoot, "assets", "site-static.js"), runtimeCode);
 
 const workerUrl = new URL("../dist/server/index.js", import.meta.url);
 workerUrl.searchParams.set("static-export", `${process.pid}-${Date.now()}`);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { safeContactUrl } from "../lib/lead-tracking.js";
 
 const whatsappConversionId = "AW-614157022/bWIoCP-morQDEN6V7aQC";
 const analyticsMeasurementId = "G-YED0X4J78V";
@@ -28,12 +29,12 @@ export function AnalyticsEvents() {
       analyticsWindow.dataLayer?.push({
         event: eventName,
         page_path: window.location.pathname,
-        link_url: href,
+        link_url: safeContactUrl(href),
       });
       analyticsWindow.gtag?.("event", eventName, {
         send_to: analyticsMeasurementId,
         page_path: window.location.pathname,
-        link_url: href,
+        link_url: safeContactUrl(href),
       });
       if (eventName === "whatsapp_click" && typeof analyticsWindow.gtag === "function") {
         analyticsWindow.gtag("event", "conversion", { send_to: whatsappConversionId });
