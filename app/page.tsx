@@ -196,16 +196,16 @@ export default function Home() {
               <p className="eyebrow">Projetos completos de médio e alto padrão</p>
               <h1>Escritório de arquitetura e interiores, do projeto à obra.</h1>
               <p className="hero-lead">
-                Projetos personalizados para casas, apartamentos e espaços comerciais.
-                Atendimento direto com Mayara e Luiz, do conceito e das imagens 3D
-                ao executivo, às especificações e ao planejamento da obra.
+                Contrate um projeto completo de arquitetura e interiores no ABC e em São Paulo.
+                Mayara e Luiz conduzem o layout, as imagens 3D, o projeto executivo
+                e as especificações. Reforma e marcenaria podem integrar a contratação.
               </p>
               <div className="button-row">
                 <a className="button button--primary" href="#contato">
                   Avaliar meu projeto
                 </a>
                 <a className="button button--ghost" href="#servicos">
-                  Conhecer serviços
+                  Ver projetos e serviços
                 </a>
               </div>
             </div>
@@ -219,6 +219,28 @@ export default function Home() {
             <div><strong>Atendimento direto</strong><span>Mayara e Luiz à frente dos projetos</span></div>
             <div><strong>Projeto à execução</strong><span>decisões coordenadas em cada etapa</span></div>
             <div><strong>Soluções integradas</strong><span>arquitetura, obra e marcenaria</span></div>
+          </div>
+        </section>
+
+        <section className="section contact-section" id="contato">
+          <div className="page-shell contact-grid">
+            <div className="contact-copy" data-reveal>
+              <p className="eyebrow eyebrow--light">Conte sobre o seu projeto</p>
+              <h2>Uma proposta para o seu projeto completo.</h2>
+              <p>
+                Conte sobre o imóvel, o escopo e quando pretende começar.
+                Avaliamos suas necessidades para apresentar uma proposta de honorários.
+                Projeto, obra e marcenaria podem ser contratados conforme a sua necessidade.
+              </p>
+              <div className="contact-meta">
+                <a href="mailto:contato@barrocoarquitetura.com.br">contato@barrocoarquitetura.com.br</a>
+                <div className="contact-meta__line">
+                  <a href="tel:+551127630517">(11) 2763-0517</a>
+                  <span>· Santo André · SP</span>
+                </div>
+              </div>
+            </div>
+            <LeadForm />
           </div>
         </section>
 
@@ -285,27 +307,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section contact-section" id="contato">
-          <div className="page-shell contact-grid">
-            <div className="contact-copy" data-reveal>
-              <p className="eyebrow eyebrow--light">Conte sobre o seu projeto</p>
-              <h2>Uma proposta para o seu projeto completo.</h2>
-              <p>
-                Conte sobre o imóvel, o escopo e quando pretende começar.
-                Avaliamos suas necessidades para apresentar uma proposta de honorários.
-                Projeto, obra e marcenaria podem ser contratados conforme a sua necessidade.
-              </p>
-              <div className="contact-meta">
-                <a href="mailto:contato@barrocoarquitetura.com.br">contato@barrocoarquitetura.com.br</a>
-                <div className="contact-meta__line">
-                  <a href="tel:+551127630517">(11) 2763-0517</a>
-                  <span>· Santo André · SP</span>
-                </div>
-              </div>
-            </div>
-            <LeadForm />
-          </div>
-        </section>
+
 
         <section className="section process-section">
           <div className="page-shell process-grid">

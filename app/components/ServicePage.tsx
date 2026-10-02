@@ -9,6 +9,11 @@ import { SiteHeader } from "./SiteHeader";
 type ServicePageProps = {
   canonicalPath: string;
   conversionLanding?: boolean;
+  contactFirst?: boolean;
+  contactTitle?: string;
+  contactIntro?: string;
+  processTitle?: string;
+  processSteps?: Array<[string, string]>;
   eyebrow: string;
   title: string;
   intro: string;
@@ -120,8 +125,8 @@ export function ServicePage(props: ServicePageProps) {
           <div className="page-shell contact-grid">
             <div className="contact-copy" data-reveal>
               <p className="eyebrow eyebrow--light">Sua proposta</p>
-              <h2>Vamos planejar o seu projeto completo.</h2>
-              <p>Conte sobre o imóvel, o serviço e o prazo desejado. Mayara e Luiz avaliam o escopo para apresentar uma proposta de honorários alinhada ao seu projeto.</p>
+              <h2>{props.contactTitle || "Vamos planejar o seu projeto completo."}</h2>
+              <p>{props.contactIntro || "Conte sobre o imóvel, o serviço e o prazo desejado. Mayara e Luiz avaliam o escopo para apresentar uma proposta de honorários alinhada ao seu projeto."}</p>
               <p>Projeto, execução e marcenaria têm escopos e investimentos definidos na proposta. Atendimento no ABC e em São Paulo.</p>
             </div>
             <LeadForm defaultService={props.defaultService} />
@@ -165,7 +170,7 @@ export function ServicePage(props: ServicePageProps) {
           </div>
         </section>
 
-        {props.conversionLanding && <>{scopeSection}{contactSection}</>}
+        {props.conversionLanding && (props.contactFirst ? <>{contactSection}{scopeSection}</> : <>{scopeSection}{contactSection}</>)}
 
         {props.gallery && props.gallery.length > 0 && (
           <section className="section page-shell service-gallery" id="portfolio">
@@ -234,15 +239,19 @@ export function ServicePage(props: ServicePageProps) {
 
         <section className="section page-shell service-process">
           <div className="section-heading section-heading--split" data-reveal>
-            <div><p className="eyebrow">Como funciona</p><h2>Do diagnóstico ao executivo.</h2></div>
+            <div><p className="eyebrow">Como funciona</p><h2>{props.processTitle || "Do diagnóstico ao executivo."}</h2></div>
             <p>Cada etapa é validada antes de avançarmos, mantendo decisões e investimento sob controle.</p>
           </div>
           <ol>
-            <li><span>01</span><strong>Conversa inicial</strong><p>Entendemos imóvel, rotina, escopo, prazo e prioridades.</p></li>
-            <li><span>02</span><strong>Levantamento</strong><p>Organizamos as informações necessárias para projetar.</p></li>
-            <li><span>03</span><strong>Conceito</strong><p>Apresentamos layout, linguagem e principais soluções.</p></li>
-            <li><span>04</span><strong>Desenvolvimento</strong><p>Detalhamos materiais, iluminação, marcenaria e sistemas.</p></li>
-            <li><span>05</span><strong>Executivo</strong><p>Entregamos desenhos, especificações e apoio aos orçamentos.</p></li>
+            {(props.processSteps || [
+              ["Conversa inicial", "Entendemos imóvel, rotina, escopo, prazo e prioridades."],
+              ["Levantamento", "Organizamos as informações necessárias para projetar."],
+              ["Conceito", "Apresentamos layout, linguagem e principais soluções."],
+              ["Desenvolvimento", "Detalhamos materiais, iluminação, marcenaria e sistemas."],
+              ["Executivo", "Entregamos desenhos, especificações e apoio aos orçamentos."],
+            ]).map(([title, text], index) => (
+              <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><p>{text}</p></li>
+            ))}
           </ol>
         </section>
 

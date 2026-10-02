@@ -28,9 +28,12 @@ export default function ReformasPage() {
   return <ServicePage
     canonicalPath="/reformas-residenciais"
     conversionLanding
+    contactFirst
+    contactTitle="Solicite uma proposta para sua reforma completa."
+    contactIntro="Informe o imóvel, a localização e o prazo pretendido. Avaliamos seu escopo para definir os próximos passos de projeto, orçamento e execução."
     eyebrow="Reformas residenciais"
-    title="Reforma completa, do projeto à execução."
-    intro="Reformas completas de casas e apartamentos com projeto de arquitetura, orçamento e gerenciamento. Planejamos escopo, cronograma e acabamentos antes de iniciar a execução."
+    title="Reforma completa de apartamentos e casas."
+    intro="Projeto, gerenciamento e execução de reformas residenciais no ABC e em São Paulo. Com atendimento direto dos arquitetos, definimos escopo, orçamento e cronograma para transformar seu imóvel com cuidado em cada detalhe."
     image="/images/portfolio-cozinha-verde.webp"
     imageAlt="Cozinha reformada com marcenaria verde e estrutura metálica"
     gallery={[
@@ -75,6 +78,14 @@ export default function ReformasPage() {
       ["A marcenaria pode entrar no mesmo orçamento?", "Sim. A marcenaria pode ser integrada à proposta de execução conforme o projeto e o cronograma."],
       ["Quanto tempo dura uma reforma?", "O prazo depende do escopo, aprovações, fornecedores e condições do imóvel. O cronograma é apresentado antes da contratação da execução."],
       ["Onde a Barroco realiza reformas residenciais?", "O escritório está localizado em Santo André e realiza reformas de casas e apartamentos em diferentes regiões do estado de São Paulo."],
+    ]}
+    processTitle="Do planejamento à entrega da reforma."
+    processSteps={[
+      ["Avaliação do imóvel", "Entendemos o que será reformado, suas prioridades, o prazo e o investimento previsto."],
+      ["Projeto e escopo", "Desenvolvemos o projeto ou avaliamos o existente para definir os serviços necessários."],
+      ["Orçamento e cronograma", "Organizamos serviços, materiais, responsabilidades e etapas antes de iniciar a obra."],
+      ["Execução e gerenciamento", "Coordenamos equipes e fornecedores conforme o escopo contratado."],
+      ["Conferência e entrega", "Verificamos os serviços executados e alinhamos os ajustes finais da reforma."],
     ]}
     defaultService="Reforma residencial completa"
   />;
