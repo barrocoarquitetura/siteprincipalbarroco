@@ -10,6 +10,7 @@ type ServicePageProps = {
   canonicalPath: string;
   conversionLanding?: boolean;
   contactFirst?: boolean;
+  contactButtonLabel?: string;
   contactTitle?: string;
   contactIntro?: string;
   processTitle?: string;
@@ -146,7 +147,7 @@ export function ServicePage(props: ServicePageProps) {
               <h1>{props.title}</h1>
               <p className="hero-lead">{props.intro}</p>
               <div className="button-row">
-                <a className="button button--primary" href="#contato">Quero avaliar meu projeto</a>
+                <a className="button button--primary" href="#contato">{props.contactButtonLabel || "Quero avaliar meu projeto"}</a>
                 <a className="button button--ghost-dark" href="#escopo">Ver o que está incluído</a>
               </div>
               <div className="service-hero__context" aria-label="Informações do atendimento">

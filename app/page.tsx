@@ -205,7 +205,7 @@ export default function Home() {
                   Avaliar meu projeto
                 </a>
                 <a className="button button--ghost" href="#servicos">
-                  Ver projetos e serviços
+                  Conhecer os serviços
                 </a>
               </div>
             </div>
@@ -306,8 +306,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
 
         <section className="section process-section">
           <div className="page-shell process-grid">

@@ -29,6 +29,7 @@ export default function ReformasPage() {
     canonicalPath="/reformas-residenciais"
     conversionLanding
     contactFirst
+    contactButtonLabel="Avaliar minha reforma"
     contactTitle="Solicite uma proposta para sua reforma completa."
     contactIntro="Informe o imóvel, a localização e o prazo pretendido. Avaliamos seu escopo para definir os próximos passos de projeto, orçamento e execução."
     eyebrow="Reformas residenciais"
