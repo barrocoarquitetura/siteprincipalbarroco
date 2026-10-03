@@ -504,6 +504,8 @@ p { line-height: 1.65; }
 }
 
 @media (max-width: 820px) {
+  .button { font-size: 14px; letter-spacing: .035em; line-height: 1.4; padding-block: 12px; text-align: center; }
+  .header-cta { font-size: 13px; letter-spacing: .035em; line-height: 1.4; }
   .page-shell { width: min(100% - 36px, 1280px); }
   .section { padding-block: 82px; }
   .desktop-nav, .header-cta { display: none; }
@@ -514,7 +516,7 @@ p { line-height: 1.65; }
   .site-header--landing .brand__wordmark { flex-direction: column; align-items: flex-start; gap: 4px; font-size: 12px; }
   .site-header--landing .mobile-menu summary { padding-inline: 0; min-height: 44px; display: flex; align-items: center; }
   .mobile-menu { display: block; position: relative; }
-  .mobile-menu summary { padding: 12px 0 12px 18px; color: white; cursor: pointer; font-size: 10px; font-weight: 900; letter-spacing: .1em; list-style: none; text-transform: uppercase; }
+  .mobile-menu summary { padding: 12px 0 12px 18px; color: white; cursor: pointer; font-size: 12px; font-weight: 900; letter-spacing: .035em; list-style: none; text-transform: uppercase; }
   .mobile-menu summary::-webkit-details-marker { display: none; }
   .mobile-menu nav { position: absolute; top: 50px; right: 0; width: min(300px, calc(100vw - 36px)); display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--line); background: var(--paper); box-shadow: 0 18px 40px rgba(0,0,0,.14); }
   .mobile-menu nav a { padding: 14px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 700; }
