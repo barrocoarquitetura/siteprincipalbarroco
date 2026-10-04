@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { responsiveImage } from "../lib/responsive-image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type HeroSlide = {
@@ -60,7 +61,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         {slides.map((slide, index) => (
           <img
             className={index === active ? "is-active" : ""}
-            src={slide.image}
+            src={slide.image} {...responsiveImage(slide.image, "hero")}
             alt={slide.alt}
             fetchPriority={index === 0 ? "high" : "auto"}
             loading={index === 0 ? "eager" : "lazy"}
@@ -149,7 +150,7 @@ export function PortfolioCarousel({ projects }: { projects: ProjectSlide[] }) {
               aria-label={`Ampliar imagem: ${project.title}`}
               aria-haspopup="dialog"
             >
-              <img src={project.image} alt={`${project.title} — ${project.text}`} loading="lazy" decoding="async" />
+              <img src={project.image} {...responsiveImage(project.image, "card")} alt={`${project.title} — ${project.text}`} loading="lazy" decoding="async" />
               <span className="portfolio-slide__zoom" aria-hidden="true">Ampliar <b>↗</b></span>
             </a>
             <figcaption>

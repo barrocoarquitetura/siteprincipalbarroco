@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { responsiveImage } from "../../lib/responsive-image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -121,7 +122,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <span>{post.readingTime}</span>
               </div>
             </div>
-            <figure className="article-hero__image"><img src={post.image} alt={post.imageAlt} fetchPriority="high" loading="eager" /></figure>
+            <figure className="article-hero__image"><img src={post.image} {...responsiveImage(post.image, "article")} alt={post.imageAlt} fetchPriority="high" loading="eager" /></figure>
           </header>
 
           <div className="article-layout page-shell">

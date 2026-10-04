@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { responsiveImage } from "../lib/responsive-image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "../components/SiteFooter";
@@ -90,7 +91,7 @@ export default function BlogPage() {
             {blogPosts.map((post) => (
               <article className="blog-card" key={post.slug}>
                 <Link className="blog-card__image" href={`/blog/${post.slug}`} aria-label={`Ler: ${post.title}`}>
-                  <img src={post.image} alt={post.imageAlt} loading="lazy" decoding="async" />
+                  <img src={post.image} {...responsiveImage(post.image, "card")} alt={post.imageAlt} loading="lazy" decoding="async" />
                 </Link>
                 <div className="blog-card__body">
                   <div className="blog-card__meta"><span>{post.category}</span><span>{post.readingTime}</span></div>

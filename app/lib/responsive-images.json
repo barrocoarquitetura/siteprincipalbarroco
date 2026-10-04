@@ -1,0 +1,1216 @@
+{
+  "/images/apartamento-banheiro-claro.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 79272,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-banheiro-claro-26bbee59ad-480.webp",
+        "width": 480,
+        "bytes": 28932
+      },
+      {
+        "src": "/images/responsive/apartamento-banheiro-claro-26bbee59ad-768.webp",
+        "width": 768,
+        "bytes": 58212
+      },
+      {
+        "src": "/images/responsive/apartamento-banheiro-claro-26bbee59ad-1024.webp",
+        "width": 1024,
+        "bytes": 78868
+      }
+    ]
+  },
+  "/images/apartamento-cozinha-corredor-arte.webp": {
+    "width": 893,
+    "height": 1600,
+    "bytes": 88304,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-cozinha-corredor-arte-b4965c6957-480.webp",
+        "width": 480,
+        "bytes": 47224
+      },
+      {
+        "src": "/images/responsive/apartamento-cozinha-corredor-arte-b4965c6957-768.webp",
+        "width": 768,
+        "bytes": 87452
+      }
+    ]
+  },
+  "/images/apartamento-cozinha-linear.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 52842,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-cozinha-linear-fa471bb243-480.webp",
+        "width": 480,
+        "bytes": 21448
+      },
+      {
+        "src": "/images/responsive/apartamento-cozinha-linear-fa471bb243-768.webp",
+        "width": 768,
+        "bytes": 41924
+      }
+    ]
+  },
+  "/images/apartamento-estar-contemporaneo.webp": {
+    "width": 1600,
+    "height": 1195,
+    "bytes": 79136,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-estar-contemporaneo-41e822a6b1-480.webp",
+        "width": 480,
+        "bytes": 18826
+      },
+      {
+        "src": "/images/responsive/apartamento-estar-contemporaneo-41e822a6b1-768.webp",
+        "width": 768,
+        "bytes": 37222
+      },
+      {
+        "src": "/images/responsive/apartamento-estar-contemporaneo-41e822a6b1-1024.webp",
+        "width": 1024,
+        "bytes": 57658
+      }
+    ]
+  },
+  "/images/apartamento-estar-jantar-integrados.webp": {
+    "width": 1600,
+    "height": 1195,
+    "bytes": 114620,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-estar-jantar-integrados-7c979dbcd9-480.webp",
+        "width": 480,
+        "bytes": 23902
+      },
+      {
+        "src": "/images/responsive/apartamento-estar-jantar-integrados-7c979dbcd9-768.webp",
+        "width": 768,
+        "bytes": 49288
+      },
+      {
+        "src": "/images/responsive/apartamento-estar-jantar-integrados-7c979dbcd9-1024.webp",
+        "width": 1024,
+        "bytes": 75568
+      }
+    ]
+  },
+  "/images/apartamento-estar-painel-tv.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 75454,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-estar-painel-tv-aa6383a1d0-480.webp",
+        "width": 480,
+        "bytes": 17054
+      },
+      {
+        "src": "/images/responsive/apartamento-estar-painel-tv-aa6383a1d0-768.webp",
+        "width": 768,
+        "bytes": 35270
+      },
+      {
+        "src": "/images/responsive/apartamento-estar-painel-tv-aa6383a1d0-1024.webp",
+        "width": 1024,
+        "bytes": 54476
+      }
+    ]
+  },
+  "/images/apartamento-jantar-cristaleira.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 109042,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-jantar-cristaleira-39779a6cdd-480.webp",
+        "width": 480,
+        "bytes": 34902
+      },
+      {
+        "src": "/images/responsive/apartamento-jantar-cristaleira-39779a6cdd-768.webp",
+        "width": 768,
+        "bytes": 72804
+      },
+      {
+        "src": "/images/responsive/apartamento-jantar-cristaleira-39779a6cdd-1024.webp",
+        "width": 1024,
+        "bytes": 104636
+      }
+    ]
+  },
+  "/images/apartamento-lavabo-botanico.webp": {
+    "width": 1085,
+    "height": 1450,
+    "bytes": 74906,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-lavabo-botanico-08e42a44eb-480.webp",
+        "width": 480,
+        "bytes": 39312
+      },
+      {
+        "src": "/images/responsive/apartamento-lavabo-botanico-08e42a44eb-768.webp",
+        "width": 768,
+        "bytes": 71194
+      }
+    ]
+  },
+  "/images/apartamento-quarto-infantil-casinha.webp": {
+    "width": 1600,
+    "height": 1195,
+    "bytes": 106660,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-quarto-infantil-casinha-51502fe9f2-480.webp",
+        "width": 480,
+        "bytes": 28896
+      },
+      {
+        "src": "/images/responsive/apartamento-quarto-infantil-casinha-51502fe9f2-768.webp",
+        "width": 768,
+        "bytes": 54534
+      },
+      {
+        "src": "/images/responsive/apartamento-quarto-infantil-casinha-51502fe9f2-1024.webp",
+        "width": 1024,
+        "bytes": 83950
+      }
+    ]
+  },
+  "/images/apartamento-sala-cortinas.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 163846,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-sala-cortinas-914a42eb75-480.webp",
+        "width": 480,
+        "bytes": 52954
+      },
+      {
+        "src": "/images/responsive/apartamento-sala-cortinas-914a42eb75-768.webp",
+        "width": 768,
+        "bytes": 107456
+      },
+      {
+        "src": "/images/responsive/apartamento-sala-cortinas-914a42eb75-1024.webp",
+        "width": 1024,
+        "bytes": 156292
+      }
+    ]
+  },
+  "/images/apartamento-varanda-gourmet-pedra.webp": {
+    "width": 1600,
+    "height": 1195,
+    "bytes": 184758,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-varanda-gourmet-pedra-06c569f5fa-480.webp",
+        "width": 480,
+        "bytes": 35074
+      },
+      {
+        "src": "/images/responsive/apartamento-varanda-gourmet-pedra-06c569f5fa-768.webp",
+        "width": 768,
+        "bytes": 75336
+      },
+      {
+        "src": "/images/responsive/apartamento-varanda-gourmet-pedra-06c569f5fa-1024.webp",
+        "width": 1024,
+        "bytes": 118088
+      }
+    ]
+  },
+  "/images/apartamento-varanda-jardim.webp": {
+    "width": 1024,
+    "height": 1024,
+    "bytes": 96570,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-varanda-jardim-73729950e6-480.webp",
+        "width": 480,
+        "bytes": 43492
+      },
+      {
+        "src": "/images/responsive/apartamento-varanda-jardim-73729950e6-768.webp",
+        "width": 768,
+        "bytes": 84984
+      }
+    ]
+  },
+  "/images/apartamento-varanda-noturna.webp": {
+    "width": 1600,
+    "height": 1600,
+    "bytes": 147532,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamento-varanda-noturna-e01b859d67-480.webp",
+        "width": 480,
+        "bytes": 33610
+      },
+      {
+        "src": "/images/responsive/apartamento-varanda-noturna-e01b859d67-768.webp",
+        "width": 768,
+        "bytes": 70272
+      },
+      {
+        "src": "/images/responsive/apartamento-varanda-noturna-e01b859d67-1024.webp",
+        "width": 1024,
+        "bytes": 108796
+      }
+    ]
+  },
+  "/images/apartamentos-hero.webp": {
+    "width": 800,
+    "height": 536,
+    "bytes": 30410,
+    "candidates": [
+      {
+        "src": "/images/responsive/apartamentos-hero-6caaf217ff-480.webp",
+        "width": 480,
+        "bytes": 22966
+      }
+    ]
+  },
+  "/images/casa-area-gourmet.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 202226,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-area-gourmet-1ffb686b6b-480.webp",
+        "width": 480,
+        "bytes": 40752
+      },
+      {
+        "src": "/images/responsive/casa-area-gourmet-1ffb686b6b-768.webp",
+        "width": 768,
+        "bytes": 87406
+      },
+      {
+        "src": "/images/responsive/casa-area-gourmet-1ffb686b6b-1024.webp",
+        "width": 1024,
+        "bytes": 138464
+      }
+    ]
+  },
+  "/images/casa-estar-vista-piscina.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 140014,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-estar-vista-piscina-d3db239d94-480.webp",
+        "width": 480,
+        "bytes": 26110
+      },
+      {
+        "src": "/images/responsive/casa-estar-vista-piscina-d3db239d94-768.webp",
+        "width": 768,
+        "bytes": 58744
+      },
+      {
+        "src": "/images/responsive/casa-estar-vista-piscina-d3db239d94-1024.webp",
+        "width": 1024,
+        "bytes": 93568
+      }
+    ]
+  },
+  "/images/casa-fachada-linear.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 138458,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-fachada-linear-03e2b55339-480.webp",
+        "width": 480,
+        "bytes": 26860
+      },
+      {
+        "src": "/images/responsive/casa-fachada-linear-03e2b55339-768.webp",
+        "width": 768,
+        "bytes": 62224
+      },
+      {
+        "src": "/images/responsive/casa-fachada-linear-03e2b55339-1024.webp",
+        "width": 1024,
+        "bytes": 97630
+      }
+    ]
+  },
+  "/images/casa-fachada-urbana.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 128850,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-fachada-urbana-5216124fb6-480.webp",
+        "width": 480,
+        "bytes": 26800
+      },
+      {
+        "src": "/images/responsive/casa-fachada-urbana-5216124fb6-768.webp",
+        "width": 768,
+        "bytes": 56068
+      },
+      {
+        "src": "/images/responsive/casa-fachada-urbana-5216124fb6-1024.webp",
+        "width": 1024,
+        "bytes": 90264
+      }
+    ]
+  },
+  "/images/casa-patio-piscina.webp": {
+    "width": 1600,
+    "height": 1195,
+    "bytes": 139622,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-patio-piscina-8d0c7b0788-480.webp",
+        "width": 480,
+        "bytes": 30900
+      },
+      {
+        "src": "/images/responsive/casa-patio-piscina-8d0c7b0788-768.webp",
+        "width": 768,
+        "bytes": 65124
+      },
+      {
+        "src": "/images/responsive/casa-patio-piscina-8d0c7b0788-1024.webp",
+        "width": 1024,
+        "bytes": 98572
+      }
+    ]
+  },
+  "/images/casa-piscina-deck.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 248972,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-piscina-deck-e947fd189f-480.webp",
+        "width": 480,
+        "bytes": 43220
+      },
+      {
+        "src": "/images/responsive/casa-piscina-deck-e947fd189f-768.webp",
+        "width": 768,
+        "bytes": 98244
+      },
+      {
+        "src": "/images/responsive/casa-piscina-deck-e947fd189f-1024.webp",
+        "width": 1024,
+        "bytes": 159998
+      }
+    ]
+  },
+  "/images/casa-sala-jantar.webp": {
+    "width": 1600,
+    "height": 1600,
+    "bytes": 123666,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-sala-jantar-b26d519fd2-480.webp",
+        "width": 480,
+        "bytes": 30140
+      },
+      {
+        "src": "/images/responsive/casa-sala-jantar-b26d519fd2-768.webp",
+        "width": 768,
+        "bytes": 59724
+      },
+      {
+        "src": "/images/responsive/casa-sala-jantar-b26d519fd2-1024.webp",
+        "width": 1024,
+        "bytes": 90562
+      }
+    ]
+  },
+  "/images/casa-terrea-concreto-madeira.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 187976,
+    "candidates": [
+      {
+        "src": "/images/responsive/casa-terrea-concreto-madeira-e1e930882b-480.webp",
+        "width": 480,
+        "bytes": 28312
+      },
+      {
+        "src": "/images/responsive/casa-terrea-concreto-madeira-e1e930882b-768.webp",
+        "width": 768,
+        "bytes": 69624
+      },
+      {
+        "src": "/images/responsive/casa-terrea-concreto-madeira-e1e930882b-1024.webp",
+        "width": 1024,
+        "bytes": 116342
+      }
+    ]
+  },
+  "/images/casas-hero.webp": {
+    "width": 800,
+    "height": 553,
+    "bytes": 30084,
+    "candidates": [
+      {
+        "src": "/images/responsive/casas-hero-57c25ebcfb-480.webp",
+        "width": 480,
+        "bytes": 21928
+      }
+    ]
+  },
+  "/images/comercial-copa-atendimento.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 90098,
+    "candidates": [
+      {
+        "src": "/images/responsive/comercial-copa-atendimento-71df81b7a9-480.webp",
+        "width": 480,
+        "bytes": 36826
+      },
+      {
+        "src": "/images/responsive/comercial-copa-atendimento-71df81b7a9-768.webp",
+        "width": 768,
+        "bytes": 72270
+      }
+    ]
+  },
+  "/images/comercial-fachada-corporativa.webp": {
+    "width": 1600,
+    "height": 1600,
+    "bytes": 198586,
+    "candidates": [
+      {
+        "src": "/images/responsive/comercial-fachada-corporativa-95d4038575-480.webp",
+        "width": 480,
+        "bytes": 37962
+      },
+      {
+        "src": "/images/responsive/comercial-fachada-corporativa-95d4038575-768.webp",
+        "width": 768,
+        "bytes": 83258
+      },
+      {
+        "src": "/images/responsive/comercial-fachada-corporativa-95d4038575-1024.webp",
+        "width": 1024,
+        "bytes": 134694
+      }
+    ]
+  },
+  "/images/comercial-hall-entrada-madeira.webp": {
+    "width": 1600,
+    "height": 1195,
+    "bytes": 78448,
+    "candidates": [
+      {
+        "src": "/images/responsive/comercial-hall-entrada-madeira-857fac25fd-480.webp",
+        "width": 480,
+        "bytes": 18902
+      },
+      {
+        "src": "/images/responsive/comercial-hall-entrada-madeira-857fac25fd-768.webp",
+        "width": 768,
+        "bytes": 39448
+      },
+      {
+        "src": "/images/responsive/comercial-hall-entrada-madeira-857fac25fd-1024.webp",
+        "width": 1024,
+        "bytes": 58634
+      }
+    ]
+  },
+  "/images/comercial-recepcao-iluminacao.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 95804,
+    "candidates": [
+      {
+        "src": "/images/responsive/comercial-recepcao-iluminacao-1e7b703aeb-480.webp",
+        "width": 480,
+        "bytes": 31282
+      },
+      {
+        "src": "/images/responsive/comercial-recepcao-iluminacao-1e7b703aeb-768.webp",
+        "width": 768,
+        "bytes": 64200
+      },
+      {
+        "src": "/images/responsive/comercial-recepcao-iluminacao-1e7b703aeb-1024.webp",
+        "width": 1024,
+        "bytes": 88502
+      }
+    ]
+  },
+  "/images/comercial-recepcao-jardim-vertical.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 93348,
+    "candidates": [
+      {
+        "src": "/images/responsive/comercial-recepcao-jardim-vertical-3481b639a1-480.webp",
+        "width": 480,
+        "bytes": 31398
+      },
+      {
+        "src": "/images/responsive/comercial-recepcao-jardim-vertical-3481b639a1-768.webp",
+        "width": 768,
+        "bytes": 64330
+      },
+      {
+        "src": "/images/responsive/comercial-recepcao-jardim-vertical-3481b639a1-1024.webp",
+        "width": 1024,
+        "bytes": 89238
+      }
+    ]
+  },
+  "/images/comercial-restaurante.webp": {
+    "width": 1600,
+    "height": 893,
+    "bytes": 170264,
+    "candidates": [
+      {
+        "src": "/images/responsive/comercial-restaurante-9a815e0261-480.webp",
+        "width": 480,
+        "bytes": 33850
+      },
+      {
+        "src": "/images/responsive/comercial-restaurante-9a815e0261-768.webp",
+        "width": 768,
+        "bytes": 73900
+      },
+      {
+        "src": "/images/responsive/comercial-restaurante-9a815e0261-1024.webp",
+        "width": 1024,
+        "bytes": 116114
+      }
+    ]
+  },
+  "/images/escritorio-estacao-trabalho.webp": {
+    "width": 1195,
+    "height": 1600,
+    "bytes": 75376,
+    "candidates": [
+      {
+        "src": "/images/responsive/escritorio-estacao-trabalho-489f73d194-480.webp",
+        "width": 480,
+        "bytes": 29834
+      },
+      {
+        "src": "/images/responsive/escritorio-estacao-trabalho-489f73d194-768.webp",
+        "width": 768,
+        "bytes": 56906
+      }
+    ]
+  },
+  "/images/escritorio-home-office-claro.webp": {
+    "width": 1600,
+    "height": 1195,
+    "bytes": 71678,
+    "candidates": [
+      {
+        "src": "/images/responsive/escritorio-home-office-claro-79d5d70e19-480.webp",
+        "width": 480,
+        "bytes": 14204
+      },
+      {
+        "src": "/images/responsive/escritorio-home-office-claro-79d5d70e19-768.webp",
+        "width": 768,
+        "bytes": 30318
+      },
+      {
+        "src": "/images/responsive/escritorio-home-office-claro-79d5d70e19-1024.webp",
+        "width": 1024,
+        "bytes": 46234
+      }
+    ]
+  },
+  "/images/hero-apartamento-integrado.webp": {
+    "width": 1800,
+    "height": 1800,
+    "bytes": 130350,
+    "candidates": [
+      {
+        "src": "/images/responsive/hero-apartamento-integrado-2185ff2571-480.webp",
+        "width": 480,
+        "bytes": 25208
+      },
+      {
+        "src": "/images/responsive/hero-apartamento-integrado-2185ff2571-768.webp",
+        "width": 768,
+        "bytes": 51854
+      },
+      {
+        "src": "/images/responsive/hero-apartamento-integrado-2185ff2571-1024.webp",
+        "width": 1024,
+        "bytes": 82066
+      }
+    ]
+  },
+  "/images/hero-casa-terrea-contemporanea.webp": {
+    "width": 1800,
+    "height": 1005,
+    "bytes": 179848,
+    "candidates": [
+      {
+        "src": "/images/responsive/hero-casa-terrea-contemporanea-2779f8e3b6-480.webp",
+        "width": 480,
+        "bytes": 33548
+      },
+      {
+        "src": "/images/responsive/hero-casa-terrea-contemporanea-2779f8e3b6-768.webp",
+        "width": 768,
+        "bytes": 74704
+      },
+      {
+        "src": "/images/responsive/hero-casa-terrea-contemporanea-2779f8e3b6-1024.webp",
+        "width": 1024,
+        "bytes": 116280
+      }
+    ]
+  },
+  "/images/hero-cozinha-cinza.webp": {
+    "width": 1800,
+    "height": 1344,
+    "bytes": 54596,
+    "candidates": [
+      {
+        "src": "/images/responsive/hero-cozinha-cinza-6c9e4ae0d6-480.webp",
+        "width": 480,
+        "bytes": 14278
+      },
+      {
+        "src": "/images/responsive/hero-cozinha-cinza-6c9e4ae0d6-768.webp",
+        "width": 768,
+        "bytes": 27156
+      },
+      {
+        "src": "/images/responsive/hero-cozinha-cinza-6c9e4ae0d6-1024.webp",
+        "width": 1024,
+        "bytes": 41816
+      }
+    ]
+  },
+  "/images/hero-escritorio-jardim-vertical.webp": {
+    "width": 1200,
+    "height": 1600,
+    "bytes": 120584,
+    "candidates": [
+      {
+        "src": "/images/responsive/hero-escritorio-jardim-vertical-a9bd72847c-480.webp",
+        "width": 480,
+        "bytes": 40632
+      },
+      {
+        "src": "/images/responsive/hero-escritorio-jardim-vertical-a9bd72847c-768.webp",
+        "width": 768,
+        "bytes": 91014
+      }
+    ]
+  },
+  "/images/hero-hall-iluminacao-linear.webp": {
+    "width": 1269,
+    "height": 1800,
+    "bytes": 91270,
+    "candidates": [
+      {
+        "src": "/images/responsive/hero-hall-iluminacao-linear-c9d85b95bf-480.webp",
+        "width": 480,
+        "bytes": 35616
+      },
+      {
+        "src": "/images/responsive/hero-hall-iluminacao-linear-c9d85b95bf-768.webp",
+        "width": 768,
+        "bytes": 72518
+      }
+    ]
+  },
+  "/images/hero-lavabo-geometrico.webp": {
+    "width": 1249,
+    "height": 1800,
+    "bytes": 139148,
+    "candidates": [
+      {
+        "src": "/images/responsive/hero-lavabo-geometrico-d5ba64f45f-480.webp",
+        "width": 480,
+        "bytes": 52846
+      },
+      {
+        "src": "/images/responsive/hero-lavabo-geometrico-d5ba64f45f-768.webp",
+        "width": 768,
+        "bytes": 107268
+      }
+    ]
+  },
+  "/images/home-hero.webp": {
+    "width": 800,
+    "height": 534,
+    "bytes": 32940,
+    "candidates": [
+      {
+        "src": "/images/responsive/home-hero-f91b5b3e5c-480.webp",
+        "width": 480,
+        "bytes": 25254
+      }
+    ]
+  },
+  "/images/mayara-cimino-luiz-faria.webp": {
+    "width": 1448,
+    "height": 1086,
+    "bytes": 38436,
+    "candidates": [
+      {
+        "src": "/images/responsive/mayara-cimino-luiz-faria-a68820f3d5-480.webp",
+        "width": 480,
+        "bytes": 8600
+      },
+      {
+        "src": "/images/responsive/mayara-cimino-luiz-faria-a68820f3d5-768.webp",
+        "width": 768,
+        "bytes": 17118
+      },
+      {
+        "src": "/images/responsive/mayara-cimino-luiz-faria-a68820f3d5-1024.webp",
+        "width": 1024,
+        "bytes": 26550
+      }
+    ]
+  },
+  "/images/portfolio-banheiro-verde.webp": {
+    "width": 1344,
+    "height": 1800,
+    "bytes": 73432,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-banheiro-verde-8591b9c342-480.webp",
+        "width": 480,
+        "bytes": 27294
+      },
+      {
+        "src": "/images/responsive/portfolio-banheiro-verde-8591b9c342-768.webp",
+        "width": 768,
+        "bytes": 53326
+      }
+    ]
+  },
+  "/images/portfolio-casa-corten.webp": {
+    "width": 1800,
+    "height": 1005,
+    "bytes": 98868,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-casa-corten-62fb9293fc-480.webp",
+        "width": 480,
+        "bytes": 19704
+      },
+      {
+        "src": "/images/responsive/portfolio-casa-corten-62fb9293fc-768.webp",
+        "width": 768,
+        "bytes": 41832
+      },
+      {
+        "src": "/images/responsive/portfolio-casa-corten-62fb9293fc-1024.webp",
+        "width": 1024,
+        "bytes": 67230
+      }
+    ]
+  },
+  "/images/portfolio-casa-pedra.webp": {
+    "width": 1800,
+    "height": 1005,
+    "bytes": 140806,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-casa-pedra-a3a48a367b-480.webp",
+        "width": 480,
+        "bytes": 23514
+      },
+      {
+        "src": "/images/responsive/portfolio-casa-pedra-a3a48a367b-768.webp",
+        "width": 768,
+        "bytes": 52902
+      },
+      {
+        "src": "/images/responsive/portfolio-casa-pedra-a3a48a367b-1024.webp",
+        "width": 1024,
+        "bytes": 87328
+      }
+    ]
+  },
+  "/images/portfolio-casa-piscina.webp": {
+    "width": 1800,
+    "height": 1344,
+    "bytes": 190928,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-casa-piscina-72c67364f8-480.webp",
+        "width": 480,
+        "bytes": 34612
+      },
+      {
+        "src": "/images/responsive/portfolio-casa-piscina-72c67364f8-768.webp",
+        "width": 768,
+        "bytes": 75494
+      },
+      {
+        "src": "/images/responsive/portfolio-casa-piscina-72c67364f8-1024.webp",
+        "width": 1024,
+        "bytes": 120540
+      }
+    ]
+  },
+  "/images/portfolio-circulacao-pedra.webp": {
+    "width": 1344,
+    "height": 1800,
+    "bytes": 114504,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-circulacao-pedra-d6f68b5727-480.webp",
+        "width": 480,
+        "bytes": 38258
+      },
+      {
+        "src": "/images/responsive/portfolio-circulacao-pedra-d6f68b5727-768.webp",
+        "width": 768,
+        "bytes": 71530
+      },
+      {
+        "src": "/images/responsive/portfolio-circulacao-pedra-d6f68b5727-1024.webp",
+        "width": 1024,
+        "bytes": 95424
+      }
+    ]
+  },
+  "/images/portfolio-circulacao.webp": {
+    "width": 705,
+    "height": 1000,
+    "bytes": 36060,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-circulacao-5e9e0af8b3-480.webp",
+        "width": 480,
+        "bytes": 34982
+      }
+    ]
+  },
+  "/images/portfolio-cozinha-cinza.webp": {
+    "width": 1800,
+    "height": 1344,
+    "bytes": 54534,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-cozinha-cinza-90ab273b6a-480.webp",
+        "width": 480,
+        "bytes": 14352
+      },
+      {
+        "src": "/images/responsive/portfolio-cozinha-cinza-90ab273b6a-768.webp",
+        "width": 768,
+        "bytes": 27166
+      },
+      {
+        "src": "/images/responsive/portfolio-cozinha-cinza-90ab273b6a-1024.webp",
+        "width": 1024,
+        "bytes": 42056
+      }
+    ]
+  },
+  "/images/portfolio-cozinha-ilha.webp": {
+    "width": 1800,
+    "height": 1344,
+    "bytes": 83110,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-cozinha-ilha-0033f2cddb-480.webp",
+        "width": 480,
+        "bytes": 24096
+      },
+      {
+        "src": "/images/responsive/portfolio-cozinha-ilha-0033f2cddb-768.webp",
+        "width": 768,
+        "bytes": 45378
+      },
+      {
+        "src": "/images/responsive/portfolio-cozinha-ilha-0033f2cddb-1024.webp",
+        "width": 1024,
+        "bytes": 64812
+      }
+    ]
+  },
+  "/images/portfolio-cozinha-verde.webp": {
+    "width": 1344,
+    "height": 1800,
+    "bytes": 68316,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-cozinha-verde-38618c190b-480.webp",
+        "width": 480,
+        "bytes": 28724
+      },
+      {
+        "src": "/images/responsive/portfolio-cozinha-verde-38618c190b-768.webp",
+        "width": 768,
+        "bytes": 54094
+      }
+    ]
+  },
+  "/images/portfolio-cozinha.webp": {
+    "width": 800,
+    "height": 534,
+    "bytes": 37492,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-cozinha-221965c6a3-480.webp",
+        "width": 480,
+        "bytes": 25788
+      }
+    ]
+  },
+  "/images/portfolio-escritorio.webp": {
+    "width": 707,
+    "height": 1000,
+    "bytes": 37642,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-escritorio-0519c31450-480.webp",
+        "width": 480,
+        "bytes": 34788
+      }
+    ]
+  },
+  "/images/portfolio-hall-madeira.webp": {
+    "width": 1800,
+    "height": 1344,
+    "bytes": 50274,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-hall-madeira-780f2ec6af-480.webp",
+        "width": 480,
+        "bytes": 12436
+      },
+      {
+        "src": "/images/responsive/portfolio-hall-madeira-780f2ec6af-768.webp",
+        "width": 768,
+        "bytes": 25102
+      },
+      {
+        "src": "/images/responsive/portfolio-hall-madeira-780f2ec6af-1024.webp",
+        "width": 1024,
+        "bytes": 40564
+      }
+    ]
+  },
+  "/images/portfolio-home-office.webp": {
+    "width": 500,
+    "height": 500,
+    "bytes": 16016,
+    "candidates": []
+  },
+  "/images/portfolio-integracao-varanda.webp": {
+    "width": 1800,
+    "height": 1800,
+    "bytes": 130350,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-integracao-varanda-2185ff2571-480.webp",
+        "width": 480,
+        "bytes": 25208
+      },
+      {
+        "src": "/images/responsive/portfolio-integracao-varanda-2185ff2571-768.webp",
+        "width": 768,
+        "bytes": 51854
+      },
+      {
+        "src": "/images/responsive/portfolio-integracao-varanda-2185ff2571-1024.webp",
+        "width": 1024,
+        "bytes": 82066
+      }
+    ]
+  },
+  "/images/portfolio-jantar-madeira.webp": {
+    "width": 1800,
+    "height": 1800,
+    "bytes": 137710,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-jantar-madeira-a94d3b764a-480.webp",
+        "width": 480,
+        "bytes": 27324
+      },
+      {
+        "src": "/images/responsive/portfolio-jantar-madeira-a94d3b764a-768.webp",
+        "width": 768,
+        "bytes": 57844
+      },
+      {
+        "src": "/images/responsive/portfolio-jantar-madeira-a94d3b764a-1024.webp",
+        "width": 1024,
+        "bytes": 90084
+      }
+    ]
+  },
+  "/images/portfolio-lavabo-travertino.webp": {
+    "width": 1344,
+    "height": 1800,
+    "bytes": 65868,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-lavabo-travertino-53c8a159c0-480.webp",
+        "width": 480,
+        "bytes": 27882
+      },
+      {
+        "src": "/images/responsive/portfolio-lavabo-travertino-53c8a159c0-768.webp",
+        "width": 768,
+        "bytes": 54846
+      }
+    ]
+  },
+  "/images/portfolio-quarto-beliche.webp": {
+    "width": 1800,
+    "height": 1005,
+    "bytes": 119682,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-quarto-beliche-e12212b431-480.webp",
+        "width": 480,
+        "bytes": 21638
+      },
+      {
+        "src": "/images/responsive/portfolio-quarto-beliche-e12212b431-768.webp",
+        "width": 768,
+        "bytes": 47332
+      },
+      {
+        "src": "/images/responsive/portfolio-quarto-beliche-e12212b431-1024.webp",
+        "width": 1024,
+        "bytes": 76816
+      }
+    ]
+  },
+  "/images/portfolio-quarto-infantil-rosa.webp": {
+    "width": 1800,
+    "height": 1344,
+    "bytes": 73702,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-quarto-infantil-rosa-e61f132ceb-480.webp",
+        "width": 480,
+        "bytes": 21694
+      },
+      {
+        "src": "/images/responsive/portfolio-quarto-infantil-rosa-e61f132ceb-768.webp",
+        "width": 768,
+        "bytes": 41134
+      },
+      {
+        "src": "/images/responsive/portfolio-quarto-infantil-rosa-e61f132ceb-1024.webp",
+        "width": 1024,
+        "bytes": 60692
+      }
+    ]
+  },
+  "/images/portfolio-quarto.webp": {
+    "width": 800,
+    "height": 534,
+    "bytes": 21756,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-quarto-cd6c97f011-480.webp",
+        "width": 480,
+        "bytes": 16108
+      }
+    ]
+  },
+  "/images/portfolio-varanda-gourmet-cinza.webp": {
+    "width": 1800,
+    "height": 1800,
+    "bytes": 132646,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-varanda-gourmet-cinza-91652e8197-480.webp",
+        "width": 480,
+        "bytes": 22474
+      },
+      {
+        "src": "/images/responsive/portfolio-varanda-gourmet-cinza-91652e8197-768.webp",
+        "width": 768,
+        "bytes": 49752
+      },
+      {
+        "src": "/images/responsive/portfolio-varanda-gourmet-cinza-91652e8197-1024.webp",
+        "width": 1024,
+        "bytes": 83946
+      }
+    ]
+  },
+  "/images/portfolio-varanda-pedra.webp": {
+    "width": 1800,
+    "height": 1344,
+    "bytes": 153922,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-varanda-pedra-491594b7a7-480.webp",
+        "width": 480,
+        "bytes": 29600
+      },
+      {
+        "src": "/images/responsive/portfolio-varanda-pedra-491594b7a7-768.webp",
+        "width": 768,
+        "bytes": 62336
+      },
+      {
+        "src": "/images/responsive/portfolio-varanda-pedra-491594b7a7-1024.webp",
+        "width": 1024,
+        "bytes": 100308
+      }
+    ]
+  },
+  "/images/portfolio-varanda-preta.webp": {
+    "width": 1800,
+    "height": 1005,
+    "bytes": 95300,
+    "candidates": [
+      {
+        "src": "/images/responsive/portfolio-varanda-preta-a821432db7-480.webp",
+        "width": 480,
+        "bytes": 22404
+      },
+      {
+        "src": "/images/responsive/portfolio-varanda-preta-a821432db7-768.webp",
+        "width": 768,
+        "bytes": 44020
+      },
+      {
+        "src": "/images/responsive/portfolio-varanda-preta-a821432db7-1024.webp",
+        "width": 1024,
+        "bytes": 66950
+      }
+    ]
+  },
+  "/images/portfolio-varanda.webp": {
+    "width": 500,
+    "height": 500,
+    "bytes": 24164,
+    "candidates": []
+  },
+  "/images/reformas-hero.webp": {
+    "width": 738,
+    "height": 1000,
+    "bytes": 54990,
+    "candidates": [
+      {
+        "src": "/images/responsive/reformas-hero-5c02898312-480.webp",
+        "width": 480,
+        "bytes": 43232
+      }
+    ]
+  }
+}

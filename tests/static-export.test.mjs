@@ -88,3 +88,32 @@ test("ships discovery, routing, caching and removal rules", async () => {
   assert.match(htaccess, /max-age=31536000, immutable/i);
   assert.match(htaccess, /AddType image\/webp \.webp/i);
 });
+
+test("responsive image candidates exist, have truthful widths and preserve original zoom targets", async () => {
+  const { default: sharp } = await import('sharp');
+  const manifest = JSON.parse(await readFile('app/lib/responsive-images.json', 'utf8'));
+  for (const [original, entry] of Object.entries(manifest)) {
+    for (const candidate of entry.candidates) {
+      const file = await readFile(path.join(root, candidate.src));
+      const metadata = await sharp(file).metadata();
+      assert.equal(metadata.width, candidate.width, candidate.src);
+      assert.ok(candidate.width < entry.width, 'never enlarge originals');
+      assert.ok(file.length < entry.bytes, 'each candidate must save bytes');
+      assert.ok(Math.abs(metadata.height / metadata.width - entry.height / entry.width) < .005, 'preserve aspect ratio');
+    }
+    await access(path.join(root, original));
+  }
+  for (const page of pages) {
+    const html = await readFile(path.join(root, page), 'utf8');
+    let count = 0;
+    for (const [tag] of html.matchAll(/<img\b[^>]*>/gi)) {
+      const src = tag.match(/\bsrc="([^"]+)"/i)?.[1];
+      if (!manifest[src]?.candidates.length) continue;
+      assert.match(tag, /\bsrcset="[^"]+"/i, page);
+      assert.match(tag, /\bsizes="[^"]+"/i, page);
+      count++;
+    }
+    assert.ok(count > 0, `responsive photos on ${page}`);
+    assert.doesNotMatch(html, /<a\b[^>]*href="\/images\/responsive\//i, 'zoom must use originals');
+  }
+});

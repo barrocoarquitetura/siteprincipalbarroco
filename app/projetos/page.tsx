@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { responsiveImage } from "../lib/responsive-image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadForm } from "../components/LeadForm";
@@ -114,7 +115,7 @@ export default function ProjetosPage() {
             <div className="featured-cases__grid">
               {caseStudies.map((caseStudy) => (
                 <Link className="featured-case" href={`/projetos/${caseStudy.slug}`} key={caseStudy.slug}>
-                  <span className="featured-case__image"><img src={caseStudy.heroImage} alt={caseStudy.heroAlt} loading="lazy" decoding="async" /></span>
+                  <span className="featured-case__image"><img src={caseStudy.heroImage} {...responsiveImage(caseStudy.heroImage, "card")} alt={caseStudy.heroAlt} loading="lazy" decoding="async" /></span>
                   <span className="featured-case__body"><small>{caseStudy.category}</small><strong>{caseStudy.title}</strong><span>Ver projeto <b aria-hidden="true">→</b></span></span>
                 </Link>
               ))}
@@ -146,7 +147,7 @@ export default function ProjetosPage() {
                     aria-label={`Ampliar imagem: ${title}`}
                     aria-haspopup="dialog"
                   >
-                    <img src={src} alt={`${category.keyword}: ${title}. ${description}`} loading="lazy" decoding="async" />
+                    <img src={src} {...responsiveImage(src, "gallery")} alt={`${category.keyword}: ${title}. ${description}`} loading="lazy" decoding="async" />
                     <span className="service-gallery__zoom-label" aria-hidden="true">Ampliar <b>↗</b></span>
                   </a>
                   <figcaption><strong>{title}</strong><span>{category.keyword} · {description}</span></figcaption>

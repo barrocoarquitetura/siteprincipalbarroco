@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { responsiveImage } from "../lib/responsive-image";
 import Link from "next/link";
 import { testimonials } from "../content/testimonials";
 import { TestimonialCarousel } from "./HomeCarousels";
@@ -157,7 +158,7 @@ export function ServicePage(props: ServicePageProps) {
               </div>
             </div>
             <figure className="service-hero__figure">
-              <img src={props.image} alt={props.imageAlt} fetchPriority="high" loading="eager" />
+              <img src={props.image} {...responsiveImage(props.image, "serviceHero")} alt={props.imageAlt} fetchPriority="high" loading="eager" />
               <figcaption><strong>Barroco Arquitetura</strong><span>Projeto · Interiores · Obra</span></figcaption>
             </figure>
           </div>
@@ -194,7 +195,7 @@ export function ServicePage(props: ServicePageProps) {
                     aria-label={`Ampliar imagem: ${title}`}
                     aria-haspopup="dialog"
                   >
-                    <img src={image} alt={`${title} — ${text}`} loading="lazy" decoding="async" />
+                    <img src={image} {...responsiveImage(image, "gallery")} alt={`${title} — ${text}`} loading="lazy" decoding="async" />
                     <span className="service-gallery__zoom-label" aria-hidden="true">Ampliar <b>↗</b></span>
                   </a>
                   <figcaption><strong>{title}</strong><span>{text}</span></figcaption>
@@ -214,7 +215,7 @@ export function ServicePage(props: ServicePageProps) {
               <div className="featured-cases__grid featured-cases__grid--compact">
                 {props.featuredProjects.map(([href, image, title, text]) => (
                   <Link className="featured-case" href={href} key={href}>
-                    <span className="featured-case__image"><img src={image} alt={`${title} — ${text}`} loading="lazy" decoding="async" /></span>
+                    <span className="featured-case__image"><img src={image} {...responsiveImage(image, "card")} alt={`${title} — ${text}`} loading="lazy" decoding="async" /></span>
                     <span className="featured-case__body"><small>Projeto Barroco</small><strong>{title}</strong><span>Conhecer projeto <b aria-hidden="true">→</b></span></span>
                   </Link>
                 ))}

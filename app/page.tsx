@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { responsiveImage } from "./lib/responsive-image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroCarousel, PortfolioCarousel, TestimonialCarousel } from "./components/HomeCarousels";
@@ -250,7 +251,7 @@ export default function Home() {
             <h2>Arquitetura que traduz pessoas, rotinas e negócios.</h2>
             <figure className="about-team-photo">
               <img
-                src="/images/mayara-cimino-luiz-faria.webp"
+                src="/images/mayara-cimino-luiz-faria.webp" {...responsiveImage("/images/mayara-cimino-luiz-faria.webp", "team")}
                 alt="Arquiteta Mayara Cimino e arquiteto Luiz Faria, à frente da Barroco Arquitetura"
                 loading="lazy"
               />
@@ -291,7 +292,7 @@ export default function Home() {
               {services.map((service, index) => (
                 <article className="service-card" key={service.title}>
                   <Link href={service.href} className="service-card__image" aria-label={`Conhecer ${service.title}`}>
-                    <img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
+                    <img src={service.image} {...responsiveImage(service.image, "card")} alt={service.alt} loading="lazy" decoding="async" />
                   </Link>
                   <div className="service-card__body">
                     <span>0{index + 1}</span>
@@ -351,7 +352,7 @@ export default function Home() {
               {blogPosts.slice(0, 3).map((post) => (
                 <article className="blog-card" key={post.slug}>
                   <Link className="blog-card__image" href={`/blog/${post.slug}`} aria-label={`Ler: ${post.title}`}>
-                    <img src={post.image} alt={post.imageAlt} loading="lazy" decoding="async" />
+                    <img src={post.image} {...responsiveImage(post.image, "card")} alt={post.imageAlt} loading="lazy" decoding="async" />
                   </Link>
                   <div className="blog-card__body">
                     <div className="blog-card__meta"><span>{post.category}</span><span>{post.readingTime}</span></div>

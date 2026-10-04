@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { responsiveImage } from "../../lib/responsive-image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -114,7 +115,7 @@ export default async function ProjectCasePage({ params }: { params: Promise<{ sl
                 <Link className="button button--primary" href={caseStudy.serviceHref}>{caseStudy.serviceLabel}</Link>
               </div>
               <figure className="case-hero__figure">
-                <img src={caseStudy.heroImage} alt={caseStudy.heroAlt} fetchPriority="high" loading="eager" />
+                <img src={caseStudy.heroImage} {...responsiveImage(caseStudy.heroImage, "caseHero")} alt={caseStudy.heroAlt} fetchPriority="high" loading="eager" />
               </figure>
             </div>
           </header>
@@ -161,7 +162,7 @@ export default async function ProjectCasePage({ params }: { params: Promise<{ sl
                     aria-label={`Ampliar imagem: ${title}`}
                     aria-haspopup="dialog"
                   >
-                    <img src={image} alt={`${caseStudy.category}: ${title}. ${text}`} loading="lazy" decoding="async" />
+                    <img src={image} {...responsiveImage(image, "gallery")} alt={`${caseStudy.category}: ${title}. ${text}`} loading="lazy" decoding="async" />
                     <span className="service-gallery__zoom-label" aria-hidden="true">Ampliar <b>↗</b></span>
                   </a>
                   <figcaption><strong>{title}</strong><span>{text}</span></figcaption>
@@ -179,7 +180,7 @@ export default async function ProjectCasePage({ params }: { params: Promise<{ sl
               <div className="featured-cases__grid">
                 {relatedProjects.map((project) => (
                   <Link className="featured-case" href={`/projetos/${project.slug}`} key={project.slug}>
-                    <span className="featured-case__image"><img src={project.heroImage} alt={project.heroAlt} loading="lazy" decoding="async" /></span>
+                    <span className="featured-case__image"><img src={project.heroImage} {...responsiveImage(project.heroImage, "card")} alt={project.heroAlt} loading="lazy" decoding="async" /></span>
                     <span className="featured-case__body"><small>{project.category}</small><strong>{project.title}</strong><span>Ver projeto <b aria-hidden="true">→</b></span></span>
                   </Link>
                 ))}
