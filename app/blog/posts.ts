@@ -26,6 +26,8 @@ export type BlogPost = {
   relatedService: { href: string; label: string; title: string };
 };
 
+// 2026-09-03 (fae6dbb): restored editorial content, individual authorship and technical citations.
+// Keep original publication dates; modified is shared by sitemap, Article JSON-LD and Open Graph.
 export const blogPosts: BlogPost[] = [
   {
     slug: "projeto-de-interiores-para-apartamento-o-que-inclui",
@@ -37,7 +39,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Um guia para comparar propostas com clareza e entender quais decisões devem sair do campo das ideias antes do início da obra.",
     answer: "Um projeto de interiores para apartamento pode reunir briefing, levantamento, estudo de layout, conceito, imagens 3D, projeto executivo, iluminação, marcenaria, especificações e apoio aos orçamentos. O escopo exato varia, mas precisa transformar escolhas estéticas e funcionais em informações que fornecedores e equipes consigam executar.",
     published: "2026-08-06",
-    modified: "2026-08-06",
+    modified: "2026-09-03",
     readingTime: "8 min de leitura",
     image: "/images/apartamento-estar-jantar-integrados.webp",
     imageAlt: "Projeto de interiores para apartamento com estar, jantar e varanda integrados",
@@ -102,7 +104,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "A obra começa muito antes da demolição. Organizar escopo, projeto, orçamento e responsabilidades é o que torna a execução previsível.",
     answer: "Uma reforma de apartamento deve começar pelo diagnóstico do imóvel e pela definição do escopo, não pela contratação isolada de mão de obra. Depois vêm levantamento, projeto, aprovações, orçamento detalhado, cronograma, plano de compras e somente então a execução.",
     published: "2026-08-06",
-    modified: "2026-08-06",
+    modified: "2026-09-03",
     readingTime: "8 min de leitura",
     image: "/images/portfolio-cozinha-verde.webp",
     imageAlt: "Cozinha de apartamento reformada com marcenaria verde e estrutura metálica",
@@ -166,7 +168,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "O executivo traduz o conceito aprovado em desenhos, medidas e especificações que as equipes conseguem orçar e executar.",
     answer: "O projeto executivo de interiores é o conjunto de desenhos, detalhes e especificações que transforma o conceito aprovado em informação para a obra. Ele pode incluir demolição e construção, pisos, forros, iluminação, elétrica, hidráulica, pedras, marcenaria e acabamentos, conforme o escopo.",
     published: "2026-08-06",
-    modified: "2026-08-06",
+    modified: "2026-09-03",
     readingTime: "7 min de leitura",
     image: "/images/portfolio-cozinha-ilha.webp",
     imageAlt: "Cozinha com ilha central, marcenaria planejada e iluminação integrada",
@@ -228,7 +230,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "O prazo não depende apenas da área. Complexidade, decisões pendentes, aprovações e itens sob medida podem alterar o caminho crítico da obra.",
     answer: "A duração de uma reforma de apartamento depende do escopo, da maturidade do projeto, das aprovações, da disponibilidade de materiais e equipes e dos prazos de itens sob medida. Um cronograma confiável só pode ser fechado depois que serviços, dependências e compras críticas estiverem definidos.",
     published: "2026-08-06",
-    modified: "2026-08-06",
+    modified: "2026-09-03",
     readingTime: "7 min de leitura",
     image: "/images/portfolio-varanda-pedra.webp",
     imageAlt: "Varanda gourmet reformada com bancada em pedra e marcenaria planejada",
@@ -291,7 +293,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Começar antes da entrega pode adiantar layout, orçamento e compras — desde que as decisões sejam confirmadas com os documentos e medidas corretos.",
     answer: "O projeto de interiores pode começar antes das chaves quando já existem planta, memorial, manual técnico e uma previsão razoável de entrega. Layout, conceito e planejamento podem avançar; medidas finais, interferências e itens sob medida devem ser confirmados após o acesso ao imóvel.",
     published: "2026-08-06",
-    modified: "2026-08-06",
+    modified: "2026-09-03",
     readingTime: "6 min de leitura",
     image: "/images/portfolio-integracao-varanda.webp",
     imageAlt: "Apartamento com sala de estar, jantar e varanda integradas",
@@ -352,7 +354,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Portfólio importa, mas a contratação também precisa considerar método, profundidade técnica, responsabilidades e compatibilidade com o seu momento.",
     answer: "Para escolher um escritório de arquitetura, avalie projetos semelhantes ao seu, clareza do escopo, profundidade dos entregáveis, participação dos responsáveis, método de comunicação, experiência de execução e forma de organizar orçamento, prazo e alterações. Não compare apenas imagens ou o valor final da proposta.",
     published: "2026-08-06",
-    modified: "2026-08-06",
+    modified: "2026-09-03",
     readingTime: "8 min de leitura",
     image: "/images/mayara-cimino-luiz-faria.webp",
     imageAlt: "Arquiteta Mayara Cimino e arquiteto Luiz Faria, responsáveis pela Barroco Arquitetura",
@@ -424,7 +426,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "O valor só pode ser comparado corretamente quando etapas, ambientes, entregáveis, revisões e participação durante a obra estão claramente definidos.",
     answer: "O custo de um projeto de interiores depende da área e do número de ambientes, mas também da complexidade, profundidade do executivo, quantidade de detalhamentos, prazo, revisões, visitas e serviços adicionais. Para comparar propostas, verifique o que será entregue e quais responsabilidades estão incluídas, não apenas o preço total.",
     published: "2026-08-10",
-    modified: "2026-08-10",
+    modified: "2026-09-03",
     readingTime: "8 min de leitura",
     image: "/images/apartamento-jantar-cristaleira.webp",
     imageAlt: "Projeto de interiores para apartamento com sala de jantar, cristaleira e marcenaria planejada",
@@ -489,7 +491,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Antes da demolição, é preciso entender o escopo, as regras do condomínio, os sistemas afetados e a documentação técnica aplicável.",
     answer: "A NBR 16280 estabelece requisitos para a gestão de reformas em edificações. Em apartamentos, o proprietário deve consultar as regras do condomínio e apresentar o plano e os documentos solicitados antes da obra. Quando a intervenção exigir responsabilidade técnica, o documento deve ser emitido por profissional habilitado dentro de suas atribuições. As exigências variam conforme o escopo, o edifício e as regras locais.",
     published: "2026-08-10",
-    modified: "2026-08-10",
+    modified: "2026-09-03",
     readingTime: "8 min de leitura",
     image: "/images/reformas-hero.webp",
     imageAlt: "Apartamento em processo de planejamento para reforma residencial com projeto técnico",
