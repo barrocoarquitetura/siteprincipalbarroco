@@ -30,3 +30,32 @@ test("direct WhatsApp clicks work without form data and send only the contact co
     assert.equal(events[0][0], "whatsapp_click");
   }
 });
+
+for (const [label, file, receiver] of [
+  ['React', '../app/components/LeadForm.tsx', 'analyticsWindow'],
+  ['FTP', '../scripts/static-site-runtime.js', 'window'],
+]) {
+  test(`${label}: enhanced lead data is available when form_submit fires`, async () => {
+    const source = await readFile(new URL(file, import.meta.url), 'utf8');
+    const start = source.indexOf('const userData = {');
+    const end = source.indexOf(`${receiver}.gtag?.("event", "lead_form_whatsapp"`, start);
+    assert.ok(start >= 0 && end > start);
+    let configured;
+    const events = [];
+    const receiverMock = { gtag: (command, name, value) => {
+      if (command === 'set' && name === 'user_data') configured = value;
+      if (command === 'event') events.push({name, value, configured});
+    }};
+    vm.runInNewContext(source.slice(start, end), {
+      [receiver]: receiverMock,
+      fields: {email: ' LEAD@EXAMPLE.COM ', phone: '+5511999999999'},
+      normalizedPhone: value => value,
+      googleAdsId: 'AW-614157022',
+    });
+    assert.equal(events.length, 1);
+    assert.equal(events[0].name, 'form_submit');
+    assert.equal(events[0].value.send_to, 'AW-614157022');
+    assert.equal(events[0].configured?.email, 'lead@example.com');
+    assert.equal(events[0].configured?.phone_number, '+5511999999999');
+  });
+}

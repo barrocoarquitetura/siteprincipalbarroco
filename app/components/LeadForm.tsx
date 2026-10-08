@@ -90,6 +90,7 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
         email: String(fields.email).trim().toLowerCase(),
         phone_number: normalizedPhone(String(fields.phone)),
       };
+      analyticsWindow.gtag?.("set", "user_data", userData);
       analyticsWindow.gtag?.("event", "form_submit", {
         send_to: googleAdsId,
         user_data: userData,
@@ -110,7 +111,6 @@ export function LeadForm({ defaultService = "" }: LeadFormProps) {
       };
 
       if (typeof analyticsWindow.gtag === "function") {
-        analyticsWindow.gtag("set", "user_data", userData);
         analyticsWindow.gtag("event", "conversion", {
           send_to: formConversionId,
           transaction_id: result.lead.id,

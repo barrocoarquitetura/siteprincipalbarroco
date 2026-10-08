@@ -368,9 +368,10 @@ async function submitLead(endpoint, payload) {
             email: String(fields.email).trim().toLowerCase(),
             phone_number: normalizedPhone(fields.phone),
           };
+          window.gtag?.("set", "user_data", userData);
           window.gtag?.("event", "form_submit", {
             send_to: googleAdsId,
-        user_data: userData,
+            user_data: userData,
           });
           window.gtag?.("event", "lead_form_whatsapp", {
             send_to: analyticsMeasurementId,
@@ -392,7 +393,6 @@ async function submitLead(endpoint, payload) {
           };
 
           if (typeof window.gtag === "function") {
-            window.gtag("set", "user_data", userData);
             window.gtag("event", "conversion", {
               send_to: formConversionId,
               transaction_id: result.lead.id,
