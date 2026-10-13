@@ -9,11 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 1b6b820: portfolio title; fae6dbb: restored blog content/authorship.
   // Image resizing and CSS-only changes do not advance these dates.
   const primaryPages: MetadataRoute.Sitemap = [
-    { url: base, lastModified: new Date("2026-10-02"), changeFrequency: "monthly", priority: 1 },
+    { url: base, lastModified: new Date("2026-10-13"), changeFrequency: "monthly", priority: 1 },
     { url: `${base}/projetos`, lastModified: new Date("2026-08-27"), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${base}/projetos-de-apartamentos`, lastModified: new Date("2026-09-19"), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/projetos-de-apartamentos`, lastModified: new Date("2026-10-13"), changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/projetos-de-casas`, lastModified: new Date("2026-09-19"), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${base}/reformas-residenciais`, lastModified: new Date("2026-10-02"), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/reformas-residenciais`, lastModified: new Date("2026-10-13"), changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/projetos-e-obras-comerciais`, lastModified: new Date("2026-09-19"), changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/blog`, lastModified: new Date("2026-09-03"), changeFrequency: "weekly", priority: 0.85 },
   ];

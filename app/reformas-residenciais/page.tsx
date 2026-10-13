@@ -56,8 +56,8 @@ export default function ReformasPage() {
       ["Gestão integrada", "Acompanhamento de cronograma, fornecedores e decisões durante a execução."],
       ["Entrega coerente", "Projeto, obra e marcenaria avançam com a mesma intenção."],
     ]}
-    sectionTitle="Uma reforma com responsabilidades bem definidas."
-    sectionIntro="O escopo da execução é montado a partir do projeto e das condições do imóvel, com orçamento detalhado e etapas claras."
+    sectionTitle="Arquiteto para reforma de apartamento: do projeto à execução."
+    sectionIntro="Antes de reformar, avaliamos layout, instalações e regras do condomínio. O projeto executivo orienta a reforma completa; orçamento, cronograma e responsabilidades são definidos conforme as condições do imóvel e o escopo contratado."
     deliverables={[
       ["Diagnóstico e escopo", "Leitura do imóvel, serviços necessários, prioridades e restrições."],
       ["Planejamento", "Sequência de atividades, cronograma e decisões críticas."],
@@ -78,7 +78,7 @@ export default function ReformasPage() {
       ["É possível contratar somente a obra?", "A viabilidade depende da qualidade e do nível de detalhamento do projeto existente. A equipe faz uma avaliação inicial."],
       ["A marcenaria pode entrar no mesmo orçamento?", "Sim. A marcenaria pode ser integrada à proposta de execução conforme o projeto e o cronograma."],
       ["Quanto tempo dura uma reforma?", "O prazo depende do escopo, aprovações, fornecedores e condições do imóvel. O cronograma é apresentado antes da contratação da execução."],
-      ["Onde a Barroco realiza reformas residenciais?", "O escritório está localizado em Santo André e realiza reformas de casas e apartamentos em diferentes regiões do estado de São Paulo."],
+      ["Onde a Barroco realiza reformas residenciais?", "Atendemos Santo André, São Bernardo do Campo, São Caetano do Sul, Diadema e São Paulo capital. A avaliação inicial considera a localização, as condições do imóvel e o escopo da reforma."],
     ]}
     processTitle="Do planejamento à entrega da reforma."
     processSteps={[

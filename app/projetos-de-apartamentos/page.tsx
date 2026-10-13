@@ -28,6 +28,9 @@ export default function ApartamentosPage() {
   return <ServicePage
     canonicalPath="/projetos-de-apartamentos"
     conversionLanding
+    contactButtonLabel="Avaliar meu apartamento"
+    contactTitle="Converse com um arquiteto sobre seu apartamento."
+    contactIntro="Conte onde fica o imóvel, o que deseja transformar e quando pretende começar. Definimos uma proposta de projeto de interiores, com obra e marcenaria opcionais."
     eyebrow="Projeto de interiores para apartamentos"
     title="Interiores de alto padrão para o seu apartamento."
     intro="Projeto completo de interiores para apartamentos novos ou em reforma. Layout, imagens 3D, executivo e especificações, com atendimento direto dos arquitetos e opção de obra e marcenaria."
@@ -80,7 +83,7 @@ export default function ApartamentosPage() {
       ["Vocês fazem apenas o projeto?", "Sim. O projeto pode ser contratado de forma independente. Obra e marcenaria são opções adicionais."],
       ["Atendem apartamentos novos e usados?", "Sim. O processo é adaptado tanto para imóveis novos quanto para reformas de apartamentos existentes."],
       ["O projeto inclui orçamento da obra?", "Inclui apoio a orçamentos dentro do escopo contratado. A execução é apresentada separadamente."],
-      ["Onde vocês atendem?", "O escritório está localizado em Santo André e desenvolve projetos de apartamentos em diferentes regiões do estado de São Paulo."],
+      ["Onde vocês atendem?", "Com sede em Santo André, atendemos apartamentos em Santo André, São Bernardo do Campo, São Caetano do Sul, Diadema e São Paulo capital."],
     ]}
     defaultService="Projeto de interiores para apartamento"
   />;

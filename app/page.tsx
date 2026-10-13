@@ -12,7 +12,7 @@ import { testimonials } from "./content/testimonials";
 export const metadata: Metadata = {
   title: { absolute: "Escritório de Arquitetura em Santo André e SP | Barroco" },
   description:
-    "Escritório de arquitetura em Santo André para projetos de casas, apartamentos, interiores, reformas e obras comerciais no estado de São Paulo.",
+    "Escritório de arquitetura e interiores no ABCD e em São Paulo. Projetos completos de casas e apartamentos, reforma, obra e marcenaria.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Escritório de Arquitetura em Santo André e SP | Barroco Arquitetura",
@@ -133,7 +133,11 @@ const homeFaqs = [
   {
     question: "Onde a Barroco Arquitetura atende?",
     answer:
-      "O escritório está localizado em Santo André e desenvolve projetos e obras em diferentes regiões do estado de São Paulo.",
+      "Com sede em Santo André, atendemos Santo André, São Bernardo do Campo, São Caetano do Sul, Diadema e São Paulo capital. A viabilidade de cada projeto e obra é avaliada no primeiro contato.",
+  },
+  {
+    question: "Como funciona a contratação de um arquiteto de interiores?",
+    answer: "Começamos pela rotina, pelas prioridades e pelas condições do imóvel. A proposta define as etapas de layout, imagens 3D, projeto executivo e especificações. Obra e marcenaria podem ser contratadas conforme a necessidade, com atendimento direto de Mayara e Luiz.",
   },
   {
     question: "É possível contratar o projeto e a obra com a mesma equipe?",
