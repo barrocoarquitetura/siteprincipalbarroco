@@ -10,15 +10,19 @@ permissions:
 
 jobs:
   revista:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Preparar o Chromium
         run: |
           npm install --prefix "$RUNNER_TEMP/portfolio-render" --no-audit --no-fund playwright@1.56.1
-          "$RUNNER_TEMP/portfolio-render/node_modules/.bin/playwright" install chromium
+          command -v google-chrome
+          if ! command -v pdfinfo >/dev/null || ! command -v pdfimages >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y poppler-utils
+          fi
 
       - name: Renderizar o PDF e verificar as imagens
         run: |
@@ -38,7 +42,7 @@ jobs:
           );
           const tempHtml = resolve(process.env.RUNNER_TEMP, title + '.html');
           await writeFile(tempHtml, prepared);
-          const browser = await chromium.launch();
+          const browser = await chromium.launch({ channel: 'chrome' });
           try {
             const page = await browser.newPage();
             await page.goto(pathToFileURL(tempHtml).href, { waitUntil: 'load', timeout: 30000 });
