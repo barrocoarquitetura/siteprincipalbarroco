@@ -1,0 +1,83 @@
+name: Gerar PDF do portfólio
+
+on:
+  push:
+    branches: [portfolio-editorial-barroco]
+    paths: [.github/workflows/portfolio-editorial-pdf.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  revista:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Preparar o Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/portfolio-render" --no-audit --no-fund playwright@1.56.1
+          "$RUNNER_TEMP/portfolio-render/node_modules/.bin/playwright" install chromium
+
+      - name: Renderizar o PDF e verificar as imagens
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          import { resolve } from 'node:path';
+          import { pathToFileURL } from 'node:url';
+
+          const playwright = resolve(process.env.RUNNER_TEMP, 'portfolio-render/node_modules/playwright/index.mjs');
+          const { chromium } = await import(pathToFileURL(playwright));
+          const title = 'Portfolio_Barroco_Arquitetura';
+          const original = await readFile('portfolio-editorial/' + title + '.html', 'utf8');
+          const prefix = pathToFileURL(resolve('ftp-static')).href;
+          const prepared = original.replace(
+            /<img src="https:\/\/www\.barrocoarquitetura\.com\.br(\/images\/[^"]+)" alt="([^"]*)" loading="(?:eager|lazy)"/g,
+            (_, src, alt) => '<img src="' + prefix + src + '" alt="' + alt + '" loading="eager"'
+          );
+          const tempHtml = resolve(process.env.RUNNER_TEMP, title + '.html');
+          await writeFile(tempHtml, prepared);
+          const browser = await chromium.launch();
+          try {
+            const page = await browser.newPage();
+            await page.goto(pathToFileURL(tempHtml).href, { waitUntil: 'load', timeout: 30000 });
+            await page.emulateMedia({ media: 'print' });
+            const report = await page.evaluate(async () => {
+              await document.fonts.ready;
+              const images = Array.from(document.images);
+              const rejected = await Promise.allSettled(images.map(image => image.decode()));
+              return {
+                uniqueImages: new Set(images.map(image => image.src)).size,
+                failed: images.filter((image, index) => !image.naturalWidth || rejected[index].status !== 'fulfilled').map(image => image.src),
+                sheets: document.querySelectorAll('.sheet').length,
+                fonts: Array.from(document.fonts).filter(font => font.status === 'loaded').map(font => font.family)
+              };
+            });
+            if (report.failed.length || report.uniqueImages !== 150 || report.sheets !== 44) {
+              throw new Error(JSON.stringify(report));
+            }
+            console.log(JSON.stringify(report));
+            await page.pdf({
+              path: 'portfolio-editorial/' + title + '.pdf',
+              printBackground: true,
+              preferCSSPageSize: true,
+              tagged: true,
+              outline: true
+            });
+          } finally {
+            await browser.close();
+          }
+          NODE
+          pdf=portfolio-editorial/Portfolio_Barroco_Arquitetura.pdf
+          pdfinfo "$pdf"
+          test "$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')" -eq 44
+          test "$(pdfimages -list "$pdf" | awk 'NR > 2 {print $1}' | sort -u | wc -l)" -ge 43
+
+      - name: Disponibilizar o PDF no GitHub
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add portfolio-editorial/Portfolio_Barroco_Arquitetura.pdf
+          git commit -m 'Adiciona o portfólio editorial em PDF'
+          git push origin HEAD:portfolio-editorial-barroco
