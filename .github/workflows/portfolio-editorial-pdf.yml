@@ -3,7 +3,7 @@ name: Gerar PDF do portfólio
 on:
   push:
     branches: [portfolio-editorial-barroco]
-    paths: [.github/workflows/portfolio-editorial-pdf.yml]
+    paths: [.github/workflows/portfolio-editorial-pdf.yml, portfolio-editorial/Portfolio_Barroco_Arquitetura.html]
 
 permissions:
   contents: write
@@ -36,7 +36,7 @@ jobs:
 
           html = Path("portfolio-editorial/Portfolio_Barroco_Arquitetura.html").read_text()
           files = set(re.findall(r'<img src="https://www\.barrocoarquitetura\.com\.br(/images/[^"]+)"', html))
-          assert len(files) == 150, f"{len(files)} imagens encontradas"
+          assert len(files) == 119, f"{len(files)} imagens encontradas"
           target_root = Path(os.environ["RUNNER_TEMP"]) / "portfolio-assets"
           for file in sorted(files):
               source = Path("ftp-static") / file.lstrip("/")
@@ -85,7 +85,7 @@ jobs:
                 fonts: Array.from(document.fonts).filter(font => font.status === 'loaded').map(font => font.family)
               };
             });
-            if (report.failed.length || report.uniqueImages !== 150 || report.sheets !== 44) {
+            if (report.failed.length || report.uniqueImages !== 119 || report.sheets !== 44) {
               throw new Error(JSON.stringify(report));
             }
             console.log(JSON.stringify(report));
