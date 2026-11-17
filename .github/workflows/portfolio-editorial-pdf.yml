@@ -24,6 +24,33 @@ jobs:
             sudo apt-get install -y poppler-utils
           fi
 
+      - name: Preparar imagens para o PDF
+        run: |
+          python3 -m venv "$RUNNER_TEMP/portfolio-images"
+          "$RUNNER_TEMP/portfolio-images/bin/pip" -q install Pillow==11.3.0
+          "$RUNNER_TEMP/portfolio-images/bin/python" <<'PY'
+          import os
+          import re
+          from pathlib import Path
+          from PIL import Image
+
+          html = Path("portfolio-editorial/Portfolio_Barroco_Arquitetura.html").read_text()
+          files = set(re.findall(r'<img src="https://www\.barrocoarquitetura\.com\.br(/images/[^"]+)"', html))
+          assert len(files) == 150, f"{len(files)} imagens encontradas"
+          target_root = Path(os.environ["RUNNER_TEMP"]) / "portfolio-assets"
+          for file in sorted(files):
+              source = Path("ftp-static") / file.lstrip("/")
+              target = (target_root / file.lstrip("/")).with_suffix(".jpg")
+              target.parent.mkdir(parents=True, exist_ok=True)
+              with Image.open(source) as image:
+                  image.thumbnail((1800, 1800), Image.Resampling.LANCZOS)
+                  if image.mode == "RGBA":
+                      background = Image.new("RGB", image.size, "#fbf8f3")
+                      background.paste(image, mask=image.getchannel("A"))
+                      image = background
+                  image.convert("RGB").save(target, "JPEG", quality=87, optimize=True)
+          PY
+
       - name: Renderizar o PDF e verificar as imagens
         run: |
           node --input-type=module <<'NODE'
@@ -35,10 +62,10 @@ jobs:
           const { chromium } = await import(pathToFileURL(playwright));
           const title = 'Portfolio_Barroco_Arquitetura';
           const original = await readFile('portfolio-editorial/' + title + '.html', 'utf8');
-          const prefix = pathToFileURL(resolve('ftp-static')).href;
+          const prefix = pathToFileURL(resolve(process.env.RUNNER_TEMP, 'portfolio-assets')).href;
           const prepared = original.replace(
             /<img src="https:\/\/www\.barrocoarquitetura\.com\.br(\/images\/[^"]+)" alt="([^"]*)" loading="(?:eager|lazy)"/g,
-            (_, src, alt) => '<img src="' + prefix + src + '" alt="' + alt + '" loading="eager"'
+            (_, src, alt) => '<img src="'  + prefix + src.replace(/\.webp$/, '.jpg') + '" alt="' + alt + '" loading="eager"'
           );
           const tempHtml = resolve(process.env.RUNNER_TEMP, title + '.html');
           await writeFile(tempHtml, prepared);
@@ -75,6 +102,7 @@ jobs:
           NODE
           pdf=portfolio-editorial/Portfolio_Barroco_Arquitetura.pdf
           pdfinfo "$pdf"
+          test "$(stat -c %s "$pdf")" -lt 80000000
           test "$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')" -eq 44
           test "$(pdfimages -list "$pdf" | awk 'NR > 2 {print $1}' | sort -u | wc -l)" -ge 43
 
